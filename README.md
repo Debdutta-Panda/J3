@@ -107,6 +107,26 @@ fun MyApp() {
     }
 }
 ```
+
+**Place the App Composable**
+
+```kt
+class MainActivity : ComponentActivity() {  
+    override fun onCreate(savedInstanceState: Bundle?) {  
+        super.onCreate(savedInstanceState)  
+        setContent {  
+  J3Theme {  
+  // A surface container using the 'background' color from the theme  
+  Surface(  
+                    modifier = Modifier.fillMaxSize(),  
+  color = MaterialTheme.colorScheme.background  
+  ) {  
+  MyApp()  
+                }  
+ } }  }  
+}
+```
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzM0OTU1MzJdfQ==
+eyJoaXN0b3J5IjpbLTkyMDk1MjkyN119
 -->
