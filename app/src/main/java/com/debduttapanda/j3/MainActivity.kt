@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.debduttapanda.j3lib.MyScreen
@@ -43,7 +44,8 @@ fun MyApp() {
         navController,
         startDestination = Routes.splash.full
     ) {
-        MyScreen<MainViewModel>(
+        MyScreen(
+            {hiltViewModel<MainViewModel>()},
             navController = navController,
             route = Routes.splash.full
         ) {
@@ -55,7 +57,8 @@ fun MyApp() {
                 Text("Splash")
             }
         }
-        MyScreen<HomeViewModel>(
+        MyScreen(
+            {hiltViewModel<HomeViewModel>()},
             navController = navController,
             route = Routes.home.full
         ) {
