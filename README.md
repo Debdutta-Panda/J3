@@ -159,6 +159,8 @@ fun HomePage(
     }
 }
 ```
+
+Any *data from viewModel* and *event notification towards viewModel will be done by id. 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNzY4ODAxMzBdfQ==
+eyJoaXN0b3J5IjpbMTAxMDE1OTA1XX0=
 -->
