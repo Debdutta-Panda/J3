@@ -162,7 +162,18 @@ fun HomePage(
 
 Any *data from viewModel* and *event notification towards viewModel* will be done by id.
 **That is how J3 abstracted the viewModel.**
-ViewModel will declare data with specific id(s) and subscribe event through specific ids 
+ViewModel will declare data with specific id(s) and will subscribe event through specific id(s).
+**Declaring data in viewModel with id**
+
+```kt
+resolver.addAll(
+    DataIds.statusBarColor to _statusBarColor,
+    MyDataIds.inputValue to inputValue,
+    MyDataIds.labelValue to labelValue,
+)
+``` 
+
+****
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4OTczMjk1MF19
+eyJoaXN0b3J5IjpbMTEzMjQzNTg2Ml19
 -->
