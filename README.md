@@ -254,7 +254,97 @@ fun HomePage(
 2. Access data in composable with same id
 3. Notify event from composable with data by id
 4. Subscribe event with data in viewModel with same id 
+
+## Full MainActivity
+
+```kt
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            J3Theme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MyApp()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun MyApp() {
+    val navController = rememberNavController()
+    NavHost(
+        navController,
+        startDestination = Routes.splash.full
+    ) {
+        MyScreen(
+            {viewModel<MainViewModel>()},
+            navController = navController,
+            route = Routes.splash.full
+        ) {
+            SplashPage()
+        }
+        MyScreen(
+            {viewModel<HomeViewModel>()},
+            navController = navController,
+            route = Routes.home.full
+        ) {
+            HomePage()
+        }
+    }
+}
+
+enum class
+MyDataIds {//
+    inputValue,
+    labelValue,
+    goBack
+}
+
+@Composable
+fun HomePage(
+    inputValue: String = stringState(key = MyDataIds.inputValue).value,
+    labelValue: String = stringState(key = MyDataIds.labelValue).value,
+    notifier: NotificationService = com.debduttapanda.j3lib.notifier()
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        Text("Home")
+        TextField(
+            value = inputValue,
+            onValueChange = {
+                notifier.notify(MyDataIds.inputValue,it)
+            }
+        )
+        Text(labelValue)
+        Button(
+            onClick = {
+                notifier.notify(MyDataIds.goBack)
+            }
+        ) {
+            Text("Go Back")
+        }
+    }
+}
+
+@Composable
+fun SplashPage() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        Text("Splash")
+    }
+}
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjUwOTczNDg1LC0yMDg0OTY3NTU1LC03OT
-MwOTY3M119
+eyJoaXN0b3J5IjpbLTE3MjE5MTM1NDMsLTIwODQ5Njc1NTUsLT
+c5MzA5NjczXX0=
 -->
