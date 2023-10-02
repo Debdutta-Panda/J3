@@ -300,7 +300,7 @@ fun MyApp() {
 }
 
 enum class
-MyDataIds {//
+MyDataIds {// organize your ids, you can do somehow else as well, no restriction
     inputValue,
     labelValue,
     goBack
@@ -345,6 +345,6 @@ fun SplashPage() {
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjE5MTM1NDMsLTIwODQ5Njc1NTUsLT
+eyJoaXN0b3J5IjpbLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLT
 c5MzA5NjczXX0=
 -->
