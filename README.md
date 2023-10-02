@@ -19,3 +19,7 @@ dependencies {
 	implementation 'com.github.Debdutta-Panda:J3:<version>'
 }
 ```
+
+# What is J3?
+
+J3 is a architectural utility library which enforch MVVM in jetpack compose project along with providing lots of utilities like navigation from viewModel, toast showing, permission checking and requesting, camera preview obtaining, pixel perfect ui developing and many more.
