@@ -111,22 +111,53 @@ fun MyApp() {
 **Place the App Composable**
 
 ```kt
-class MainActivity : ComponentActivity() {  
-    override fun onCreate(savedInstanceState: Bundle?) {  
-        super.onCreate(savedInstanceState)  
-        setContent {  
-  J3Theme {  
-  // A surface container using the 'background' color from the theme  
-  Surface(  
-                    modifier = Modifier.fillMaxSize(),  
-  color = MaterialTheme.colorScheme.background  
-  ) {  
-  MyApp()  
-                }  
- } }  }  
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            J3Theme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MyApp()
+                }
+            }
+        }
+    }
 }
 ```
+**Design your Composable page**
 
+```kt
+@Composable  
+fun HomePage(  
+    inputValue: String = stringState(key = MyDataIds.inputValue).value,  
+  labelValue: String = stringState(key = MyDataIds.labelValue).value,  
+  notifier: NotificationService = com.debduttapanda.j3lib.notifier()  
+) {  
+    Column(  
+        modifier = Modifier  
+            .fillMaxSize()  
+    ){  
+  Text("Home")  
+        TextField(  
+            value = inputValue,  
+  onValueChange = {  
+  notifier.notify(MyDataIds.inputValue,it)  
+            }  
+  )  
+        Text(labelValue)  
+        Button(  
+            onClick = {  
+  notifier.notify(MyDataIds.goBack)  
+            }  
+  ) {  
+  Text("Go Back")  
+        }  
+ }}
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkyMDk1MjkyN119
+eyJoaXN0b3J5IjpbLTE4MTQ0NDc5MjhdfQ==
 -->
