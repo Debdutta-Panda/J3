@@ -204,9 +204,21 @@ This way the data in viewModel is always *private* and *immutable*, but still yo
 **Subscribing event in viewModel**
 
 ```kt
-
+override val notifier = com.debduttapanda.j3lib.NotificationService { id, arg ->
+    when (id) {
+        "${DataIds.back}home" -> {
+            navigation.scope { navHostController, lifecycleOwner, activityService ->
+                navHostController.popBackStack()
+            }
+        }
+        MyDataIds.inputValue->{
+            inputValue.value = arg as String
+            labelValue.value = "Result = "+inputValue.value
+        }
+    }
+}
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDE0Mjk4NjIsLTIwODQ5Njc1NTUsLT
+eyJoaXN0b3J5IjpbLTEyMDkzMDkwNTYsLTIwODQ5Njc1NTUsLT
 c5MzA5NjczXX0=
 -->
