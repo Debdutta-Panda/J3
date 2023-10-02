@@ -160,7 +160,9 @@ fun HomePage(
 }
 ```
 
-Any *data from viewModel* and *event notification towards viewModel will be done by id. 
+Any *data from viewModel* and *event notification towards viewModel* will be done by id.
+**That is how J3 abstracted the viewModel.**
+ViewModel will declare data with specific id(s) and subscribe event through specific ids 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxMDE1OTA1XX0=
+eyJoaXN0b3J5IjpbLTk4OTczMjk1MF19
 -->
