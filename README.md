@@ -248,7 +248,13 @@ fun HomePage(
     }
 }
 ```
+
+**WirelessViewModel summary**
+1. Declare data in viewModel with id
+2. Access data in composable with same id
+3. Notify event from composable with data by id
+4. Subscribe event with data from  
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2NjIwMjQ4MCwtMjA4NDk2NzU1NSwtNz
+eyJoaXN0b3J5IjpbLTE2NjgxMjYyMywtMjA4NDk2NzU1NSwtNz
 kzMDk2NzNdfQ==
 -->
