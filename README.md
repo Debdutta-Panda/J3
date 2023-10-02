@@ -82,3 +82,26 @@ class HomeViewModel: WirelessViewModelInterface, ViewModel(){
     }
 }
 ```
+This is minimal bare bone wirelessViewModel.
+It has lots of functionality will discuss later.
+First of all let's use it.
+Create App Composable
+
+```kt
+@Composable
+fun MyApp() {
+    val navController = rememberNavController()
+    NavHost(
+        navController,
+        startDestination = Routes.splash.full
+    ) {
+        MyScreen(
+            {hiltViewModel<HomeViewModel>()},
+            navController = navController,
+            route = Routes.home.full
+        ) {
+            HomePage()
+        }
+    }
+}
+```
