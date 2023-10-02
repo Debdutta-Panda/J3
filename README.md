@@ -237,17 +237,18 @@ fun HomePage(
         modifier = Modifier
             .fillMaxSize()
     ){
-	    
+	    ...
         TextField(
             value = inputValue,
             onValueChange = {
                 notifier.notify(MyDataIds.inputValue,it)
             }
         )
+        ...
     }
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc3NzQ1OTM5NCwtMjA4NDk2NzU1NSwtNz
+eyJoaXN0b3J5IjpbLTg2NjIwMjQ4MCwtMjA4NDk2NzU1NSwtNz
 kzMDk2NzNdfQ==
 -->
