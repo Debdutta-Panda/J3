@@ -18,10 +18,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor(
 
-): com.debduttapanda.j3lib.WirelessViewModelInterface, ViewModel(){
+class MainViewModel: WirelessViewModelInterface, ViewModel(){
     private val _statusBarColor = mutableStateOf<com.debduttapanda.j3lib.StatusBarColor?>(null)
     override val softInputMode = mutableStateOf(com.debduttapanda.j3lib.SoftInputMode.adjustNothing)
     override val resolver = com.debduttapanda.j3lib.Resolver()

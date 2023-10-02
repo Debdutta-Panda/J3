@@ -4,6 +4,8 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class Resolver(){
     private val _map: MutableMap<Any, Any?> = mutableMapOf()
@@ -128,6 +130,7 @@ fun notifier(): NotificationService {
 }
 
 interface WirelessViewModelInterface{
+
     val softInputMode: MutableState<Int>
     val resolver: Resolver
     val notifier: NotificationService

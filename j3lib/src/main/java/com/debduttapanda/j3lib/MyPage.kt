@@ -23,32 +23,32 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 fun MyPage(
     navController: NavHostController,
     suffix: String,
-    wvm: WirelessViewModelInterface,
+    wvm: WirelessViewModelInterface?,
     content: @Composable () -> Unit
 ) {
     InitializeMetrics()
-    wvm.permissionHandler.handlePermission()
-    wvm.resultingActivityHandler.handle()
+    wvm?.permissionHandler?.handlePermission()
+    wvm?.resultingActivityHandler?.handle()
     LaunchedEffect(key1 = Unit){
-        wvm.notifier.notify(WirelessViewModelInterface.startupNotification, null)
+        wvm?.notifier?.notify(WirelessViewModelInterface.startupNotification, null)
     }
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current
-    LaunchedEffect(key1 = wvm.navigation.value){
-        wvm.navigation.forward(navController, owner, ActivityService(context))
+    LaunchedEffect(key1 = wvm?.navigation?.value){
+        wvm?.navigation?.forward(navController, owner, ActivityService(context))
     }
     // /////////
     val activity = LocalContext.current as Activity
-    LaunchedEffect(key1 = wvm.softInputMode.value) {
-        activity.window.setSoftInputMode(wvm.softInputMode.value)
+    LaunchedEffect(key1 = wvm?.softInputMode?.value) {
+        activity.window.setSoftInputMode(wvm?.softInputMode?.value?:return@LaunchedEffect)
     }
     // /////////
     CompositionLocalProvider(
-        LocalResolver provides wvm.resolver,
-        LocalNotificationService provides wvm.notifier
+        LocalResolver provides (wvm?.resolver?:Resolver()),
+        LocalNotificationService provides (wvm?.notifier?:NotificationService{_,_->})
     ) {
         OnLifecycleEvent{owner, event ->
-            wvm.notifier.notify(WirelessViewModelInterface.lifecycleEvent, event)
+            wvm?.notifier?.notify(WirelessViewModelInterface.lifecycleEvent, event)
         }
         HandleKeyboardVisibility(wvm)
         StatusBarColorControl()
@@ -67,11 +67,11 @@ fun MyPage(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun HandleKeyboardVisibility(wvm: WirelessViewModelInterface) {
+fun HandleKeyboardVisibility(wvm: WirelessViewModelInterface?) {
     val keyboardController = LocalSoftwareKeyboardController.current
-    LaunchedEffect(key1 = wvm.keyboarder.value){
+    LaunchedEffect(key1 = wvm?.keyboarder?.value){
         keyboardController?.let {
-            wvm.keyboarder.forward(it)
+            wvm?.keyboarder?.forward(it)
         }
     }
 }
