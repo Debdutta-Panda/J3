@@ -173,7 +173,33 @@ resolver.addAll(
 )
 ``` 
 
-****
+**Accessing data in composable**
+
+```kt
+@Composable
+fun HomePage(
+    inputValue: String = stringState(key = MyDataIds.inputValue).value,
+    labelValue: String = stringState(key = MyDataIds.labelValue).value,
+    ...
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        Text("Home")
+        TextField(
+            value = inputValue,
+            onValueChange = {}
+        )
+        Text(labelValue)
+        Button(
+            onClick = {}
+        ) {
+            Text("Go Back")
+        }
+    }
+}
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzMjQzNTg2Ml19
+eyJoaXN0b3J5IjpbLTk2ODI2MTA2N119
 -->
