@@ -253,8 +253,8 @@ fun HomePage(
 1. Declare data in viewModel with id
 2. Access data in composable with same id
 3. Notify event from composable with data by id
-4. Subscribe event with data from  
+4. Subscribe event with data in viewModel with same id 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NjgxMjYyMywtMjA4NDk2NzU1NSwtNz
-kzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbNjUwOTczNDg1LC0yMDg0OTY3NTU1LC03OT
+MwOTY3M119
 -->
