@@ -192,14 +192,10 @@ fun HomePage(
             onValueChange = {}
         )
         Text(labelValue)
-        Button(
-            onClick = {}
-        ) {
-            Text("Go Back")
-        }
+        ...
     }
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk2ODI2MTA2N119
+eyJoaXN0b3J5IjpbLTc5MzA5NjczXX0=
 -->
