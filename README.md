@@ -204,7 +204,7 @@ This way the data in viewModel is always *private* and *immutable*, but still yo
 **Subscribing event in viewModel**
 
 ```kt
-override val notifier = com.debduttapanda.j3lib.NotificationService { id, arg ->
+override val notifier = NotificationService { id, arg ->
     when (id) {
         "${DataIds.back}home" -> {
             navigation.scope { navHostController, lifecycleOwner, activityService ->
@@ -215,10 +215,39 @@ override val notifier = com.debduttapanda.j3lib.NotificationService { id, arg ->
             inputValue.value = arg as String
             labelValue.value = "Result = "+inputValue.value
         }
+        MyDataIds.goBack->{
+            navigation.scope { navHostController, lifecycleOwner, activityService ->
+                navHostController.popBackStack()
+            }
+        }
+    }
+}
+```
+
+**Notifying event from composable**
+
+```kt
+@Composable
+fun HomePage(
+    inputValue: String = stringState(key = MyDataIds.inputValue).value,
+    notifier: NotificationService = com.debduttapanda.j3lib.notifier(),
+    ...
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+	    
+        TextField(
+            value = inputValue,
+            onValueChange = {
+                notifier.notify(MyDataIds.inputValue,it)
+            }
+        )
     }
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMDkzMDkwNTYsLTIwODQ5Njc1NTUsLT
-c5MzA5NjczXX0=
+eyJoaXN0b3J5IjpbLTc3NzQ1OTM5NCwtMjA4NDk2NzU1NSwtNz
+kzMDk2NzNdfQ==
 -->
