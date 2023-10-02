@@ -1,16 +1,15 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 
-@OptIn(ExperimentalAnimationApi::class)
-inline fun <reified T : ViewModel> NavGraphBuilder.MyScreen(
+@NonRestartableComposable
+inline fun NavGraphBuilder.MyScreen(
+    crossinline wirelessViewModel: @Composable ()->WirelessViewModelInterface,
     navController: NavHostController,
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
@@ -25,14 +24,9 @@ inline fun <reified T : ViewModel> NavGraphBuilder.MyScreen(
         MyPage(
             navController,
             suffix = route,
-            wvm = getInterface<T>() ?: return@myComposable
+            wvm = wirelessViewModel()
         ) {
             content()
         }
     }
-}
-
-@Composable
-inline fun <reified T : ViewModel>getInterface(): WirelessViewModelInterface? {
-    return hiltViewModel<T>() as? WirelessViewModelInterface
 }

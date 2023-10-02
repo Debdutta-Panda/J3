@@ -1,6 +1,5 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
-import android.util.Log
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.snapshots.SnapshotStateMap

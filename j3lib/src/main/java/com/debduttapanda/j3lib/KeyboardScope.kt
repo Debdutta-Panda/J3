@@ -1,4 +1,4 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

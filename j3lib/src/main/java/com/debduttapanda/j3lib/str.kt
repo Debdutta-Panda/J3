@@ -1,4 +1,4 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 
 fun str(activityService: ActivityService, message: Any): String{

@@ -52,11 +52,9 @@ fun Number.sep(fullWidth: Number = localDesignWidth.current): TextUnit{
 }
 */
 
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
-import android.graphics.Color.pack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity

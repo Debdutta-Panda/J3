@@ -1,9 +1,8 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.graphics.Color
-import com.debduttapanda.j3.DataIds
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 data class StatusBarColor(
