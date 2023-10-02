@@ -49,3 +49,36 @@ Our WirelessViewModel offers a solution to this problem by decoupling Composable
 ## Simplifying UI Development
 
 With WirelessViewModel, you can streamline UI development, making your codebase more maintainable and adaptable as your application evolves.
+
+## Example
+
+Let's create a simple wirelessViewModel
+
+```kt
+class HomeViewModel: WirelessViewModelInterface, ViewModel(){
+    private val _statusBarColor = mutableStateOf<com.debduttapanda.j3lib.StatusBarColor?>(null)
+    override val softInputMode = mutableStateOf(com.debduttapanda.j3lib.SoftInputMode.adjustNothing)
+    override val resolver = com.debduttapanda.j3lib.Resolver()
+    override val notifier = com.debduttapanda.j3lib.NotificationService { id, arg ->
+        when (id) {
+            "${DataIds.back}home" -> {
+                navigation.scope { navHostController, lifecycleOwner, activityService ->
+                    navHostController.popBackStack()
+                }
+            }
+        }
+    }
+    override val navigation = com.debduttapanda.j3lib.Navigation()
+    override val permissionHandler = com.debduttapanda.j3lib.PermissionHandler()
+    override val resultingActivityHandler = com.debduttapanda.j3lib.ResultingActivityHandler()
+    init {
+        resolver.addAll(
+            DataIds.statusBarColor to _statusBarColor,
+        )
+        _statusBarColor.value = com.debduttapanda.j3lib.StatusBarColor(
+            color = Color.Red,
+            darkIcons = true
+        )
+    }
+}
+```
