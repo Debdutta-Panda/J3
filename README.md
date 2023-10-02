@@ -96,15 +96,17 @@ fun MyApp() {
         startDestination = Routes.splash.full
     ) {
         MyScreen(
-            {viewModel<HomeViewModel>()},
+            {
+                viewModel<HomeViewModel>()//provide your wirelessViewModel
+            },
             navController = navController,
-            route = Routes.home.full
+            route = Routes.home.full// route name in string, you can use simple "home" etc.
         ) {
-            HomePage()
+            HomePage()// your composable
         }
     }
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTczMDczODUwN119
+eyJoaXN0b3J5IjpbLTE4NzM0OTU1MzJdfQ==
 -->
