@@ -1,4 +1,4 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 import kotlin.collections.MutableList
 import kotlin.collections.forEach
@@ -44,7 +44,7 @@ class EventCallback{
         }
         callbacks[event]?.add(callback)
     }
-    fun oneShot(event: Any, block: () -> Unit): Callback{
+    fun oneShot(event: Any, block: () -> Unit): Callback {
         val callback = Callback(
             lifeTime = LifeTime.OneShot,
             event = event,
@@ -54,7 +54,7 @@ class EventCallback{
         this[event] = callback
         return callback
     }
-    fun repeat(event: Any, block: () -> Unit): Callback{
+    fun repeat(event: Any, block: () -> Unit): Callback {
         val callback = Callback(
             lifeTime = LifeTime.Repeat,
             event = event,

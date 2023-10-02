@@ -1,4 +1,4 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable

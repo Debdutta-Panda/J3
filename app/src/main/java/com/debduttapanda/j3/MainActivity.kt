@@ -12,10 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.debduttapanda.j3.jerokit.MyScreen
+import com.debduttapanda.j3lib.MyScreen
 import com.debduttapanda.j3.ui.theme.J3Theme
 import dagger.hilt.android.AndroidEntryPoint
 

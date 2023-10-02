@@ -1,11 +1,9 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.LinearEasing
@@ -88,9 +86,9 @@ fun NavGraphBuilder.myComposable(
         arguments,
         deepLinks,
         content = content,
-        enterTransition = enterTransition?:DefaultNavigationAnimation.enterTransition,
-        exitTransition = exitTransition?:DefaultNavigationAnimation.exitTransition,
-        popEnterTransition = popEnterTransition?:DefaultNavigationAnimation.popEnterTransition,
-        popExitTransition = popExitTransition?:DefaultNavigationAnimation.popExitTransition
+        enterTransition = enterTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.enterTransition,
+        exitTransition = exitTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.exitTransition,
+        popEnterTransition = popEnterTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.popEnterTransition,
+        popExitTransition = popExitTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.popExitTransition
     )
 }

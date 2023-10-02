@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "J3"
 include(":app")
+include(":j3lib")

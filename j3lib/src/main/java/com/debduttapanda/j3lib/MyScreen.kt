@@ -1,4 +1,4 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable

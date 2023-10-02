@@ -1,4 +1,4 @@
-package com.debduttapanda.j3.jerokit
+package com.debduttapanda.j3lib
 
 import android.app.Activity
 import androidx.compose.animation.*
@@ -19,7 +19,6 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.debduttapanda.j3.R
-import com.debduttapanda.j3.jerokit.BackHandle
 
 @Composable
 fun MyPage(
@@ -133,7 +132,7 @@ fun BoxScope.Fail(){
 fun LoaderUI(
     state: LoaderState
 ){
-    if(state!=LoaderState.None){
+    if(state!= LoaderState.None){
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -155,9 +154,9 @@ fun LoaderUI(
                 }
             ) {
                 when(it){
-                    LoaderState.Loading-> Indeterminate()
-                    LoaderState.Success-> Success()
-                    LoaderState.Fail-> Fail()
+                    LoaderState.Loading -> Indeterminate()
+                    LoaderState.Success -> Success()
+                    LoaderState.Fail -> Fail()
                     else->{}
                 }
             }
