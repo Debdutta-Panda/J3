@@ -85,7 +85,7 @@ class HomeViewModel: WirelessViewModelInterface, ViewModel(){
 This is minimal bare bone wirelessViewModel.
 It has lots of functionality will discuss later.
 First of all let's use it.
-Create App Composable
+**Create App Composable**
 
 ```kt
 @Composable
@@ -96,7 +96,7 @@ fun MyApp() {
         startDestination = Routes.splash.full
     ) {
         MyScreen(
-            {hiltViewModel<HomeViewModel>()},
+            {viewModel<HomeViewModel>()},
             navController = navController,
             route = Routes.home.full
         ) {
@@ -106,5 +106,5 @@ fun MyApp() {
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4NDgyNTQ2MF19
+eyJoaXN0b3J5IjpbMTczMDczODUwN119
 -->
