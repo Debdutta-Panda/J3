@@ -131,33 +131,34 @@ class MainActivity : ComponentActivity() {
 **Design your Composable page**
 
 ```kt
-@Composable  
-fun HomePage(  
-    inputValue: String = stringState(key = MyDataIds.inputValue).value,  
-  labelValue: String = stringState(key = MyDataIds.labelValue).value,  
-  notifier: NotificationService = com.debduttapanda.j3lib.notifier()  
-) {  
-    Column(  
-        modifier = Modifier  
-            .fillMaxSize()  
-    ){  
-  Text("Home")  
-        TextField(  
-            value = inputValue,  
-  onValueChange = {  
-  notifier.notify(MyDataIds.inputValue,it)  
-            }  
-  )  
-        Text(labelValue)  
-        Button(  
-            onClick = {  
-  notifier.notify(MyDataIds.goBack)  
-            }  
-  ) {  
-  Text("Go Back")  
-        }  
- }}
+@Composable
+fun HomePage(
+    inputValue: String = stringState(key = MyDataIds.inputValue).value,
+    labelValue: String = stringState(key = MyDataIds.labelValue).value,
+    notifier: NotificationService = com.debduttapanda.j3lib.notifier()
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        Text("Home")
+        TextField(
+            value = inputValue,
+            onValueChange = {
+                notifier.notify(MyDataIds.inputValue,it)
+            }
+        )
+        Text(labelValue)
+        Button(
+            onClick = {
+                notifier.notify(MyDataIds.goBack)
+            }
+        ) {
+            Text("Go Back")
+        }
+    }
+}
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MTQ0NDc5MjhdfQ==
+eyJoaXN0b3J5IjpbLTEwNzY4ODAxMzBdfQ==
 -->
