@@ -200,6 +200,13 @@ fun HomePage(
 Notice the id should be same, otherwise the app will crash **surely**.
 
 This way the data in viewModel is always *private* and *immutable*, but still you can access in a specific scope. It reduces the effort of creating two variable, one private mutableStateOf and one public State<T>.
+
+**Subscribing event in viewModel**
+
+```kt
+
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
+eyJoaXN0b3J5IjpbLTE1MDE0Mjk4NjIsLTIwODQ5Njc1NTUsLT
+c5MzA5NjczXX0=
 -->
