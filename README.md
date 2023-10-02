@@ -7,15 +7,15 @@ Jetpack Compose Material 3 Architectural Utility Library
 Add it in your root build.gradle at the end of repositories:
 ```groovy
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 Add the dependency
 ```groovy
 dependencies {
-	        implementation 'com.github.Debdutta-Panda:J3:<version>'
-	}
+	implementation 'com.github.Debdutta-Panda:J3:<version>'
+}
 ```
