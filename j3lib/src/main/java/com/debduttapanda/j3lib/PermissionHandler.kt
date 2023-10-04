@@ -1,11 +1,13 @@
 package com.debduttapanda.j3lib
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
+import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
@@ -29,33 +31,34 @@ class PermissionHandler{
             _permissions.addAll(permissions)
         }
 
-    suspend fun request(vararg permissions: String): Map<String, Boolean>? =
+    suspend fun request(vararg permissions: String): Pair<MultiplePermissionsState?,Map<String, Boolean>?> =
         suspendCancellableCoroutine {coroutine ->
             if (permissions.isEmpty()){
-                coroutine.resume(null)
+                coroutine.resume(Pair(null,null))
                 return@suspendCancellableCoroutine
             }
-            onDisposition = {
-                onDisposition = {}
+            onDisposition = {mps,states->
+                onDisposition = {mps,states->}
                 _permissions.clear()
                 _request.value = false
-                coroutine.resume(it)
+                coroutine.resume(Pair(mps,states))
             }
             _permissions.addAll(permissions)
             _request.value = true
         }
 
-    private var onDisposition: (states: Map<String, Boolean>) -> Unit = {}
+    private var onDisposition: (multiplePermissionsState: MultiplePermissionsState,states: Map<String, Boolean>) -> Unit = {mps,states->}
     private var onResult: (multiplePermissionsState: MultiplePermissionsState) -> Unit = {}
 
     @OptIn(ExperimentalPermissionsApi::class)
     @Composable
     fun handlePermission() {
         if (_permissions.isNotEmpty()){
-            val permissionState = rememberMultiplePermissionsState(
+            lateinit var permissionState: MultiplePermissionsState
+            permissionState = rememberMultiplePermissionsState(
                 _permissions
             ){
-                onDisposition(it)
+                onDisposition(permissionState,it)
             }
             LaunchedEffect(key1 = permissionState){
                 onResult(permissionState)

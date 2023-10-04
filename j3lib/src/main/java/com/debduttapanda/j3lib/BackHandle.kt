@@ -9,6 +9,6 @@ fun BackHandle(
     notifier: NotificationService = notifier()
 ) {
     BackHandler(enabled = true, onBack = {
-        notifier.notify("${DataIds.back}$suffix", null)
+        notifier.notify(DataIds.back, suffix)
     })
 }

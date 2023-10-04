@@ -1,5 +1,7 @@
 package com.debduttapanda.j3lib
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher
@@ -13,6 +15,41 @@ import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
+
+val ob = object : ActivityResultContract<Void, Int>() {
+    override fun createIntent(context: Context, input: Void): Intent {
+        TODO("Not yet implemented")
+    }
+
+    override fun parseResult(resultCode: Int, intent: Intent?): Int {
+        TODO("Not yet implemented")
+    }
+
+}
+
+suspend fun <I,O>ResultingActivityHandler.request(
+    createIntent: (context: Context, input: I)->Intent,
+    parseResult: (resultCode: Int, intent: Intent?)->O,
+    launch: ManagedActivityResultLauncher<I,O>.()->Unit,
+    maxTry: Int = 10,
+    millis: Long = 200
+): O?{
+    return request(
+        object : ActivityResultContract<I, O>() {
+            override fun createIntent(context: Context, input: I): Intent {
+                return createIntent(context, input)
+            }
+
+            override fun parseResult(resultCode: Int, intent: Intent?): O {
+                return parseResult(resultCode, intent)
+            }
+        },
+        maxTry,
+        millis
+    ){
+        launch(it)
+    }
+}
 
 suspend fun ResultingActivityHandler.takePicturePreview(
     maxTry: Int = 10,
