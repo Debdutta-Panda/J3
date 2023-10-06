@@ -1,5 +1,6 @@
 package com.debduttapanda.j3lib
 
+import android.util.Log
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.compose.runtime.*
@@ -40,12 +41,17 @@ data class NotificationService(
 }
 
 val LocalResolver = compositionLocalOf { Resolver() }
+val LocalController = compositionLocalOf { Controller(Resolver(),NotificationService{ _, _->}) }
 val LocalNotificationService = compositionLocalOf { NotificationService{ _, _ -> } }
 val LocalSuffix = compositionLocalOf { "" }
 
 @Composable
 fun suffix(): String{
     return LocalSuffix.current
+}
+@Composable
+fun controller(): Controller{
+    return LocalController.current
 }
 
 @Composable
@@ -71,6 +77,7 @@ fun doubleState(key: Any): State<Double> {
 
 @Composable
 fun stringState(key: Any): State<String> {
+    Log.d("fjkldjfd","klfdjfdd")
     return LocalResolver.current.get(key)
 }
 @Composable
@@ -139,17 +146,10 @@ fun notifier(): NotificationService {
 }
 
 interface WirelessViewModelInterface{
-
-    fun retrieveResolver(): Resolver{
-        addResolverData(__resolver)
-        return __resolver
-    }
-
-    fun addResolverData(resolver: Resolver)
+    val controller: Controller
 
     val __softInputMode: MutableState<Int>
-    val __resolver: Resolver
-    val __notifier: NotificationService
+
     val __navigation: MutableState<UIScope?>
     val __permissionHandler: PermissionHandler
     val __resultingActivityHandler: ResultingActivityHandler
@@ -189,18 +189,12 @@ interface WirelessViewModelInterface{
 }
 
 abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
-    val controller by lazy { Controller(__resolver, __notifier) }
+    override val controller by lazy { createController() }
+
+    open fun createController() = Controller(Resolver(), NotificationService(::onNotification))
+
     private val __statusBarColor = mutableStateOf<StatusBarColor?>(null)
     override val __softInputMode = mutableStateOf(SoftInputMode.adjustNothing)
-    override val __resolver = Resolver()
-    override val __notifier = NotificationService { id, arg ->
-        when (id) {
-            DataIds.back -> {
-                onBack()
-            }
-            else->onNotification(id,arg)
-        }
-    }
 
     fun setSoftInputMode(mode: Int){
         __softInputMode.value = mode
@@ -212,7 +206,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     override val __permissionHandler = PermissionHandler()
     override val __resultingActivityHandler = ResultingActivityHandler()
     init {
-        __resolver.addAll(DataIds.statusBarColor to __statusBarColor)
+        controller.resolver.addAll(DataIds.statusBarColor to __statusBarColor)
         onStart()
     }
 
@@ -276,4 +270,63 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
 data class Controller(
     val resolver: Resolver,
     val notificationService: NotificationService
-)
+){
+
+    fun floatState(key: Any): State<Float> {
+        return resolver.get(key)
+    }
+
+    fun doubleState(key: Any): State<Double> {
+        return resolver.get(key)
+    }
+
+    fun stringState(key: Any): State<String> {
+        Log.d("fjldjkfdfd","fdfdfd")
+        return resolver.get(key)
+    }
+
+    fun stringResourceState(key: Any): State<StringResource> {
+        return resolver.get(key)
+    }
+
+    fun boolState(key: Any): State<Boolean> {
+        return resolver.get(key)
+    }
+
+    fun safeBoolState(key: Any): State<Boolean>? {
+        return resolver.get(key)
+    }
+
+    fun intState(key: Any): State<Int> {
+        return resolver.get(key)
+    }
+
+    fun <T>listState(key: Any): SnapshotStateList<T> {
+        return resolver.get(key)
+    }
+
+    fun <T>safeListState(key: Any): SnapshotStateList<T>? {
+        return resolver.get(key)
+    }
+
+    fun <T, E>mapState(key: Any): SnapshotStateMap<T, E> {
+        return resolver.get(key)
+    }
+
+    fun <T, E>safeMapState(key: Any): SnapshotStateMap<T, E>? {
+        return resolver.get(key)
+    }
+
+    fun <T>t(key: Any): T {
+        return resolver.get(key)
+    }
+
+    fun <T>tState(key: Any): State<T> {
+        return resolver.get(key)
+    }
+
+    fun <T>safeTState(key: Any): State<T>? {
+        return resolver.get(key)
+    }
+
+}

@@ -30,7 +30,7 @@ fun MyPage(
     wvm?.__permissionHandler?.handlePermission()
     wvm?.__resultingActivityHandler?.handle()
     LaunchedEffect(key1 = Unit){
-        wvm?.__notifier?.notify(WirelessViewModelInterface.startupNotification, null)
+        wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.startupNotification, null)
     }
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current
@@ -44,11 +44,28 @@ fun MyPage(
     }
     // /////////
     CompositionLocalProvider(
-        LocalResolver provides (wvm?.retrieveResolver()?:Resolver()),
-        LocalNotificationService provides (wvm?.__notifier?:NotificationService{ _, _->})
+        LocalResolver provides (wvm?.controller?.resolver?:Resolver()),
+        LocalNotificationService provides (wvm?.controller?.notificationService?:NotificationService{ _, _->}),
+        LocalController provides (
+                wvm
+                ?.controller
+                ?:
+                Controller(
+                    wvm
+                        ?.controller
+                        ?.resolver
+                        ?:
+                        Resolver(),
+                    wvm
+                        ?.controller
+                        ?.notificationService
+                        ?:
+                        NotificationService{ _, _->}
+                )
+        ),
     ) {
         OnLifecycleEvent{owner, event ->
-            wvm?.__notifier?.notify(WirelessViewModelInterface.lifecycleEvent, event)
+            wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.lifecycleEvent, event)
         }
         HandleKeyboardVisibility(wvm)
         StatusBarColorControl()

@@ -41,6 +41,4 @@ class SplashViewModel: WirelessViewModel(){
             }
         }
     }
-
-    override fun addResolverData(resolver: Resolver) {}
 }

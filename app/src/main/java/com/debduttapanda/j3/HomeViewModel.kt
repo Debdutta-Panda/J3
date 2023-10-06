@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.debduttapanda.j3lib.Controller
 import com.debduttapanda.j3lib.Navigation
 import com.debduttapanda.j3lib.NotificationService
 import com.debduttapanda.j3lib.PermissionHandler
@@ -22,8 +23,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel: WirelessViewModel(){
+
     private val inputValue = mutableStateOf("")
     private val labelValue = mutableStateOf("")
+
     override fun onBack() {
 
     }
@@ -44,20 +47,13 @@ class HomeViewModel: WirelessViewModel(){
             }
             MyDataIds.checkPermission->{
                 goToAppSettings()
-                /*viewModelScope.launch(Dispatchers.Main){
-                    val permitted = android.Manifest.permission.CAMERA.permitted()?.allPermissionsGranted?:false
-                    if(!permitted){
-                        val (mps,states) = android.Manifest.permission.CAMERA.requestPermission()
-                        val rationaleNeeded = mps?.shouldShowRationale
-                        toast(states.toString())
-                    }
-                }*/
             }
         }
     }
 
-    override fun addResolverData(resolver: Resolver) {
-        resolver.addAll(
+
+    init {
+        controller.resolver.addAll(
             MyDataIds.inputValue to inputValue,
             MyDataIds.labelValue to labelValue,
         )
