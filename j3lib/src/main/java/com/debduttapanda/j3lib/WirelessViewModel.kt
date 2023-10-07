@@ -12,37 +12,9 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
-
-class Resolver(){
-    private val _map: MutableMap<Any, Any?> = mutableMapOf()
-    fun <T>get(key: Any): T{
-        return _map[key] as T
-    }
-
-    operator fun set(key: Any, value: Any?){
-        _map[key] = value
-    }
-
-    fun addAll(map: Map<Any, Any?>){
-        _map.putAll(map)
-    }
-
-    fun addAll(vararg pairs: Pair<Any, Any?>){
-        _map.putAll(pairs)
-    }
-}
-
-data class NotificationService(
-    val callback: (Any, Any?) -> Unit
-){
-    fun notify(id: Any, arg: Any? = null){
-        callback(id, arg)
-    }
-}
-
-val LocalResolver = compositionLocalOf { Resolver() }
-val LocalController = compositionLocalOf { Controller(Resolver(),NotificationService{ _, _->}) }
-val LocalNotificationService = compositionLocalOf { NotificationService{ _, _ -> } }
+val LocalResolver = compositionLocalOf { _Resolver() }
+val LocalController = compositionLocalOf { Controller(_Resolver(),_NotificationService{ _, _->}).restricted() }
+val LocalNotificationService = compositionLocalOf { _NotificationService{ _, _ -> } }
 val LocalSuffix = compositionLocalOf { "" }
 
 @Composable
@@ -50,7 +22,7 @@ fun suffix(): String{
     return LocalSuffix.current
 }
 @Composable
-fun controller(): Controller{
+fun controller(): RestrictedController{
     return LocalController.current
 }
 
@@ -77,7 +49,6 @@ fun doubleState(key: Any): State<Double> {
 
 @Composable
 fun stringState(key: Any): State<String> {
-    Log.d("fjkldjfd","klfdjfdd")
     return LocalResolver.current.get(key)
 }
 @Composable
@@ -141,7 +112,7 @@ fun <T>safeTState(key: Any): State<T>? {
 }
 
 @Composable
-fun notifier(): NotificationService {
+fun notifier(): _NotificationService {
     return LocalNotificationService.current
 }
 
@@ -191,7 +162,7 @@ interface WirelessViewModelInterface{
 abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     override val controller by lazy { createController() }
 
-    open fun createController() = Controller(Resolver(), NotificationService(::onNotification))
+    open fun createController() = Controller(_Resolver(), _NotificationService(::onNotification))
 
     private val __statusBarColor = mutableStateOf<StatusBarColor?>(null)
     override val __softInputMode = mutableStateOf(SoftInputMode.adjustNothing)
@@ -264,69 +235,66 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     suspend fun takePicturePreview() = __resultingActivityHandler.takePicturePreview()
     suspend fun getContent(type: String) = __resultingActivityHandler.getContent(type)
 
-    fun newController(notificationService: NotificationService) = Controller(Resolver(), notificationService)
+    fun newController(notificationService: _NotificationService) = Controller(_Resolver(), notificationService)
 }
 
-data class Controller(
-    val resolver: Resolver,
-    val notificationService: NotificationService
+
+@Composable
+fun rememberStringState(id: Any): State<String>{
+    val controller = LocalController.current
+    return remember(controller) {
+        controller.stringState(id)
+    }
+}
+@Composable
+fun rememberBoolState(id: Any): State<Boolean>{
+    val controller = LocalController.current
+    return remember(controller) {
+        controller.boolState(id)
+    }
+}
+@Composable
+fun rememberNotifier(): NotificationService{
+    val controller = LocalController.current
+    return remember(controller) { controller.notifier() }
+}
+
+@Composable
+fun ControlledBy(
+    controller: RestrictedController,
+    content: @Composable () -> Unit,
 ){
-
-    fun floatState(key: Any): State<Float> {
-        return resolver.get(key)
+    CompositionLocalProvider(
+        LocalController provides controller
+    ){
+        content()
     }
+}
 
-    fun doubleState(key: Any): State<Double> {
-        return resolver.get(key)
+@Composable
+fun ControlledById(
+    id: Any,
+    content: @Composable () -> Unit,
+){
+    val controller = LocalController.current.resolver().get<RestrictedController>(id)
+    CompositionLocalProvider(
+        LocalController provides controller
+    ){
+        content()
     }
+}
 
-    fun stringState(key: Any): State<String> {
-        Log.d("fjldjkfdfd","fdfdfd")
-        return resolver.get(key)
+@Composable
+fun SafeControlledById(
+    id: Any,
+    content: @Composable () -> Unit,
+){
+    val controller = LocalController.current.resolver().getOrNull<RestrictedController>(id)
+    if(controller!=null){
+        CompositionLocalProvider(
+            LocalController provides controller
+        ){
+            content()
+        }
     }
-
-    fun stringResourceState(key: Any): State<StringResource> {
-        return resolver.get(key)
-    }
-
-    fun boolState(key: Any): State<Boolean> {
-        return resolver.get(key)
-    }
-
-    fun safeBoolState(key: Any): State<Boolean>? {
-        return resolver.get(key)
-    }
-
-    fun intState(key: Any): State<Int> {
-        return resolver.get(key)
-    }
-
-    fun <T>listState(key: Any): SnapshotStateList<T> {
-        return resolver.get(key)
-    }
-
-    fun <T>safeListState(key: Any): SnapshotStateList<T>? {
-        return resolver.get(key)
-    }
-
-    fun <T, E>mapState(key: Any): SnapshotStateMap<T, E> {
-        return resolver.get(key)
-    }
-
-    fun <T, E>safeMapState(key: Any): SnapshotStateMap<T, E>? {
-        return resolver.get(key)
-    }
-
-    fun <T>t(key: Any): T {
-        return resolver.get(key)
-    }
-
-    fun <T>tState(key: Any): State<T> {
-        return resolver.get(key)
-    }
-
-    fun <T>safeTState(key: Any): State<T>? {
-        return resolver.get(key)
-    }
-
 }

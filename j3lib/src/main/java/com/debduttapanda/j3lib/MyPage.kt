@@ -44,24 +44,24 @@ fun MyPage(
     }
     // /////////
     CompositionLocalProvider(
-        LocalResolver provides (wvm?.controller?.resolver?:Resolver()),
-        LocalNotificationService provides (wvm?.controller?.notificationService?:NotificationService{ _, _->}),
+        LocalResolver provides (wvm?.controller?.resolver?:_Resolver()),
+        LocalNotificationService provides (wvm?.controller?.notificationService?:_NotificationService{ _, _->}),
         LocalController provides (
                 wvm
-                ?.controller
+                ?.controller?.restricted()
                 ?:
                 Controller(
                     wvm
                         ?.controller
                         ?.resolver
                         ?:
-                        Resolver(),
+                        _Resolver(),
                     wvm
                         ?.controller
                         ?.notificationService
                         ?:
-                        NotificationService{ _, _->}
-                )
+                        _NotificationService{ _, _->}
+                ).restricted()
         ),
     ) {
         OnLifecycleEvent{owner, event ->

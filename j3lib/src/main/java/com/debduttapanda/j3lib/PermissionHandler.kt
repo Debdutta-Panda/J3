@@ -12,6 +12,8 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
+
+
 @OptIn(ExperimentalPermissionsApi::class)
 class PermissionHandler{
     private val _permissions = mutableStateListOf<String>()
