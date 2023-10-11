@@ -131,6 +131,8 @@ class SplashViewModel: WirelessViewModel(){
 
 The viewModel need to extend `WirelessViewModel`. You will be forced to implement `onBack`, `onStart`, `onNotification`. Here we are interested in `onStart`.
 
+Creat the Hom
+
 onStart will be called when the viewModel is starting.
 Here we have scope to do something. We need to do just a wait and navigate to home page.
 
@@ -150,8 +152,11 @@ The problem was to navigate by viewModel. It is really hard to get access of nav
 J3's first benefit is to get navigation controll in viewModel without having any extra/complex/bad things.
 
 Navigation in viewModel is just easy in J3.
+Inside `navigate{}` you will have all the functionalities of `navHostController`.
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzNDMyNjA2Myw3MjI5MTg0NzQsLTE4Nz
-MwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2
-NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbNTM2MTA1MTAwLDcyMjkxODQ3NCwtMTg3Mz
+A2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3
+NTU1LC03OTMwOTY3M119
 -->
