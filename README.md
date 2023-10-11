@@ -144,8 +144,12 @@ viewModelScope.launch {
 ```
 
 Just put this code inside `onStart`. And you are done.
+
+The problem was to navigate by viewModel. It is really hard to get access of navigation things in viewModel.
+
+J3's first benefit is to get navigation controll in viewModel without having any extra/complex
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExNzkyNDkwNCwtMTg3MzA2MDYyNywtMz
+eyJoaXN0b3J5IjpbLTI3MTQ3NDI0OCwtMTg3MzA2MDYyNywtMz
 k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
 OTY3M119
 -->
