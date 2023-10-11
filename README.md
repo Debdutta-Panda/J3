@@ -149,9 +149,9 @@ The problem was to navigate by viewModel. It is really hard to get access of nav
 
 J3's first benefit is to get navigation controll in viewModel without having any extra/complex/bad things.
 
-Navigation in viewModel is just free in J3.
+Navigation in viewModel is just easy in J3.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzIyOTE4NDc0LC0xODczMDYwNjI3LC0zOT
-U2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5
-NjczXX0=
+eyJoaXN0b3J5IjpbLTIwOTUwMTg3ODQsNzIyOTE4NDc0LC0xOD
+czMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5
+Njc1NTUsLTc5MzA5NjczXX0=
 -->
