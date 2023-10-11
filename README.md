@@ -39,7 +39,14 @@ dependencies {
 	implementation("com.github.Debdutta-Panda:J3:<version>")
 }
 ```
+
+## Update App
+
+* kotlin version: 1.9.10
+* compileSdk: 34
+* targetSdk: 34
+* 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTY2NzcwODIwLC0xOTM2OTU1MzUxLC0yMD
-g0OTY3NTU1LC03OTMwOTY3M119
+eyJoaXN0b3J5IjpbLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMj
+A4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
 -->
