@@ -102,9 +102,15 @@ fun MyApp() {
 }
 ```
 
-Here we have created two pages,
+Here we have created two pages splash and home. The plan is to stay a while in splash then go to home. You can see we need to viewModel also for those pages.
+
+To use viewModel<T> you need to add the following dependency
+
+`val nav_version = "2.7.4"  
+  
+implementation("androidx.navigation:navigation-compose:$nav_version")`
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTUyMzgxODYwLC0xODczMDYwNjI3LC0zOT
-U2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5
-NjczXX0=
+eyJoaXN0b3J5IjpbLTE4NDM3MjY4MCwtMTg3MzA2MDYyNywtMz
+k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
+OTY3M119
 -->
