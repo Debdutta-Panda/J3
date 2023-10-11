@@ -131,7 +131,7 @@ class SplashViewModel: WirelessViewModel(){
 
 The viewModel need to extend `WirelessViewModel`. You will be forced to implement `onBack`, `onStart`, `onNotification`. Here we are interested in `onStart`.
 
-Creat the Hom
+Creat the `HomPage` and `HomeViewModel` like `SplashPage` and `SplashViewModel`.
 
 onStart will be called when the viewModel is starting.
 Here we have scope to do something. We need to do just a wait and navigate to home page.
@@ -156,7 +156,7 @@ Inside `navigate{}` you will have all the functionalities of `navHostController`
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTM2MTA1MTAwLDcyMjkxODQ3NCwtMTg3Mz
-A2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3
-NTU1LC03OTMwOTY3M119
+eyJoaXN0b3J5IjpbLTE4MDc4MjY1ODgsNzIyOTE4NDc0LC0xOD
+czMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5
+Njc1NTUsLTc5MzA5NjczXX0=
 -->
