@@ -188,10 +188,16 @@ fun HomePage(
 }
 ```
 
-The followings are bit confusional
+The followings are bit confusional.
+
+```
+inputValue: State<String> = rememberStringState("inputValue"),
+labelValue: State<String> = rememberStringState("labelValue"),
+notifier: NotificationService = rememberNotifier()
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODI2MjczMDYzLC0xMjI5OTI4NDA2LC0xOD
-A3ODI2NTg4LDcyMjkxODQ3NCwtMTg3MzA2MDYyNywtMzk1NjUw
-NDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M1
-19
+eyJoaXN0b3J5IjpbMTI1MjQ2ODAyNiwtMTIyOTkyODQwNiwtMT
+gwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLTM5NTY1
+MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2Nz
+NdfQ==
 -->
