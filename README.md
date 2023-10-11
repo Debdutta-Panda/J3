@@ -135,15 +135,17 @@ onStart will be called when the viewModel is starting.
 Here we have scope to do something. We need to do just a wait and navigate to home page.
 
 ```
-viewModelScope.launch {  
-  delay(3000)  
-    navigate {  
-  navigate(Routes.home.full)  
-    }  
+viewModelScope.launch {
+    delay(3000)
+    navigate {
+        navigate(Routes.home.full)
+    }
 }
 ```
+
+Just put this code inside `onStart`. And you are done.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxODM0NzUzLC0xODczMDYwNjI3LC0zOT
-U2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5
-NjczXX0=
+eyJoaXN0b3J5IjpbMTExNzkyNDkwNCwtMTg3MzA2MDYyNywtMz
+k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
+OTY3M119
 -->
