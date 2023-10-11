@@ -48,7 +48,10 @@ dependencies {
 * java version: 17
 * compose compiler version: 1.5.3
 * compose bom version: 2023.10.00
+
+Otherwise J3 lib may conflict or give some error.
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyMTcxNDAzOCwtMzk1NjUwNDA2LC0xOT
-M2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M119
+eyJoaXN0b3J5IjpbLTIwMzIzNzMyODMsLTM5NTY1MDQwNiwtMT
+kzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
 -->
