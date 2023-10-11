@@ -45,8 +45,10 @@ dependencies {
 * kotlin version: 1.9.10
 * compileSdk: 34
 * targetSdk: 34
-* 
+* java version: 17
+* compose compiler version: 1.5.3
+* compose bom version: 2023.10.00
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMj
-A4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbMTMyMTcxNDAzOCwtMzk1NjUwNDA2LC0xOT
+M2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M119
 -->
