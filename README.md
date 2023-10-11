@@ -138,7 +138,7 @@ Here we have scope to do something. We need to do just a wait and navigate to ho
 viewModelScope.launch {
     delay(3000)
     navigate {
-        navigate(Routes.home.full)
+        navigate("home")
     }
 }
 ```
@@ -151,7 +151,7 @@ J3's first benefit is to get navigation controll in viewModel without having any
 
 Navigation in viewModel is just easy in J3.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTUwMTg3ODQsNzIyOTE4NDc0LC0xOD
-czMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5
-Njc1NTUsLTc5MzA5NjczXX0=
+eyJoaXN0b3J5IjpbLTIzNDMyNjA2Myw3MjI5MTg0NzQsLTE4Nz
+MwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2
+NzU1NSwtNzkzMDk2NzNdfQ==
 -->
