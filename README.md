@@ -77,9 +77,34 @@ Let's see how we can do this by J3.
 ### Create a MyApp
 
 ```
+@Composable
+fun MyApp() {
+    val navController = rememberNavController()
+    NavHost(
+        navController,
+        startDestination = Routes.splash.full
+    ) {
+        MyScreen(
+            navController = navController,
+            route = "splash",
+            { viewModel<SplashViewModel>() }
+        ) {
+            SplashPage()
+        }
+        MyScreen(
+            navController = navController,
+            route = "home",
+            { viewModel<HomeViewModel>() }
+        ) {
+            HomePage()
+        }
+    }
+}
 ```
+
+Here we have created two pages,
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5NTg1OTM0LC0xODczMDYwNjI3LC0zOT
+eyJoaXN0b3J5IjpbOTUyMzgxODYwLC0xODczMDYwNjI3LC0zOT
 U2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5
 NjczXX0=
 -->
