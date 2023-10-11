@@ -69,9 +69,10 @@ fun SplashPage() {
 }
 ```
 
-Nothing 
+Nothing Special is here.
+We know splash is not bare bone always. In most cases we need to
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyOTEzMzQzMzgsLTE4NzMwNjA2MjcsLT
+eyJoaXN0b3J5IjpbLTEzODY4NzU4NTcsLTE4NzMwNjA2MjcsLT
 M5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkz
 MDk2NzNdfQ==
 -->
