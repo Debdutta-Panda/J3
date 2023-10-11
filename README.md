@@ -110,8 +110,12 @@ To use `viewModel<T>` you need to add the following dependency
 val nav_version = "2.7.4"  
 implementation("androidx.navigation:navigation-compose:$nav_version")
 ```
+
+### SplashViewModel
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4Mjg4ODIzNCwtMTg3MzA2MDYyNywtMz
+eyJoaXN0b3J5IjpbMTM3ODcwNjMxNCwtMTg3MzA2MDYyNywtMz
 k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
 OTY3M119
 -->
