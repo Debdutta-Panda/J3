@@ -154,11 +154,11 @@ J3's first benefit is to get navigation controll in viewModel without having any
 Navigation in viewModel is just easy in J3.
 Inside `navigate{}` you will have all the functionalities of `navHostController`.
 
-#
+## Improve 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ1NTQ1ODkzNSwtMTgwNzgyNjU4OCw3Mj
-I5MTg0NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1
-NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbNjY0ODY1ODYwLC0xODA3ODI2NTg4LDcyMj
+kxODQ3NCwtMTg3MzA2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1
+MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M119
 -->
