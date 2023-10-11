@@ -158,11 +158,39 @@ Inside `navigate{}` you will have all the functionalities of `navHostController`
 
 Let's suppose we will have a textField, a button and a text in home page. The plan is to type in the textfield, whatever in textField it will be shown in the text below the button with a prefix, and whenever the button will be clicked we will go back to splash(sounds absurd though).
 
+```
+@Composable
+fun HomePage(
+    inputValue: State<String> = rememberStringState(MyDataIds.inputValue),
+    labelValue: State<String> = rememberStringState(MyDataIds.labelValue),
+    notifier: NotificationService = rememberNotifier()
+) {
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ){
+        TextField(
+            value = inputValue.value,
+            onValueChange = {
+                notifier.notify(MyDataIds.inputValue,it)
+            }
+        )
+        Text(labelValue.value)
+        Button(
+            onClick = {
+                notifier.notify(MyDataIds.goBack)
+            }
+        ) {
+            Text("Go Back")
+        }
+    }
+}
+```
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MDk1OTgxNTMsLTE4MDc4MjY1ODgsNz
-IyOTE4NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5
-NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
+eyJoaXN0b3J5IjpbOTkxNDMzMzg2LC0xODA3ODI2NTg4LDcyMj
+kxODQ3NCwtMTg3MzA2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1
+MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M119
 -->
