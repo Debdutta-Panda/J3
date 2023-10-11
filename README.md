@@ -70,9 +70,11 @@ fun SplashPage() {
 ```
 
 Nothing Special is here.
-We know splash is not bare bone always. In most cases we need to
+We know splash is not bare bone always. In most cases we need to do(fetch, send, etc). In most simple case we need to do just a wait go to some page(login, intro, home, etc.)
+So, we need to do something of course. But those need to be controlled/triggered from/by viewModel.
+Let's see 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODY4NzU4NTcsLTE4NzMwNjA2MjcsLT
-M5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkz
-MDk2NzNdfQ==
+eyJoaXN0b3J5IjpbLTgxNDk2MjU1NCwtMTg3MzA2MDYyNywtMz
+k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
+OTY3M119
 -->
