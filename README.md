@@ -113,9 +113,25 @@ implementation("androidx.navigation:navigation-compose:$nav_version")
 
 ### SplashViewModel
 
+```
+class SplashViewModel: WirelessViewModel(){  
+    override fun onBack() {  
+          
+    }  
+  
+    override fun onStart() {  
+          
+    }  
+  
+    override fun onNotification(id: Any?, arg: Any?) {  
+          
+    }  
+}
+```
 
+The viewModel need to extend `WirelessViewModel`. You will be forced to implement
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM3ODcwNjMxNCwtMTg3MzA2MDYyNywtMz
+eyJoaXN0b3J5IjpbMTM0MDU5Nzg4NSwtMTg3MzA2MDYyNywtMz
 k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
 OTY3M119
 -->
