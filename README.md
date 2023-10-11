@@ -161,8 +161,8 @@ Let's suppose we will have a textField, a button and a text in home page. The pl
 ```
 @Composable
 fun HomePage(
-    inputValue: State<String> = rememberStringState(MyDataIds.inputValue),
-    labelValue: State<String> = rememberStringState(MyDataIds.labelValue),
+    inputValue: State<String> = rememberStringState("inputValue"),
+    labelValue: State<String> = rememberStringState("labelValue"),
     notifier: NotificationService = rememberNotifier()
 ) {
 
@@ -190,7 +190,7 @@ fun HomePage(
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTkxNDMzMzg2LC0xODA3ODI2NTg4LDcyMj
-kxODQ3NCwtMTg3MzA2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1
-MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M119
+eyJoaXN0b3J5IjpbLTEyMjk5Mjg0MDYsLTE4MDc4MjY1ODgsNz
+IyOTE4NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5
+NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
 -->
