@@ -53,8 +53,25 @@ Otherwise J3 lib may conflict or give some error.
 
 ## Create a simple splash screen
 
+```
+@Composable  
+fun SplashPage() {  
+    Column(  
+        modifier = Modifier  
+            .fillMaxSize(),  
+  verticalArrangement = Arrangement.Center,  
+  horizontalAlignment = Alignment.CenterHorizontally  
+  ){  
+  Text("Splash")  
+        Spacer(modifier = Modifier.height(24.dp))  
+        CircularProgressIndicator()  
+    }  
+}
+```
 
+Nothing 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMT
-kzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbLTEyOTEzMzQzMzgsLTE4NzMwNjA2MjcsLT
+M5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkz
+MDk2NzNdfQ==
 -->
