@@ -154,11 +154,13 @@ J3's first benefit is to get navigation controll in viewModel without having any
 Navigation in viewModel is just easy in J3.
 Inside `navigate{}` you will have all the functionalities of `navHostController`.
 
-## Improve 
+## Improve HomePage and its viewModel
+
+Let's suppose we will have a textField, a button and a text in home page. The plan is to type in the textfield, whatever in textField it will be shown in txt
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjY0ODY1ODYwLC0xODA3ODI2NTg4LDcyMj
+eyJoaXN0b3J5IjpbMTk2OTE0OTkwLC0xODA3ODI2NTg4LDcyMj
 kxODQ3NCwtMTg3MzA2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1
 MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M119
 -->
