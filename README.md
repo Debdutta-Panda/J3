@@ -5,7 +5,9 @@ Jetpack Compose Material 3 Architectural Utility Library
 
 ## Installation
 Add it in your root build.gradle at the end of repositories:
+
 ### Groovy
+
 ```groovy
 allprojects {
 	repositories {
@@ -13,7 +15,7 @@ allprojects {
 		maven { url 'https://jitpack.io' }
 	}
 }
-
+```
 ### Kts
 ```kts
 allprojects {
@@ -29,7 +31,7 @@ Add the dependency
 dependencies {
 	implementation 'com.github.Debdutta-Panda:J3:<version>'
 }
-
+```
 ### Kts
 ```kts
 dependencies {
