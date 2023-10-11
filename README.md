@@ -72,9 +72,14 @@ fun SplashPage() {
 Nothing Special is here.
 We know splash is not bare bone always. In most cases we need to do(fetch, send, etc). In most simple case we need to do just a wait go to some page(login, intro, home, etc.)
 So, we need to do something of course. But those need to be controlled/triggered from/by viewModel.
-Let's see 
+Let's see how we can do this by J3.
+
+### Create a MyApp
+
+```
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgxNDk2MjU1NCwtMTg3MzA2MDYyNywtMz
-k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
-OTY3M119
+eyJoaXN0b3J5IjpbMTk5NTg1OTM0LC0xODczMDYwNjI3LC0zOT
+U2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5
+NjczXX0=
 -->
