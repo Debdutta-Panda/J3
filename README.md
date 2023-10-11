@@ -147,9 +147,11 @@ Just put this code inside `onStart`. And you are done.
 
 The problem was to navigate by viewModel. It is really hard to get access of navigation things in viewModel.
 
-J3's first benefit is to get navigation controll in viewModel without having any extra/complex
+J3's first benefit is to get navigation controll in viewModel without having any extra/complex/bad things.
+
+Navigation in viewModel is just free in J3.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3MTQ3NDI0OCwtMTg3MzA2MDYyNywtMz
-k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
-OTY3M119
+eyJoaXN0b3J5IjpbNzIyOTE4NDc0LC0xODczMDYwNjI3LC0zOT
+U2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5
+NjczXX0=
 -->
