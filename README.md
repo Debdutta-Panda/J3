@@ -197,8 +197,9 @@ notifier: NotificationService = rememberNotifier()
 ```
 
 In J3 UI and ViewModels are decoupled but connected. UI will not know which viewModel is connected with it and viewModel also will not know which UI is connected with it. But data should come from viewModel and events should be notified to viewModel. J3 has introduced `WirelessViewModel` concept. Data and notification can be transferred by id only.
+Where we take data as `inputValue: String = viewModel.inputValue.value` there we have to use inputValue: State<String> = rememberStringState(id_of_your_choice).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2ODE5Mzg4NDMsMTI1MjQ2ODAyNiwtMT
+eyJoaXN0b3J5IjpbLTE0NTM4NDcxNDksMTI1MjQ2ODAyNiwtMT
 IyOTkyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMw
 NjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2Nz
 U1NSwtNzkzMDk2NzNdfQ==
