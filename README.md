@@ -241,7 +241,7 @@ class HomeViewModel: WirelessViewModel(){
 
 In viewModel we have `onNotification` where you will get all the events notified with `id` and corresponding value(if send). Value is optional though.
 
-## Why we need WirelessViewModel
+## Why we need WirelessViewModel?
 
 In Jetpack Compose when we use ViewModel nested or deep ui components are also coupled with viewModel or values have to be pushed down to the deepest ui component. So to reuse ui components across different pages with different viewModels it is required to have some abstraction mechanism. With `WirelessViewModel` ui components are not coupled to specific viewModel also only those ui components have to take data which really need it instead of all in the chain.
 
@@ -274,11 +274,11 @@ fun GrandChild(
 
 From the above example you can see data need not be passed in chain arguments. Only those components will take data which really need it, others need not to know about data source and consumer.
 
-Same goes to event notification. From any ui depth any ui component can send event noti
+Same goes to event notification. From any ui depth any ui component can send event notification.
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU0ODkxMzg5LDcyMDI0MDIzNiwtMTA1MT
+eyJoaXN0b3J5IjpbMzQ1OTc2MDY3LDcyMDI0MDIzNiwtMTA1MT
 Y1ODM0OSw1MTg0OTIyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQw
 NiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLT
 M5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkz
