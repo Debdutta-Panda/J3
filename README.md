@@ -257,16 +257,28 @@ fun RootUI(){
 fun ChildUI(){
 	Row(){
 		GrandChildUI()
-		Text("Another Grand child"))
+		Text("Another Grand Child"))
+	}
+}
+
+@Composable
+fun GrandChild(
+	inputValue: State<String> = rememberStringState("inputValue")
+){
+	Box(){
+		Text("Hello World")
+		Text(inputValue.value)
 	}
 }
 ```
 
+From the above example you can see data need not be passed in chain arguments. Only those 
+
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTY4NDkxNzUsNzIwMjQwMjM2LC0xMD
-UxNjU4MzQ5LDUxODQ5MjIzNiwxMjUyNDY4MDI2LC0xMjI5OTI4
-NDA2LC0xODA3ODI2NTg4LDcyMjkxODQ3NCwtMTg3MzA2MDYyNy
-wtMzk1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03
-OTMwOTY3M119
+eyJoaXN0b3J5IjpbNjc2MDkwNzY2LDcyMDI0MDIzNiwtMTA1MT
+Y1ODM0OSw1MTg0OTIyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQw
+NiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLT
+M5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkz
+MDk2NzNdfQ==
 -->
