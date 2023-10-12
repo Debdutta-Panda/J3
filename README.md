@@ -179,7 +179,7 @@ fun HomePage(
         Text(labelValue.value)
         Button(
             onClick = {
-                notifier.notify(MyDataIds.goBack)
+                notifier.notify("go_back)
             }
         ) {
             Text("Go Back")
@@ -199,9 +199,11 @@ notifier: NotificationService = rememberNotifier()
 In J3 UI and ViewModels are decoupled but connected. UI will not know which viewModel is connected with it and viewModel also will not know which UI is connected with it. But data should come from viewModel and events should be notified to viewModel. J3 has introduced `WirelessViewModel` concept. Data and notification can be transferred by id only.
 Where we take data as `inputValue: String = viewModel.inputValue.value` there we have to use `inputValue: State<String> = rememberStringState(id_of_your_choice)`. Id can be anything.
 Since viewModel is not directly accessable event notification also need to be transferred by id. Here we have to use `NotifiactionService` to notify event.
+
+Let's see the 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTE4NDkyMjM2LDEyNTI0NjgwMjYsLTEyMj
-k5Mjg0MDYsLTE4MDc4MjY1ODgsNzIyOTE4NDc0LC0xODczMDYw
-NjI3LC0zOTU2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NT
-UsLTc5MzA5NjczXX0=
+eyJoaXN0b3J5IjpbMTgzODM1OTcyNCw1MTg0OTIyMzYsMTI1Mj
+Q2ODAyNiwtMTIyOTkyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0
+NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MS
+wtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
 -->
