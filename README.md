@@ -207,9 +207,6 @@ class HomeViewModel: WirelessViewModel(){
     private val inputValue = mutableStateOf("")
     private val labelValue = mutableStateOf("")
 
-    private val childInputValue = mutableStateOf("")
-    private val childLabelValue = mutableStateOf("")
-
     override fun onBack() {
 
     }
@@ -285,13 +282,20 @@ controller.resolver.addAll(
 )
 ```
 
-If you don't register your data but tried to consume it the app will crash f
+If you don't register your data but tried to consume it the app will crash for sure. It is by design.
+
+In general we do define two variable per data.
+
+```
+private val _inputValue = mutableStateOf("")
+val inputValue: State<String> = _inputValue
+```
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjg5MzczNzYsMzQ1OTc2MDY3LDcyMDI0MD
-IzNiwtMTA1MTY1ODM0OSw1MTg0OTIyMzYsMTI1MjQ2ODAyNiwt
-MTIyOTkyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4Nz
-MwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2
-NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbLTEzNDgwNTUzNTUsMzQ1OTc2MDY3LDcyMD
+I0MDIzNiwtMTA1MTY1ODM0OSw1MTg0OTIyMzYsMTI1MjQ2ODAy
+NiwtMTIyOTkyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLT
+E4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4
+NDk2NzU1NSwtNzkzMDk2NzNdfQ==
 -->
