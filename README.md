@@ -210,8 +210,6 @@ class HomeViewModel: WirelessViewModel(){
     private val childInputValue = mutableStateOf("")
     private val childLabelValue = mutableStateOf("")
 
-
-
     override fun onBack() {
 
     }
@@ -222,7 +220,7 @@ class HomeViewModel: WirelessViewModel(){
 
     override fun onNotification(id: Any?, arg: Any?) {
         when(id){
-            MyDataIds.goBack->navigate {
+            "go_back"->navigate {
                 popBackStack()
             }
             MyDataIds.inputValue->{
@@ -255,8 +253,9 @@ class HomeViewModel: WirelessViewModel(){
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTE2NTgzNDksNTE4NDkyMjM2LDEyNT
-I0NjgwMjYsLTEyMjk5Mjg0MDYsLTE4MDc4MjY1ODgsNzIyOTE4
-NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5NTUzNT
-EsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
+eyJoaXN0b3J5IjpbLTQzMTgxMjM4MCwtMTA1MTY1ODM0OSw1MT
+g0OTIyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQwNiwtMTgwNzgy
+NjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNi
+wtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
+
 -->
