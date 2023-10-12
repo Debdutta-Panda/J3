@@ -200,10 +200,63 @@ In J3 UI and ViewModels are decoupled but connected. UI will not know which view
 Where we take data as `inputValue: String = viewModel.inputValue.value` there we have to use `inputValue: State<String> = rememberStringState(id_of_your_choice)`. Id can be anything.
 Since viewModel is not directly accessable event notification also need to be transferred by id. Here we have to use `NotifiactionService` to notify event.
 
-Let's see the 
+Let's see the HomePageViewModel:
+
+```
+class HomeViewModel: WirelessViewModel(){
+    private val inputValue = mutableStateOf("")
+    private val labelValue = mutableStateOf("")
+
+    private val childInputValue = mutableStateOf("")
+    private val childLabelValue = mutableStateOf("")
+
+
+
+    override fun onBack() {
+
+    }
+
+    override fun onStart() {
+        setStatusBarColor(Color.Red,false)
+    }
+
+    override fun onNotification(id: Any?, arg: Any?) {
+        when(id){
+            MyDataIds.goBack->navigate {
+                popBackStack()
+            }
+            MyDataIds.inputValue->{
+                inputValue.value = arg as String
+                labelValue.value = "Result = "+inputValue.value
+            }
+            MyDataIds.checkPermission->{
+                goToAppSettings()
+            }
+        }
+    }
+
+    init {
+        childController.resolver.addAll(
+            MyDataIds.inputValue to childInputValue,
+            MyDataIds.labelValue to childLabelValue,
+
+        )
+        dialogController.resolver.addAll(
+            MyDataIds.dialogText to dialogText,
+            MyDataIds.showDialog to showDialog
+        )
+        controller.resolver.addAll(
+            MyDataIds.inputValue to inputValue,
+            MyDataIds.labelValue to labelValue,
+            MyDataIds.childCrontroller to childController.restricted(),
+            MyDataIds.dialogController to dialogController.restricted()
+        )
+    }
+}
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgzODM1OTcyNCw1MTg0OTIyMzYsMTI1Mj
-Q2ODAyNiwtMTIyOTkyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0
-NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MS
-wtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbLTEwNTE2NTgzNDksNTE4NDkyMjM2LDEyNT
+I0NjgwMjYsLTEyMjk5Mjg0MDYsLTE4MDc4MjY1ODgsNzIyOTE4
+NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5NTUzNT
+EsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
 -->
