@@ -173,7 +173,7 @@ fun HomePage(
         TextField(
             value = inputValue.value,
             onValueChange = {
-                notifier.notify(MyDataIds.inputValue,it)
+                notifier.notify("input_value",it)
             }
         )
         Text(labelValue.value)
@@ -223,39 +223,25 @@ class HomeViewModel: WirelessViewModel(){
             "go_back"->navigate {
                 popBackStack()
             }
-            MyDataIds.inputValue->{
+            "input_value"->{
                 inputValue.value = arg as String
                 labelValue.value = "Result = "+inputValue.value
-            }
-            MyDataIds.checkPermission->{
-                goToAppSettings()
             }
         }
     }
 
     init {
-        childController.resolver.addAll(
-            MyDataIds.inputValue to childInputValue,
-            MyDataIds.labelValue to childLabelValue,
-
-        )
-        dialogController.resolver.addAll(
-            MyDataIds.dialogText to dialogText,
-            MyDataIds.showDialog to showDialog
-        )
         controller.resolver.addAll(
             MyDataIds.inputValue to inputValue,
             MyDataIds.labelValue to labelValue,
-            MyDataIds.childCrontroller to childController.restricted(),
-            MyDataIds.dialogController to dialogController.restricted()
         )
     }
 }
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzMTgxMjM4MCwtMTA1MTY1ODM0OSw1MT
-g0OTIyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQwNiwtMTgwNzgy
-NjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNi
-wtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbLTEzNDk3ODYyOTAsLTEwNTE2NTgzNDksNT
+E4NDkyMjM2LDEyNTI0NjgwMjYsLTEyMjk5Mjg0MDYsLTE4MDc4
+MjY1ODgsNzIyOTE4NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MD
+YsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
 
 -->
