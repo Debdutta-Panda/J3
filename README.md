@@ -196,9 +196,9 @@ labelValue: State<String> = rememberStringState("labelValue"),
 notifier: NotificationService = rememberNotifier()
 ```
 
-In J3 UI and ViewModels are decoupled but connected. UI will not know which viewModel is connected with it and viewModel also will not know which UI is connected with it.
+In J3 UI and ViewModels are decoupled but connected. UI will not know which viewModel is connected with it and viewModel also will not know which UI is connected with it. But data should come from viewModel and events should be notified to viewModel. J3 has introduced `WirelessViewModel` concept. Data and notification can be transferred by id only.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NjIxMzc1NDMsMTI1MjQ2ODAyNiwtMT
+eyJoaXN0b3J5IjpbLTE2ODE5Mzg4NDMsMTI1MjQ2ODAyNiwtMT
 IyOTkyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMw
 NjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2Nz
 U1NSwtNzkzMDk2NzNdfQ==
