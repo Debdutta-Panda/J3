@@ -238,10 +238,11 @@ class HomeViewModel: WirelessViewModel(){
     }
 }
 ```
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDk3ODYyOTAsLTEwNTE2NTgzNDksNT
-E4NDkyMjM2LDEyNTI0NjgwMjYsLTEyMjk5Mjg0MDYsLTE4MDc4
-MjY1ODgsNzIyOTE4NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MD
-YsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
 
+In viewModel we have onNotification where you will get all the events notified with id and corresponding value(if send). Value is optional though.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNzIwMjQwMjM2LC0xMDUxNjU4MzQ5LDUxOD
+Q5MjIzNiwxMjUyNDY4MDI2LC0xMjI5OTI4NDA2LC0xODA3ODI2
+NTg4LDcyMjkxODQ3NCwtMTg3MzA2MDYyNywtMzk1NjUwNDA2LC
+0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M119
 -->
