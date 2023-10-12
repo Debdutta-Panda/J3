@@ -272,11 +272,13 @@ fun GrandChild(
 }
 ```
 
-From the above example you can see data need not be passed in chain arguments. Only those 
+From the above example you can see data need not be passed in chain arguments. Only those components will take data which really need it, others need not to know about data source and consumer.
+
+Same goes to event notification. From any ui depth any ui component can send event noti
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc2MDkwNzY2LDcyMDI0MDIzNiwtMTA1MT
+eyJoaXN0b3J5IjpbMzU0ODkxMzg5LDcyMDI0MDIzNiwtMTA1MT
 Y1ODM0OSw1MTg0OTIyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQw
 NiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLT
 M5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkz
