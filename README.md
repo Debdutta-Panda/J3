@@ -293,10 +293,12 @@ val inputValue: State<String> = _inputValue
 
 We do these to use the mutableStateOf data without having the risk to be edited from unwanted places. But in WirelessViewModel you don't need to have two variable per data, because it is already being passed as State<T> which is immutable.
 
+So all your basic needs will be fullfilled by WirelessViewModel. 
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzODU1NDU4NSwzNDU5NzYwNjcsNzIwMj
-QwMjM2LC0xMDUxNjU4MzQ5LDUxODQ5MjIzNiwxMjUyNDY4MDI2
-LC0xMjI5OTI4NDA2LC0xODA3ODI2NTg4LDcyMjkxODQ3NCwtMT
-g3MzA2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0
-OTY3NTU1LC03OTMwOTY3M119
+eyJoaXN0b3J5IjpbLTMyNzk3MjU3OSwtMjM4NTU0NTg1LDM0NT
+k3NjA2Nyw3MjAyNDAyMzYsLTEwNTE2NTgzNDksNTE4NDkyMjM2
+LDEyNTI0NjgwMjYsLTEyMjk5Mjg0MDYsLTE4MDc4MjY1ODgsNz
+IyOTE4NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MDYsLTE5MzY5
+NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
 -->
