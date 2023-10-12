@@ -243,11 +243,11 @@ In viewModel we have `onNotification` where you will get all the events notified
 
 ## Why we need WirelessViewModel
 
-In Jetpack Compose when we use ViewModel nested or deep ui components are also coupled with viewModel or values have to be pushed down to the deepest ui component. So th
+In Jetpack Compose when we use ViewModel nested or deep ui components are also coupled with viewModel or values have to be pushed down to the deepest ui component. So to reuse ui components across different pages with different viewModels it is required to have some abstraction mechanism. With WirelessViewModel ui components are not co
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0MjcyNjI5NCw3MjAyNDAyMzYsLTEwNT
-E2NTgzNDksNTE4NDkyMjM2LDEyNTI0NjgwMjYsLTEyMjk5Mjg0
-MDYsLTE4MDc4MjY1ODgsNzIyOTE4NDc0LC0xODczMDYwNjI3LC
-0zOTU2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5
-MzA5NjczXX0=
+eyJoaXN0b3J5IjpbNjk3ODQ3MTEwLDcyMDI0MDIzNiwtMTA1MT
+Y1ODM0OSw1MTg0OTIyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQw
+NiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLT
+M5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkz
+MDk2NzNdfQ==
 -->
