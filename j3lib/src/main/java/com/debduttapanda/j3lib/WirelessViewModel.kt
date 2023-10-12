@@ -107,4 +107,8 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         }
         super.onCleared()
     }
+
+    fun eventBusNotify(topic: String, value: Any? = null){
+        EventBus.instance.notify(topic,value)
+    }
 }

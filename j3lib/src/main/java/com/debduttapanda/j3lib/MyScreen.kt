@@ -11,7 +11,7 @@ import androidx.navigation.NavHostController
 inline fun NavGraphBuilder.MyScreen(
     navController: NavHostController,
     route: String,
-    crossinline wirelessViewModel: ( @Composable ()->WirelessViewModelInterface? ) = {null},
+    crossinline wirelessViewModel: ( @Composable ()->WirelessViewModel? ) = {null},
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
     crossinline content: @Composable () -> Unit

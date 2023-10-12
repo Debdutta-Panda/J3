@@ -19,7 +19,6 @@ import com.debduttapanda.j3lib.rememberBoolState
 import com.debduttapanda.j3lib.rememberNotifier
 import com.debduttapanda.j3lib.rememberStringState
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePage(
     inputValue: State<String> = rememberStringState(MyDataIds.inputValue),
@@ -31,7 +30,6 @@ fun HomePage(
         modifier = Modifier
             .fillMaxSize()
     ){
-        Text("Home")
         TextField(
             value = inputValue.value,
             onValueChange = {
