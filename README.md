@@ -246,13 +246,27 @@ In viewModel we have `onNotification` where you will get all the events notified
 In Jetpack Compose when we use ViewModel nested or deep ui components are also coupled with viewModel or values have to be pushed down to the deepest ui component. So to reuse ui components across different pages with different viewModels it is required to have some abstraction mechanism. With `WirelessViewModel` ui components are not coupled to specific viewModel also only those ui components have to take data which really need it instead of all in the chain.
 
 ```
+@Composable
+fun RootUI(){
+	Column(){
+		ChildUI()
+	}
+}
 
+@Composable
+fun ChildUI(){
+	Row(){
+		GrandChildUI()
+		Text("Another Grand child"))
+	}
+}
+```
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzNjE3NDk1MSw3MjAyNDAyMzYsLTEwNT
-E2NTgzNDksNTE4NDkyMjM2LDEyNTI0NjgwMjYsLTEyMjk5Mjg0
-MDYsLTE4MDc4MjY1ODgsNzIyOTE4NDc0LC0xODczMDYwNjI3LC
-0zOTU2NTA0MDYsLTE5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5
-MzA5NjczXX0=
+eyJoaXN0b3J5IjpbLTE2MTY4NDkxNzUsNzIwMjQwMjM2LC0xMD
+UxNjU4MzQ5LDUxODQ5MjIzNiwxMjUyNDY4MDI2LC0xMjI5OTI4
+NDA2LC0xODA3ODI2NTg4LDcyMjkxODQ3NCwtMTg3MzA2MDYyNy
+wtMzk1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03
+OTMwOTY3M119
 -->
