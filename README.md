@@ -322,8 +322,10 @@ viewModelScope.launch {
     }
 }
 ```
+
+You can see checking and requestin is one line game, no callback, no mundane code. Simple and straight forward.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4MTE5Njc0NCw2NzYzMTE0NTcsLTI5Nz
+eyJoaXN0b3J5IjpbLTMzMjU1NTQ3NSw2NzYzMTE0NTcsLTI5Nz
 EzODUxMiw4NTM1MzA0NTgsNTgyMDI4MjQyLC0zMjc5NzI1Nzks
 LTIzODU1NDU4NSwzNDU5NzYwNjcsNzIwMjQwMjM2LC0xMDUxNj
 U4MzQ5LDUxODQ5MjIzNiwxMjUyNDY4MDI2LC0xMjI5OTI4NDA2
