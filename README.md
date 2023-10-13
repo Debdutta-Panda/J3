@@ -293,13 +293,43 @@ val inputValue: State<String> = _inputValue
 
 We do these to use the mutableStateOf data without having the risk to be edited from unwanted places. But in WirelessViewModel you don't need to have two variable per data, because it is already being passed as State<T> which is immutable.
 
-So all your basic needs will be fullfilled by WirelessViewModel. Along with you will have navigation, toast, etc.
+So all your basic needs will be fulfilled by WirelessViewModel. Along with you will have navigation, toast, etc.
 
+## Statusbar color
+
+Set status bar color from viewModel:
+```
+setStatusBarColor(Color.Red,false)
+```
+
+## Permission
+
+In J3 you can easily check and request for permission(s).
+
+```
+viewModelScope.launch {
+    val permissions = listOf(android.Manifest.permission.CAMERA)
+    permissions.apply {
+        val checked = check()
+        if(checked?.allPermissionsGranted==true){
+            // process()
+        } else{
+            val requested = request()
+            if(requested.multiPermissionState?.allPermissionsGranted==true){
+                // process
+            }
+        }
+    }
+}
+```
+
+You can see checking and requestin is one line game, no callback, no mundane code. Simple and straight forward.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTgyMDI4MjQyLC0zMjc5NzI1NzksLTIzOD
-U1NDU4NSwzNDU5NzYwNjcsNzIwMjQwMjM2LC0xMDUxNjU4MzQ5
-LDUxODQ5MjIzNiwxMjUyNDY4MDI2LC0xMjI5OTI4NDA2LC0xOD
-A3ODI2NTg4LDcyMjkxODQ3NCwtMTg3MzA2MDYyNywtMzk1NjUw
-NDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMwOTY3M1
-19
+eyJoaXN0b3J5IjpbLTMzMjU1NTQ3NSw2NzYzMTE0NTcsLTI5Nz
+EzODUxMiw4NTM1MzA0NTgsNTgyMDI4MjQyLC0zMjc5NzI1Nzks
+LTIzODU1NDU4NSwzNDU5NzYwNjcsNzIwMjQwMjM2LC0xMDUxNj
+U4MzQ5LDUxODQ5MjIzNiwxMjUyNDY4MDI2LC0xMjI5OTI4NDA2
+LC0xODA3ODI2NTg4LDcyMjkxODQ3NCwtMTg3MzA2MDYyNywtMz
+k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
+OTY3M119
 -->
