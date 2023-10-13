@@ -74,8 +74,7 @@ fun MyPage(
         ){
             content()
             LoaderUI(
-                WirelessViewModelInterface.loaderState.value,
-
+                WirelessViewModelInterface.loaderState.value
             )
         }
         BackHandle(suffix)
@@ -167,7 +166,7 @@ fun LoaderUI(
                 transitionSpec = {
                     fadeIn(animationSpec = tween(500))  with
                             fadeOut(animationSpec = tween(500))
-                }
+                }, label = ""
             ) {
                 when(it){
                     LoaderState.Loading -> Indeterminate()

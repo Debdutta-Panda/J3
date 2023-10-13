@@ -16,17 +16,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-val ob = object : ActivityResultContract<Void, Int>() {
-    override fun createIntent(context: Context, input: Void): Intent {
-        TODO("Not yet implemented")
-    }
-
-    override fun parseResult(resultCode: Int, intent: Intent?): Int {
-        TODO("Not yet implemented")
-    }
-
-}
-
 suspend fun <I,O>ResultingActivityHandler.request(
     createIntent: (context: Context, input: I)->Intent,
     parseResult: (resultCode: Int, intent: Intent?)->O,

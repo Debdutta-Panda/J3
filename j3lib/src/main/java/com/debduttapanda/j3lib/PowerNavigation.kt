@@ -33,7 +33,7 @@ data class ActivityService(
     }
 
     fun contentResolver(): ContentResolver = context.contentResolver
-    fun context(): Context = context
+    //fun context(): Context = context
 }
 
 typealias UIScope = suspend Bundle.(NavHostController, LifecycleOwner, ActivityService?) -> Unit

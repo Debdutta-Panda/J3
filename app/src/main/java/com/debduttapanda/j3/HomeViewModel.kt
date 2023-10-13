@@ -35,23 +35,25 @@ class HomeViewModel: WirelessViewModel(){
     }
 
     suspend fun MyDialog(): Int {
-        return AsSync.create<Int>().start(
-            dialogController,
-        ){a,id,arg->
-            when(id){
-                AsSync.Event.START->{
-                    showDialog.value = true
-                }
-                0->{
-                    showDialog.value = false
-                    a.stop(0)
-                }
-                1->{
-                    showDialog.value = false
-                    a.stop(1)
+        return AsSync
+            .create<Int>()
+            .start(
+                dialogController,
+            ){a,id,arg->
+                when(id){
+                    AsSync.Event.START->{
+                        showDialog.value = true
+                    }
+                    0->{
+                        showDialog.value = false
+                        a.stop(0)
+                    }
+                    1->{
+                        showDialog.value = false
+                        a.stop(1)
+                    }
                 }
             }
-        }
     }
 
     private val childController = Controller(_Resolver(),_NotificationService(onChildCallback))

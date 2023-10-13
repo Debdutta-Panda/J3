@@ -1,5 +1,6 @@
 package com.debduttapanda.j3lib
 
+import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -13,12 +14,11 @@ interface WirelessViewModelInterface{
     val __permissionHandler: PermissionHandler
     val __resultingActivityHandler: ResultingActivityHandler
 
-    fun toast(message: Any){
+    fun _toast(message: Any,duration: Int = Toast.LENGTH_SHORT){
         __navigation.scope { navHostController, lifecycleOwner, activityService ->
-            activityService?.toast(str(activityService,message))
+            activityService?.toast(str(activityService,message),duration)
         }
     }
-    @OptIn(ExperimentalComposeUiApi::class)
     val __keyboarder: MutableState<KeyboardScope?> get() = Keyboarder()
     interface LoaderInterface{
         fun clear()

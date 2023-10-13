@@ -1,12 +1,16 @@
 package com.debduttapanda.j3lib
 
+import android.widget.Toast
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     override val controller by lazy { createController() }
@@ -28,6 +32,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     val eventBusId: String? = null
     val eventBusTopics: (MutableList<String>.()->Unit)? = null
     val eventBusAction: ((pattern: String, topic: String, value: Any?) -> Unit)? = null
+    private var eventBusRegistered = false
     init {
         if(
             eventBusId != null
@@ -35,6 +40,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
             && eventBusAction != null
         ){
             EventBus.instance.register(eventBusId,eventBusAction,eventBusTopics)
+            eventBusRegistered = true
         }
 
         controller.resolver.addAll(DataIds.statusBarColor to __statusBarColor)
@@ -61,15 +67,12 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         }
     }
 
-    @OptIn(ExperimentalPermissionsApi::class)
     suspend fun String.check() = __permissionHandler.check(this)
 
-    @OptIn(ExperimentalPermissionsApi::class)
     suspend fun List<String>.check() = __permissionHandler.check(*toTypedArray())
 
-    @OptIn(ExperimentalPermissionsApi::class)
     suspend fun String.request() = __permissionHandler.request(this)
-    @OptIn(ExperimentalPermissionsApi::class)
+
     suspend fun List<String>.request() = __permissionHandler.request(*this.toTypedArray())
 
     fun goToAppSettings(){
@@ -98,11 +101,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     fun newController(notificationService: _NotificationService) = Controller(_Resolver(), notificationService)
 
     override fun onCleared() {
-        if(
-            eventBusId != null
-            && eventBusTopics != null
-            && eventBusAction != null
-        ){
+        if(eventBusRegistered && eventBusId != null){
             EventBus.instance.unregister(eventBusId)
         }
         super.onCleared()
@@ -110,5 +109,11 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
 
     fun eventBusNotify(topic: String, value: Any? = null){
         EventBus.instance.notify(topic,value)
+    }
+
+    fun toast(message: Any,duration: Int = Toast.LENGTH_SHORT){
+        viewModelScope.launch(Dispatchers.Main) {
+            _toast(message,duration)
+        }
     }
 }

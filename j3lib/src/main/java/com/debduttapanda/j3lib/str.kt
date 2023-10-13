@@ -7,10 +7,7 @@ fun str(activityService: ActivityService, message: Any): String{
             is StringResource -> {
                 activityService.stringResource(id = message.id, message.formatArgs)
             }
+            is Int-> activityService.stringResource(message)
             else -> "$message"
         }
     }
-
-object Str {
-
-}
