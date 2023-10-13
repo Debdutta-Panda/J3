@@ -82,7 +82,22 @@ class HomeViewModel: WirelessViewModel(){
                 labelValue.value = "Result = "+inputValue.value
             }
             MyDataIds.checkPermission->{
-                goToAppSettings()
+                //goToAppSettings()
+                viewModelScope.launch {
+                    val permissions = listOf(android.Manifest.permission.CAMERA)
+                    permissions.apply {
+                        val checked = check()
+                        if(checked?.allPermissionsGranted==true){
+                            // process()
+                        } else{
+                            val requested = request()
+                            if(requested.multiPermissionState?.allPermissionsGranted==true){
+                                // process
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }

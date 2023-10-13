@@ -62,15 +62,15 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     }
 
     @OptIn(ExperimentalPermissionsApi::class)
-    suspend fun String.permitted() = __permissionHandler.check(this)
+    suspend fun String.check() = __permissionHandler.check(this)
 
     @OptIn(ExperimentalPermissionsApi::class)
-    suspend fun List<String>.permitted() = __permissionHandler.check(*toTypedArray())
+    suspend fun List<String>.check() = __permissionHandler.check(*toTypedArray())
 
     @OptIn(ExperimentalPermissionsApi::class)
-    suspend fun String.requestPermission() = __permissionHandler.request(this)
+    suspend fun String.request() = __permissionHandler.request(this)
     @OptIn(ExperimentalPermissionsApi::class)
-    suspend fun List<String>.requestPermission() = __permissionHandler.request(*this.toTypedArray())
+    suspend fun List<String>.request() = __permissionHandler.request(*this.toTypedArray())
 
     fun goToAppSettings(){
         __navigation.scope { navHostController, lifecycleOwner, activityService ->

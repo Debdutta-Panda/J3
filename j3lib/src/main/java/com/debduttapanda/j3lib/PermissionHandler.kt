@@ -1,17 +1,50 @@
 package com.debduttapanda.j3lib
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.content.ContextCompat
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
 import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.google.accompanist.permissions.shouldShowRationale
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
+
+public sealed interface J3PermissionStatus {
+    data object Granted : J3PermissionStatus
+    data class Denied(
+        val shouldShowRationale: Boolean
+    ) : J3PermissionStatus
+}
+
+
+public val J3PermissionStatus.isGranted: Boolean
+    get() = this == J3PermissionStatus.Granted
+
+
+public val J3PermissionStatus.shouldShowRationale: Boolean
+    get() = when (this) {
+        J3PermissionStatus.Granted -> false
+        is J3PermissionStatus.Denied -> shouldShowRationale
+    }
+
+
+class J3PermissionState(
+    val permission: String,
+    val status: J3PermissionStatus
+)
+
+class J3MultiPermissionState(
+    val permissions: List<J3PermissionState>,
+    val revokedPermissions: List<J3PermissionState>,
+    val allPermissionsGranted: Boolean,
+    val shouldShowRationale: Boolean
+)
 
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -19,31 +52,84 @@ class PermissionHandler{
     private val _permissions = mutableStateListOf<String>()
     private val _request = mutableStateOf(false)
 
-    suspend fun check(vararg permissions: String): MultiplePermissionsState? =
+    suspend fun check(vararg permissions: String): J3MultiPermissionState? =
         suspendCancellableCoroutine {coroutine ->
             if (permissions.isEmpty()){
                 coroutine.resume(null)
+                coroutine.cancel()
                 return@suspendCancellableCoroutine
             }
             onResult = {
                 onResult = {}
                 _permissions.clear()
-                coroutine.resume(it)
+
+                val j3mps = J3MultiPermissionState(
+                    it.permissions.map {
+                        J3PermissionState(
+                            it.permission,
+                            if(it.status==PermissionStatus.Granted)
+                                J3PermissionStatus.Granted
+                            else J3PermissionStatus.Denied(it.status.shouldShowRationale)
+                        )
+                    },
+                    it.revokedPermissions.map {
+                        J3PermissionState(
+                            it.permission,
+                            if(it.status==PermissionStatus.Granted)
+                                J3PermissionStatus.Granted
+                            else J3PermissionStatus.Denied(it.status.shouldShowRationale)
+                        )
+                    },
+                    it.allPermissionsGranted,
+                    it.shouldShowRationale
+                )
+
+                coroutine.resume(j3mps)
+                coroutine.cancel()
             }
             _permissions.addAll(permissions)
         }
 
-    suspend fun request(vararg permissions: String): Pair<MultiplePermissionsState?,Map<String, Boolean>?> =
+    data class PermissionRequestResult(
+        val multiPermissionState: J3MultiPermissionState?,
+        val permittedMap: Map<String, Boolean>?
+    )
+
+    suspend fun request(vararg permissions: String): PermissionRequestResult =
         suspendCancellableCoroutine {coroutine ->
             if (permissions.isEmpty()){
-                coroutine.resume(Pair(null,null))
+                coroutine.resume(PermissionRequestResult(null,null))
+                coroutine.cancel()
                 return@suspendCancellableCoroutine
             }
             onDisposition = {mps,states->
                 onDisposition = {mps,states->}
                 _permissions.clear()
                 _request.value = false
-                coroutine.resume(Pair(mps,states))
+
+                val j3mps = J3MultiPermissionState(
+                    mps.permissions.map {
+                        J3PermissionState(
+                            it.permission,
+                            if(it.status==PermissionStatus.Granted)
+                                J3PermissionStatus.Granted
+                            else J3PermissionStatus.Denied(it.status.shouldShowRationale)
+                        )
+                    },
+                    mps.revokedPermissions.map {
+                        J3PermissionState(
+                            it.permission,
+                            if(it.status==PermissionStatus.Granted)
+                                J3PermissionStatus.Granted
+                            else J3PermissionStatus.Denied(it.status.shouldShowRationale)
+                        )
+                    },
+                    mps.allPermissionsGranted,
+                    mps.shouldShowRationale
+                )
+
+                coroutine.resume(PermissionRequestResult(j3mps,states))
+                coroutine.cancel()
             }
             _permissions.addAll(permissions)
             _request.value = true
