@@ -310,13 +310,17 @@ In J3 you can easily check and request for permission(s).
 
 ```
 val permission = android.Manifest.permission.CAMERA
-val checked = 
+viewModelScope.launch{
+	val checked = permission.check()
+	permitted = 
+}
+
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzMTc3MjAwMSwtMjk3MTM4NTEyLDg1Mz
-UzMDQ1OCw1ODIwMjgyNDIsLTMyNzk3MjU3OSwtMjM4NTU0NTg1
-LDM0NTk3NjA2Nyw3MjAyNDAyMzYsLTEwNTE2NTgzNDksNTE4ND
-kyMjM2LDEyNTI0NjgwMjYsLTEyMjk5Mjg0MDYsLTE4MDc4MjY1
-ODgsNzIyOTE4NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MDYsLT
-E5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
+eyJoaXN0b3J5IjpbNjc2MzExNDU3LC0yOTcxMzg1MTIsODUzNT
+MwNDU4LDU4MjAyODI0MiwtMzI3OTcyNTc5LC0yMzg1NTQ1ODUs
+MzQ1OTc2MDY3LDcyMDI0MDIzNiwtMTA1MTY1ODM0OSw1MTg0OT
+IyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQwNiwtMTgwNzgyNjU4
+OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMT
+kzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
 -->
