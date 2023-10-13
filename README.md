@@ -301,11 +301,22 @@ Set status bar color from viewModel:
 ```
 setStatusBarColor(Color.Red,false)
 ```
+
+## Permission
+
+In J3 you can easily check and request for permission(s).
+
+### Checking Permission
+
+```
+val permission = android.Manifest.permission.CAMERA
+val checked = 
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI5NzEzODUxMiw4NTM1MzA0NTgsNTgyMD
-I4MjQyLC0zMjc5NzI1NzksLTIzODU1NDU4NSwzNDU5NzYwNjcs
-NzIwMjQwMjM2LC0xMDUxNjU4MzQ5LDUxODQ5MjIzNiwxMjUyND
-Y4MDI2LC0xMjI5OTI4NDA2LC0xODA3ODI2NTg4LDcyMjkxODQ3
-NCwtMTg3MzA2MDYyNywtMzk1NjUwNDA2LC0xOTM2OTU1MzUxLC
-0yMDg0OTY3NTU1LC03OTMwOTY3M119
+eyJoaXN0b3J5IjpbMTYzMTc3MjAwMSwtMjk3MTM4NTEyLDg1Mz
+UzMDQ1OCw1ODIwMjgyNDIsLTMyNzk3MjU3OSwtMjM4NTU0NTg1
+LDM0NTk3NjA2Nyw3MjAyNDAyMzYsLTEwNTE2NTgzNDksNTE4ND
+kyMjM2LDEyNTI0NjgwMjYsLTEyMjk5Mjg0MDYsLTE4MDc4MjY1
+ODgsNzIyOTE4NDc0LC0xODczMDYwNjI3LC0zOTU2NTA0MDYsLT
+E5MzY5NTUzNTEsLTIwODQ5Njc1NTUsLTc5MzA5NjczXX0=
 -->
