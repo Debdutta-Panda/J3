@@ -295,11 +295,16 @@ We do these to use the mutableStateOf data without having the risk to be edited 
 
 So all your basic needs will be fulfilled by WirelessViewModel. Along with you will have navigation, toast, etc.
 
+## Statusbar color
+
+Set status bar color from viewModel:
+```
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODUzNTMwNDU4LDU4MjAyODI0MiwtMzI3OT
-cyNTc5LC0yMzg1NTQ1ODUsMzQ1OTc2MDY3LDcyMDI0MDIzNiwt
-MTA1MTY1ODM0OSw1MTg0OTIyMzYsMTI1MjQ2ODAyNiwtMTIyOT
-kyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0NzQsLTE4NzMwNjA2
-MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MSwtMjA4NDk2NzU1NS
-wtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbLTEzMjUwNjIxMzAsODUzNTMwNDU4LDU4Mj
+AyODI0MiwtMzI3OTcyNTc5LC0yMzg1NTQ1ODUsMzQ1OTc2MDY3
+LDcyMDI0MDIzNiwtMTA1MTY1ODM0OSw1MTg0OTIyMzYsMTI1Mj
+Q2ODAyNiwtMTIyOTkyODQwNiwtMTgwNzgyNjU4OCw3MjI5MTg0
+NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMTkzNjk1NTM1MS
+wtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
 -->
