@@ -306,21 +306,28 @@ setStatusBarColor(Color.Red,false)
 
 In J3 you can easily check and request for permission(s).
 
-### Checking Permission
-
 ```
-val permission = android.Manifest.permission.CAMERA
-viewModelScope.launch{
-	val checked = permission.check()
-	permitted = 
+viewModelScope.launch {
+    val permissions = listOf(android.Manifest.permission.CAMERA)
+    permissions.apply {
+        val checked = check()
+        if(checked?.allPermissionsGranted==true){
+            // process()
+        } else{
+            val requested = request()
+            if(requested.multiPermissionState?.allPermissionsGranted==true){
+                // process
+            }
+        }
+    }
 }
-
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc2MzExNDU3LC0yOTcxMzg1MTIsODUzNT
-MwNDU4LDU4MjAyODI0MiwtMzI3OTcyNTc5LC0yMzg1NTQ1ODUs
-MzQ1OTc2MDY3LDcyMDI0MDIzNiwtMTA1MTY1ODM0OSw1MTg0OT
-IyMzYsMTI1MjQ2ODAyNiwtMTIyOTkyODQwNiwtMTgwNzgyNjU4
-OCw3MjI5MTg0NzQsLTE4NzMwNjA2MjcsLTM5NTY1MDQwNiwtMT
-kzNjk1NTM1MSwtMjA4NDk2NzU1NSwtNzkzMDk2NzNdfQ==
+eyJoaXN0b3J5IjpbMTc4MTE5Njc0NCw2NzYzMTE0NTcsLTI5Nz
+EzODUxMiw4NTM1MzA0NTgsNTgyMDI4MjQyLC0zMjc5NzI1Nzks
+LTIzODU1NDU4NSwzNDU5NzYwNjcsNzIwMjQwMjM2LC0xMDUxNj
+U4MzQ5LDUxODQ5MjIzNiwxMjUyNDY4MDI2LC0xMjI5OTI4NDA2
+LC0xODA3ODI2NTg4LDcyMjkxODQ3NCwtMTg3MzA2MDYyNywtMz
+k1NjUwNDA2LC0xOTM2OTU1MzUxLC0yMDg0OTY3NTU1LC03OTMw
+OTY3M119
 -->
