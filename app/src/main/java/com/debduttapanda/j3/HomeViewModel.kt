@@ -9,6 +9,7 @@ import com.debduttapanda.j3lib.Controller
 import com.debduttapanda.j3lib._NotificationService
 import com.debduttapanda.j3lib._Resolver
 import com.debduttapanda.j3lib.WirelessViewModel
+import com.debduttapanda.j3lib.arguments
 import kotlinx.coroutines.launch
 
 class HomeViewModel: WirelessViewModel(){
@@ -17,7 +18,7 @@ class HomeViewModel: WirelessViewModel(){
     val showDialog = mutableStateOf(false)
     val onChildCallback: (id: Any, arg: Any?)->Unit = {id,arg->
         when(id){
-            MyDataIds.goBack->navigate {
+            MyDataIds.goBack->navigation {
                 popBackStack()
             }
             MyDataIds.inputValue->{
@@ -72,11 +73,14 @@ class HomeViewModel: WirelessViewModel(){
 
     override fun onStart() {
         setStatusBarColor(Color.Red,false)
+        navigation {
+            Log.d("fkldlfjd",arguments()?.getString("userId")?:"none")
+        }
     }
 
     override fun onNotification(id: Any?, arg: Any?) {
         when(id){
-            MyDataIds.goBack->navigate {
+            MyDataIds.goBack->navigation {
                 popBackStack()
             }
             MyDataIds.inputValue->{

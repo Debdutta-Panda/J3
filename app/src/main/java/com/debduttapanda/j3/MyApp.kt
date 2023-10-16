@@ -16,14 +16,14 @@ fun MyApp() {
     ) {
         MyScreen(
             navController = navController,
-            route = Routes.splash.full,
+            route = Routes.splash,
             { viewModel<SplashViewModel>() }
         ) {
             SplashPage()
         }
         MyScreen(
             navController = navController,
-            route = Routes.home.full,
+            route = Routes.home,
             { viewModel<HomeViewModel>() }
         ) {
             HomePage()

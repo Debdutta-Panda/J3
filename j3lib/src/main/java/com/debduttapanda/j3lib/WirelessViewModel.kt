@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -55,14 +54,14 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         )
     }
 
-    fun navigate(block: NavHostController.()->Unit){
+    fun navigation(block: NavHostController.()->Unit){
         __navigation.scope { navHostController, lifecycleOwner, activityService ->
             block(navHostController)
         }
     }
 
     fun popBackStack(){
-        navigate {
+        navigation {
             popBackStack()
         }
     }

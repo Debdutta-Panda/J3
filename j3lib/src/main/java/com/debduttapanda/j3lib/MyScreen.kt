@@ -10,20 +10,18 @@ import androidx.navigation.NavHostController
 @NonRestartableComposable
 inline fun NavGraphBuilder.MyScreen(
     navController: NavHostController,
-    route: String,
+    route: Route,
     crossinline wirelessViewModel: ( @Composable ()->WirelessViewModel? ) = {null},
-    arguments: List<NamedNavArgument> = emptyList(),
-    deepLinks: List<NavDeepLink> = emptyList(),
     crossinline content: @Composable () -> Unit
 ){
     myComposable(
-        route,
-        arguments = arguments,
-        deepLinks = deepLinks
+        route.full,
+        arguments = route.arguments,
+        deepLinks = route.deepLinks
     ){
         MyPage(
             navController,
-            suffix = route,
+            suffix = route.name,
             wvm = wirelessViewModel()
         ) {
             content()

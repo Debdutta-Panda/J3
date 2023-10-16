@@ -13,8 +13,10 @@ class SplashViewModel: WirelessViewModel(){
     override fun onStart() {
         viewModelScope.launch {
             delay(3000)
-            navigate {
-                navigate(Routes.home.full)
+            navigation {
+                navigate(Routes.home.navigation {
+                    set("userId","123")
+                })
             }
         }
 

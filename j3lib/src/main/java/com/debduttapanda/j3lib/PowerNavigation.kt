@@ -7,11 +7,19 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
+import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavController
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
 
 data class ActivityService(
     private val context: Context
@@ -84,8 +92,15 @@ fun NavHostController.set(
     }
 }
 
+fun NavHostController.arguments() = currentBackStackEntry?.arguments
+
 operator fun <T> NavHostController.get(key: String): T? {
     return currentBackStackEntry
         ?.savedStateHandle
         ?.get<T>(key)
 }
+
+data class NavArgumentRequired(
+    val navArgument: NamedNavArgument,
+    val required: Boolean
+)

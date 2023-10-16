@@ -58,13 +58,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ConfigurationCompat.setLocales(LocalConfiguration.current,LocaleListCompat.create(Locale("hi")))
-                    Button(onClick = {
-
-                    }) {
-                        Text(stringResource(id = R.string.hello))
-                    }
-
+                    MyApp()
                 }
             }
         }
