@@ -97,7 +97,7 @@ fun NavHostController.set(
     }
 }
 
-fun NavHostController.arguments() = currentBackStackEntry?.arguments
+fun NavHostController?.arguments() = this?.currentBackStackEntry?.arguments
 
 operator fun <T> NavHostController.get(key: String): T? {
     return currentBackStackEntry
