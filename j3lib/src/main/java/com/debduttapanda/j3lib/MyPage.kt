@@ -20,7 +20,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
-fun MyPage(
+fun MyNavigationPage(
     navController: NavHostController,
     suffix: String,
     wvm: WirelessViewModelInterface?,
@@ -78,6 +78,64 @@ fun MyPage(
             )
         }
         BackHandle(suffix)
+    }
+}
+
+@Composable
+fun MyPage(
+    wvm: WirelessViewModelInterface?,
+    content: @Composable () -> Unit
+) {
+    wvm?.__permissionHandler?.handlePermission()
+    wvm?.__resultingActivityHandler?.handle()
+    LaunchedEffect(key1 = Unit){
+        wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.startupNotification, null)
+    }
+    val owner = LocalLifecycleOwner.current
+    val context = LocalContext.current
+    LaunchedEffect(key1 = wvm?.__navigation?.value){
+        wvm?.__navigation?.forward( owner, ActivityService(context))
+    }
+    // /////////
+    val activity = LocalContext.current as Activity
+    LaunchedEffect(key1 = wvm?.__softInputMode?.value) {
+        activity.window.setSoftInputMode(wvm?.__softInputMode?.value?:return@LaunchedEffect)
+    }
+    // /////////
+    CompositionLocalProvider(
+        LocalResolver provides (wvm?.controller?.resolver?:_Resolver()),
+        LocalNotificationService provides (wvm?.controller?.notificationService?:_NotificationService{ _, _->}),
+        LocalController provides (
+                wvm
+                    ?.controller?.restricted()
+                    ?:
+                    Controller(
+                        wvm
+                            ?.controller
+                            ?.resolver
+                            ?:
+                            _Resolver(),
+                        wvm
+                            ?.controller
+                            ?.notificationService
+                            ?:
+                            _NotificationService{ _, _->}
+                    ).restricted()
+                ),
+    ) {
+        OnLifecycleEvent{owner, event ->
+            wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.lifecycleEvent, event)
+        }
+        HandleKeyboardVisibility(wvm)
+        StatusBarColorControl()
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ){
+            content()
+            LoaderUI(
+                WirelessViewModelInterface.loaderState.value
+            )
+        }
     }
 }
 

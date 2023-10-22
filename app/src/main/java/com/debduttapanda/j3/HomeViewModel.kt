@@ -125,4 +125,9 @@ class HomeViewModel: WirelessViewModel(){
             MyDataIds.dialogController to dialogController.restricted()
         )
     }
+
+    override fun onCleared() {
+        Log.d("flkdjfdfd","cleared")
+        super.onCleared()
+    }
 }

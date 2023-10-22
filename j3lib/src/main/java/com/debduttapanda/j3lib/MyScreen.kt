@@ -2,8 +2,6 @@ package com.debduttapanda.j3lib
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 
@@ -19,7 +17,7 @@ inline fun NavGraphBuilder.MyScreen(
         arguments = route.arguments,
         deepLinks = route.deepLinks
     ){
-        MyPage(
+        MyNavigationPage(
             navController,
             suffix = route.name,
             wvm = wirelessViewModel()

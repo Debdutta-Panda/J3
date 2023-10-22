@@ -50,8 +50,13 @@ val Any?.adep: Dp get() {
 
 val Number.sep get() = ep(dimension = toFloat()).dep.toSp()
 
+private var metricsInitialized = false
+
 @Composable
 fun InitializeMetrics() {
+    if(metricsInitialized){
+        return
+    }
     screenWidthDp = LocalConfiguration.current.screenWidthDp
     screenHeightDp = LocalConfiguration.current.screenHeightDp
     val designWidth = localDesignWidth.current
@@ -61,6 +66,7 @@ fun InitializeMetrics() {
     savedFontScale = density.fontScale
     inverseSavedFontScale = 1f/ savedFontScale
     localDimensionFactor = screenWidthDp / designWidth
+    metricsInitialized = true
 }
 
 operator fun Dp.times(number: Number): Dp {

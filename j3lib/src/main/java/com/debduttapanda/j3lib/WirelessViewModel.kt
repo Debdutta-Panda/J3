@@ -54,6 +54,14 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         )
     }
 
+
+    fun setStatusBarColor(statusBarColo: StatusBarColor){
+        __statusBarColor.value = StatusBarColor(
+            color = statusBarColo.color,
+            darkIcons = statusBarColo.darkIcons
+        )
+    }
+
     fun navigation(block: NavHostController.()->Unit){
         __navigation.scope { navHostController, lifecycleOwner, activityService ->
             block(navHostController)

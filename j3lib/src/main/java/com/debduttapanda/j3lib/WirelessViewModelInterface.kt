@@ -3,14 +3,13 @@ package com.debduttapanda.j3lib
 import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.ExperimentalComposeUiApi
 
 interface WirelessViewModelInterface{
     val controller: Controller
 
     val __softInputMode: MutableState<Int>
 
-    val __navigation: MutableState<UIScope?>
+    val __navigation: MutableState<UINavigationScope?>
     val __permissionHandler: PermissionHandler
     val __resultingActivityHandler: ResultingActivityHandler
 

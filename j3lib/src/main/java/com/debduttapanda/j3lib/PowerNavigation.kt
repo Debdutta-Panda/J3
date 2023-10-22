@@ -7,19 +7,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
-import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavController
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigator
 
 data class ActivityService(
     private val context: Context
@@ -44,12 +37,12 @@ data class ActivityService(
     //fun context(): Context = context
 }
 
-typealias UIScope = suspend Bundle.(NavHostController, LifecycleOwner, ActivityService?) -> Unit
+typealias UINavigationScope = suspend Bundle.(NavHostController?, LifecycleOwner, ActivityService?) -> Unit
 
-fun MutableState<UIScope?>.scope(block: UIScope?){
+fun MutableState<UINavigationScope?>.scope(block: UINavigationScope?){
     this.value = {navHostController, lifecycleOwner, toaster ->
         block?.invoke(
-            navHostController.currentBackStackEntry?.arguments ?: Bundle(),
+            navHostController?.currentBackStackEntry?.arguments ?: Bundle(),
             navHostController,
             lifecycleOwner,
             toaster
@@ -58,7 +51,7 @@ fun MutableState<UIScope?>.scope(block: UIScope?){
     }
 }
 
-suspend fun MutableState<UIScope?>.forward(
+suspend fun MutableState<UINavigationScope?>.forward(
     navHostController: NavHostController,
     lifecycleOwner: LifecycleOwner,
     activityService: ActivityService? = null
@@ -71,7 +64,19 @@ suspend fun MutableState<UIScope?>.forward(
     )
 }
 
-fun Navigation() = mutableStateOf<UIScope?>(null)
+suspend fun MutableState<UINavigationScope?>.forward(
+    lifecycleOwner: LifecycleOwner,
+    activityService: ActivityService? = null
+){
+    this.value?.invoke(
+        Bundle(),
+        null,
+        lifecycleOwner,
+        activityService
+    )
+}
+
+fun Navigation() = mutableStateOf<UINavigationScope?>(null)
 
 fun NavHostController.set(
     route: String,
