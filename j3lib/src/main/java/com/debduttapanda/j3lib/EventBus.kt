@@ -14,12 +14,12 @@ class EventBus{
             value: Any? = null,
             excludeIds: List<String> = emptyList()
         ){
-            callbacks
-                .apply {
-                    if(excludeIds.isNotEmpty()){
-                        minus(excludeIds)
-                    }
-                }
+            val list = if(excludeIds.isEmpty()){
+                callbacks
+            }else{
+                callbacks.minus(excludeIds)
+            }
+            list
                 .forEach {
                     it.value.topics.forEach {pattern->
                         if(pattern.toRegex().matches(topic)){
