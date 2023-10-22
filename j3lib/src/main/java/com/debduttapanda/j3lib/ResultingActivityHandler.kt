@@ -83,6 +83,7 @@ class ResultingActivityHandler {
             ) {
                 coroutine.resume(it)
                 _callback.value = null
+                coroutine.cancel()
                 return@rememberLauncherForActivityResult
             }
 
@@ -100,6 +101,7 @@ class ResultingActivityHandler {
                             tryOn = false
                             coroutine.resume(null)
                             _callback.value = null
+                            coroutine.cancel()
                         }
                     }
                 }

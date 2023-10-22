@@ -83,6 +83,7 @@ fun MyNavigationPage(
 
 @Composable
 fun MyPage(
+    modifier: Modifier = Modifier,
     wvm: WirelessViewModelInterface?,
     content: @Composable () -> Unit
 ) {
@@ -129,7 +130,7 @@ fun MyPage(
         HandleKeyboardVisibility(wvm)
         StatusBarColorControl()
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = modifier.fillMaxSize()
         ){
             content()
             LoaderUI(

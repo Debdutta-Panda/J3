@@ -1,5 +1,6 @@
 package com.debduttapanda.j3lib
 
+import android.content.Context
 import android.widget.Toast
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
@@ -95,6 +96,12 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         }
     }
 
+    fun consumeContext(contextConsumer: ContextConsumer){
+        __navigation.scope { navHostController, lifecycleOwner, activityService ->
+            activityService?.letConsumeContext(contextConsumer)
+        }
+    }
+
     suspend fun <I,O>requestForResult(
         contract: ActivityResultContract<I, O>,
         maxTry: Int = 10,
@@ -130,4 +137,8 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
             _toast(message,duration)
         }
     }
+}
+
+interface ContextConsumer{
+    fun consume(context: Context)
 }

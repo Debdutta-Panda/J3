@@ -33,6 +33,10 @@ data class ActivityService(
         context.startActivity(intent)
     }
 
+    fun letConsumeContext(contextConsumer: ContextConsumer){
+        contextConsumer.consume(context)
+    }
+
     fun contentResolver(): ContentResolver = context.contentResolver
     //fun context(): Context = context
 }

@@ -9,14 +9,24 @@ class EventBus{
             val topics: MutableList<String>,
             val action: (String,String,Any?)->Unit
         )
-        fun notify(topic: String, value: Any? = null){
-            callbacks.forEach {
-                it.value.topics.forEach {pattern->
-                    if(pattern.toRegex().matches(topic)){
-                        it.value.action(pattern,topic,value)
+        fun notify(
+            topic: String,
+            value: Any? = null,
+            excludeIds: List<String> = emptyList()
+        ){
+            callbacks
+                .apply {
+                    if(excludeIds.isNotEmpty()){
+                        minus(excludeIds)
                     }
                 }
-            }
+                .forEach {
+                    it.value.topics.forEach {pattern->
+                        if(pattern.toRegex().matches(topic)){
+                            it.value.action(pattern,topic,value)
+                        }
+                    }
+                }
         }
         fun register(
             id: String,
