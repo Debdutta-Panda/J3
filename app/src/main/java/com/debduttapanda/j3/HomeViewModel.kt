@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewModelScope
 import com.debduttapanda.j3lib.AsSync
 import com.debduttapanda.j3lib.Controller
+import com.debduttapanda.j3lib.EventBusDescription
 import com.debduttapanda.j3lib._NotificationService
 import com.debduttapanda.j3lib._Resolver
 import com.debduttapanda.j3lib.WirelessViewModel
@@ -106,6 +107,10 @@ class HomeViewModel: WirelessViewModel(){
 
             }
         }
+    }
+
+    override fun eventBusDescription(): EventBusDescription? {
+        return null
     }
 
     init {

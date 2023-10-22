@@ -31,7 +31,7 @@ class EventBus{
                 list(it)
             }
         }
-        fun unregister(id: String){
+        fun unregister(id: String?){
             callbacks.remove(id)
         }
     }

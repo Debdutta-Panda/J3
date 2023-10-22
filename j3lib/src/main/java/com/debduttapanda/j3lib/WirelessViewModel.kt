@@ -11,6 +11,12 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+data class EventBusDescription(
+    val eventBusId: String? = null,
+    val eventBusTopics: (MutableList<String>.()->Unit)? = null,
+    val eventBusAction: ((pattern: String, topic: String, value: Any?) -> Unit)? = null
+)
+
 abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     override val controller by lazy { createController() }
 
@@ -28,17 +34,18 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     override val __navigation = Navigation()
     override val __permissionHandler = PermissionHandler()
     override val __resultingActivityHandler = ResultingActivityHandler()
-    val eventBusId: String? = null
-    val eventBusTopics: (MutableList<String>.()->Unit)? = null
-    val eventBusAction: ((pattern: String, topic: String, value: Any?) -> Unit)? = null
+    abstract fun eventBusDescription(): EventBusDescription?
     private var eventBusRegistered = false
+    private var eventBusDescription: EventBusDescription? = null
     init {
+        val ed = eventBusDescription()
         if(
-            eventBusId != null
-            && eventBusTopics != null
-            && eventBusAction != null
+            ed?.eventBusId != null
+            && ed.eventBusTopics != null
+            && ed.eventBusAction != null
         ){
-            EventBus.instance.register(eventBusId,eventBusAction,eventBusTopics)
+            EventBus.instance.register(ed.eventBusId,ed.eventBusAction,ed.eventBusTopics)
+            eventBusDescription = ed
             eventBusRegistered = true
         }
 
@@ -108,8 +115,8 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     fun newController(notificationService: _NotificationService) = Controller(_Resolver(), notificationService)
 
     override fun onCleared() {
-        if(eventBusRegistered && eventBusId != null){
-            EventBus.instance.unregister(eventBusId)
+        if(eventBusRegistered && eventBusDescription?.eventBusId != null){
+            EventBus.instance.unregister(eventBusDescription?.eventBusId)
         }
         super.onCleared()
     }

@@ -1,6 +1,7 @@
 package com.debduttapanda.j3
 
 import androidx.lifecycle.viewModelScope
+import com.debduttapanda.j3lib.EventBusDescription
 import com.debduttapanda.j3lib.WirelessViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -24,5 +25,9 @@ class SplashViewModel: WirelessViewModel(){
 
     override fun onNotification(id: Any?, arg: Any?) {
 
+    }
+
+    override fun eventBusDescription(): EventBusDescription? {
+        return null
     }
 }
