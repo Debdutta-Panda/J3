@@ -155,7 +155,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     }
 
     suspend fun <T>Df<T>.start(tag: String, block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null) = dfer(this,tag, block)
-    suspend fun <T>Df<T>.startScoped(tag: String, block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null){
+    fun <T>Df<T>.startScoped(tag: String, block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null){
         viewModelScope.launch {
             start(tag,block)
         }
