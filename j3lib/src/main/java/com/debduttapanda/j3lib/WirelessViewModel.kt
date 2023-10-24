@@ -144,7 +144,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         }
     }
 
-    suspend fun <T>dfer(df: Df<T>, tag: String, block: (df: Df<T>,topic: Any, value: Any?)->Unit): T = suspendCancellableCoroutine { continuation ->
+    suspend fun <T>dfer(df: Df<T>, tag: String, block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null): T = suspendCancellableCoroutine { continuation ->
         __navigation.scope { navHostController, lifecycleOwner, activityService ->
             CoroutineScope(Dispatchers.Main).launch{
                 val r = activityService!!.showDf(df, tag, block)
@@ -154,7 +154,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         }
     }
 
-    suspend fun <T>Df<T>.start(tag: String, block: (df: Df<T>,topic: Any, value: Any?)->Unit) = dfer(this,tag, block)
+    suspend fun <T>Df<T>.start(tag: String, block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null) = dfer(this,tag, block)
 
 }
 

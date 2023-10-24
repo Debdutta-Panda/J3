@@ -12,8 +12,10 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
 abstract class Df<T>{
-    var callback: (df: Df<T>,topic: Any, value: Any?)->Unit = {df,t,v->}
-    private set
+    private var _callback: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null
+    fun callback(df: Df<T>,topic: Any, value: Any?){
+        _callback?.invoke(df,topic,value)
+    }
     private var cdf: ComposeDialogFragment? = null
     abstract fun setContent(): @Composable ()->Unit
 
@@ -42,8 +44,8 @@ abstract class Df<T>{
         onStopCallback(value)
     }
 
-    internal suspend fun start(fm: FragmentManager, tag: String, block: (df: Df<T>,topic: Any, value: Any?)->Unit) = suspendCancellableCoroutine {coroutine->
-        callback = block
+    internal suspend fun start(fm: FragmentManager, tag: String, block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null) = suspendCancellableCoroutine {coroutine->
+        _callback = block
         onStopCallback = {
             onStopCallback = {}
             coroutine.isActive

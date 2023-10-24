@@ -30,9 +30,7 @@ class SplashViewModel: WirelessViewModel(){
             val mdf = MyDf()
             mdf.title.value = "Hello"
             mdf.title
-            val a = mdf.start(""){d,t,v->
-                mdf.title.value = System.currentTimeMillis().toString()
-            }
+            val a = mdf.start("")
             Log.d("flkdfddfdf",a.toString())
         }
     }

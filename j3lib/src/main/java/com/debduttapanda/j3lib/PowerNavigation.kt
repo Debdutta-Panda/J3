@@ -39,7 +39,7 @@ data class ActivityService(
         contextConsumer.consume(context)
     }
 
-    internal suspend fun <T>showDf(df: Df<T>, tag: String,block: (df: Df<T>,topic: Any, value: Any?)->Unit): T{
+    internal suspend fun <T>showDf(df: Df<T>, tag: String,block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null): T{
         if(context !is FragmentActivity){
             throw NotFragmentActivityException()
         }
