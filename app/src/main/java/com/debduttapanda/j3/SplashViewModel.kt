@@ -1,8 +1,10 @@
 package com.debduttapanda.j3
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.debduttapanda.j3lib.EventBusDescription
 import com.debduttapanda.j3lib.WirelessViewModel
+import com.debduttapanda.j3lib.df.Df
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -21,6 +23,18 @@ class SplashViewModel: WirelessViewModel(){
             }
         }
 
+    }
+
+    init {
+        viewModelScope.launch {
+            val mdf = MyDf()
+            mdf.title.value = "Hello"
+            mdf.title
+            val a = mdf.start(""){d,t,v->
+                mdf.title.value = System.currentTimeMillis().toString()
+            }
+            Log.d("flkdfddfdf",a.toString())
+        }
     }
 
     override fun onNotification(id: Any?, arg: Any?) {

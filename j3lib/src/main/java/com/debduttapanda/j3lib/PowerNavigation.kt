@@ -10,9 +10,11 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
+import com.debduttapanda.j3lib.df.Df
 
 data class ActivityService(
     private val context: Context
@@ -37,9 +39,19 @@ data class ActivityService(
         contextConsumer.consume(context)
     }
 
+    internal suspend fun <T>showDf(df: Df<T>, tag: String,block: (df: Df<T>,topic: Any, value: Any?)->Unit): T{
+        if(context !is FragmentActivity){
+            throw NotFragmentActivityException()
+        }
+        val r = df.start(context.supportFragmentManager,tag, block)
+        return r
+    }
+
     fun contentResolver(): ContentResolver = context.contentResolver
     //fun context(): Context = context
 }
+
+class NotFragmentActivityException: Exception("The activity must be an instance of androidx.fragment.app.FragmentActivity")
 
 typealias UINavigationScope = suspend Bundle.(NavHostController?, LifecycleOwner, ActivityService?) -> Unit
 

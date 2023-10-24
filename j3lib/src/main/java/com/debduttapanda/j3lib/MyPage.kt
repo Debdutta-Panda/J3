@@ -1,6 +1,7 @@
 package com.debduttapanda.j3lib
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -35,7 +36,9 @@ fun MyNavigationPage(
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current
     LaunchedEffect(key1 = wvm?.__navigation?.value){
+        Log.d("flkdjfddfd","${wvm?.__navigation?.value}")
         wvm?.__navigation?.forward(navController, owner, ActivityService(context))
+        Log.d("flkdjfddfd","completed")
     }
     // /////////
     val activity = LocalContext.current as Activity

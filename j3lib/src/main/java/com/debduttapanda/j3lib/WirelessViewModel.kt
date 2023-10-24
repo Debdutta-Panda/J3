@@ -9,8 +9,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import com.debduttapanda.j3lib.df.Df
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
 
 data class EventBusDescription(
     val eventBusId: String? = null,
@@ -137,6 +143,19 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
             _toast(message,duration)
         }
     }
+
+    suspend fun <T>dfer(df: Df<T>, tag: String, block: (df: Df<T>,topic: Any, value: Any?)->Unit): T = suspendCancellableCoroutine { continuation ->
+        __navigation.scope { navHostController, lifecycleOwner, activityService ->
+            CoroutineScope(Dispatchers.Main).launch{
+                val r = activityService!!.showDf(df, tag, block)
+                continuation.resume(r)
+                continuation.cancel()
+            }
+        }
+    }
+
+    suspend fun <T>Df<T>.start(tag: String, block: (df: Df<T>,topic: Any, value: Any?)->Unit) = dfer(this,tag, block)
+
 }
 
 interface ContextConsumer{
