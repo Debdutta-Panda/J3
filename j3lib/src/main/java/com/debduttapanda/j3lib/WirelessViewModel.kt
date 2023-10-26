@@ -1,6 +1,7 @@
 package com.debduttapanda.j3lib
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
@@ -124,6 +125,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
 
     suspend fun takePicturePreview() = __resultingActivityHandler.takePicturePreview()
     suspend fun getContent(type: String) = __resultingActivityHandler.getContent(type)
+    suspend fun intentResult(intent: Intent) = __resultingActivityHandler.intentContract(intent)
 
     fun newController(notificationService: _NotificationService) = Controller(_Resolver(), notificationService)
 
