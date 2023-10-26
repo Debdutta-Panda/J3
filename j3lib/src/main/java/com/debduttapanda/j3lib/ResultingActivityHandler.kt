@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
@@ -64,6 +65,20 @@ suspend fun ResultingActivityHandler.getContent(
         millis
     ){
         it.launch(type)
+    }
+}
+
+suspend fun ResultingActivityHandler.intentContract(
+    intent: Intent,
+    maxTry: Int = 10,
+    millis: Long = 200
+): ActivityResult?{
+    return request(
+        ActivityResultContracts.StartActivityForResult(),
+        maxTry,
+        millis
+    ){
+        it.launch(intent)
     }
 }
 
