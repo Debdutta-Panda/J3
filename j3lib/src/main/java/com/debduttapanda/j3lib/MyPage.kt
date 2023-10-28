@@ -133,7 +133,7 @@ fun MyPage(
         HandleKeyboardVisibility(wvm)
         StatusBarColorControl()
         Box(
-            modifier = modifier.fillMaxSize()
+            modifier = modifier
         ){
             content()
             LoaderUI(
