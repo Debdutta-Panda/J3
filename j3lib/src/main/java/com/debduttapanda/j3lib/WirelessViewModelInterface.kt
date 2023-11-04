@@ -18,6 +18,7 @@ interface WirelessViewModelInterface{
             activityService?.toast(str(activityService,message),duration)
         }
     }
+    fun onBack()
     val __keyboarder: MutableState<KeyboardScope?> get() = Keyboarder()
     interface LoaderInterface{
         fun clear()

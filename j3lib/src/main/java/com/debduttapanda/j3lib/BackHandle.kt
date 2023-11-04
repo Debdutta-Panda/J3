@@ -5,10 +5,9 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun BackHandle(
-    suffix: String,
-    notifier: _NotificationService = notifier()
+    wirelessViewModel: WirelessViewModelInterface?
 ) {
     BackHandler(enabled = true, onBack = {
-        notifier.notify(DataIds.back, suffix)
+        wirelessViewModel?.onBack()
     })
 }
