@@ -78,8 +78,10 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     }
 
     fun navigation(block: NavHostController.()->Unit){
-        __navigation.scope { navHostController, lifecycleOwner, activityService ->
-            block(navHostController!!)
+        viewModelScope.launch(Dispatchers.Main) {
+            __navigation.scope { navHostController, lifecycleOwner, activityService ->
+                block(navHostController!!)
+            }
         }
     }
 

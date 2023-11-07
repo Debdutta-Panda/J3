@@ -15,6 +15,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
 import com.debduttapanda.j3lib.df.Df
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 data class ActivityService(
     private val context: Context
@@ -57,12 +61,14 @@ typealias UINavigationScope = suspend Bundle.(NavHostController?, LifecycleOwner
 
 fun MutableState<UINavigationScope?>.scope(block: UINavigationScope?){
     this.value = {navHostController, lifecycleOwner, toaster ->
-        block?.invoke(
-            navHostController?.currentBackStackEntry?.arguments ?: Bundle(),
-            navHostController,
-            lifecycleOwner,
-            toaster
-        )
+        withContext(Dispatchers.Main){
+            block?.invoke(
+                navHostController?.currentBackStackEntry?.arguments ?: Bundle(),
+                navHostController,
+                lifecycleOwner,
+                toaster
+            )
+        }
         this@scope.value = null
     }
 }
