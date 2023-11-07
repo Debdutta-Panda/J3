@@ -36,7 +36,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     fun setSoftInputMode(mode: Int){
         __softInputMode.value = mode
     }
-    abstract fun onBack()
+
     abstract fun onStart()
     abstract fun onNotification(id: Any?, arg: Any?)
     override val __navigation = Navigation()

@@ -80,7 +80,7 @@ fun MyNavigationPage(
                 WirelessViewModelInterface.loaderState.value
             )
         }
-        BackHandle(suffix)
+        BackHandle(wvm)
     }
 }
 
