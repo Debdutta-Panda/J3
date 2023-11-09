@@ -19,6 +19,8 @@ import androidx.navigation.NavHostController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun MyNavigationPage(
@@ -36,9 +38,9 @@ fun MyNavigationPage(
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current
     LaunchedEffect(key1 = wvm?.__navigation?.value){
-        Log.d("flkdjfddfd","${wvm?.__navigation?.value}")
-        wvm?.__navigation?.forward(navController, owner, ActivityService(context))
-        Log.d("flkdjfddfd","completed")
+        withContext(Dispatchers.Main){
+            wvm?.__navigation?.forward(navController, owner, ActivityService(context))
+        }
     }
     // /////////
     val activity = LocalContext.current as Activity
