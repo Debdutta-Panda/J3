@@ -67,6 +67,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
 }
 
 publishing {

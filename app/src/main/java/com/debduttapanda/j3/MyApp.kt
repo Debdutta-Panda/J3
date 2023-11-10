@@ -1,6 +1,7 @@
 package com.debduttapanda.j3
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.navigation
@@ -24,7 +25,7 @@ fun MyApp() {
         MyScreen(
             navController = navController,
             route = Routes.home,
-            { viewModel<HomeViewModel>() }
+            { hiltViewModel<HomeViewModel>() }
         ) {
             HomePage()
         }
