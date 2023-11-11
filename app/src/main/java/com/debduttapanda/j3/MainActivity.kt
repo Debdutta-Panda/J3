@@ -34,7 +34,6 @@ import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.FragmentActivity
 import com.debduttapanda.j3.ui.theme.J3Theme
 import com.debduttapanda.j3lib.df.Df
-import com.debduttapanda.j3lib.get.jGet
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
@@ -58,9 +57,6 @@ class MainActivity : FragmentActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        jGet.set<Int>({{2}})
-        val c: Int = jGet.get()
-        Log.d("fldjkfd",c.toString())
         setContent {
             J3Theme{
                 // A surface container using the 'background' color from the theme

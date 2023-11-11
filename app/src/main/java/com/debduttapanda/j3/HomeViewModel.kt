@@ -93,11 +93,11 @@ class HomeViewModel: WirelessViewModel(){
                 viewModelScope.launch {
                     val permissions = listOf(android.Manifest.permission.CAMERA)
                     permissions.apply {
-                        val checked = check()
+                        val checked = checkPermission()
                         if(checked?.allPermissionsGranted==true){
                             // process()
                         } else{
-                            val requested = request()
+                            val requested = requestPermission()
                             if(requested.multiPermissionState?.allPermissionsGranted==true){
                                 // process
                             }

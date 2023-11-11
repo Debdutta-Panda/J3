@@ -5,6 +5,7 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -13,14 +14,12 @@ import androidx.navigation.NavHostController
 import com.debduttapanda.j3lib.df.Df
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
 data class EventBusDescription(
-    val eventBusId: String? = null,
+    val eventBusId: String,
     val eventBusTopics: (MutableList<String>.()->Unit)? = null,
     val eventBusAction: ((pattern: String, topic: String, value: Any?) -> Unit)? = null
 )
@@ -32,6 +31,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
 
     private val __statusBarColor = mutableStateOf<StatusBarColor?>(null)
     override val __softInputMode = mutableStateOf(SoftInputMode.adjustNothing)
+    override val __keyboarder: MutableState<KeyboardScope?> = Keyboarder()
 
     fun setSoftInputMode(mode: Int){
         __softInputMode.value = mode
@@ -91,13 +91,13 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         }
     }
 
-    suspend fun String.check() = __permissionHandler.check(this)
+    suspend fun String.checkPermission() = __permissionHandler.check(this)
 
-    suspend fun List<String>.check() = __permissionHandler.check(*toTypedArray())
+    suspend fun List<String>.checkPermission() = __permissionHandler.check(*toTypedArray())
 
-    suspend fun String.request() = __permissionHandler.request(this)
+    suspend fun String.requestPermission() = __permissionHandler.request(this)
 
-    suspend fun List<String>.request() = __permissionHandler.request(*this.toTypedArray())
+    suspend fun List<String>.requestPermission() = __permissionHandler.request(*this.toTypedArray())
 
     fun goToAppSettings(){
         __navigation.scope { navHostController, lifecycleOwner, activityService ->
@@ -132,10 +132,14 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     fun newController(notificationService: _NotificationService) = Controller(_Resolver(), notificationService)
 
     override fun onCleared() {
+        clearEventBusRegistration()
+        super.onCleared()
+    }
+
+    private fun clearEventBusRegistration() {
         if(eventBusRegistered && eventBusDescription?.eventBusId != null){
             EventBus.instance.unregister(eventBusDescription?.eventBusId)
         }
-        super.onCleared()
     }
 
     fun eventBusNotify(topic: String, value: Any? = null){
@@ -162,6 +166,18 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     fun <T>Df<T>.startScoped(tag: String = "", block: ((df: Df<T>,topic: Any, value: Any?)->Unit)? = null){
         viewModelScope.launch {
             start(tag,block)
+        }
+    }
+
+    fun hideKeyboard(){
+        __keyboarder{
+            hide()
+        }
+    }
+
+    fun showKeyboard(){
+        __keyboarder{
+            show()
         }
     }
 

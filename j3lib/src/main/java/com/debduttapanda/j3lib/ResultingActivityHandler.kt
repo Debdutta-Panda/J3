@@ -17,7 +17,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-suspend fun <I,O>ResultingActivityHandler.request(
+suspend fun <I,O>ResultingActivityHandler.requestPermission(
     createIntent: (context: Context, input: I)->Intent,
     parseResult: (resultCode: Int, intent: Intent?)->O,
     launch: ManagedActivityResultLauncher<I,O>.()->Unit,

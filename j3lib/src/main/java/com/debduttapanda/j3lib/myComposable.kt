@@ -20,7 +20,7 @@ import androidx.navigation.compose.composable
 object DefaultNavigationAnimation{
     private const val animationTime = 300
     val enterTransition: (@JvmSuppressWildcards
-    AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = {
+    AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition) = {
         fadeIn(
             animationSpec = tween(
                 animationTime, easing = LinearEasing
@@ -31,7 +31,7 @@ object DefaultNavigationAnimation{
         )
     }
     val exitTransition: (@JvmSuppressWildcards
-    AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = {
+    AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition) = {
         fadeOut(
             animationSpec = tween(
                 animationTime, easing = LinearEasing
@@ -42,7 +42,7 @@ object DefaultNavigationAnimation{
         )
     }
     val popEnterTransition: (@JvmSuppressWildcards
-    AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = {
+    AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition) = {
         fadeIn(
             animationSpec = tween(
                 animationTime, easing = LinearEasing
@@ -53,7 +53,7 @@ object DefaultNavigationAnimation{
         )
     }
     val popExitTransition: (@JvmSuppressWildcards
-    AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? = {
+    AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition) = {
         fadeOut(
             animationSpec = tween(
                 animationTime, easing = LinearEasing
@@ -69,6 +69,7 @@ fun NavGraphBuilder.myComposable(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
+    enableDefaultTransition: Boolean = true,
     enterTransition: (@JvmSuppressWildcards
     AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
     exitTransition: (@JvmSuppressWildcards
@@ -86,9 +87,9 @@ fun NavGraphBuilder.myComposable(
         arguments,
         deepLinks,
         content = content,
-        enterTransition = enterTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.enterTransition,
-        exitTransition = exitTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.exitTransition,
-        popEnterTransition = popEnterTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.popEnterTransition,
-        popExitTransition = popExitTransition?: com.debduttapanda.j3lib.DefaultNavigationAnimation.popExitTransition
+        enterTransition = enterTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.enterTransition else null,
+        exitTransition = exitTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.exitTransition else null,
+        popEnterTransition = popEnterTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.popEnterTransition else null,
+        popExitTransition = popExitTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.popExitTransition else null
     )
 }

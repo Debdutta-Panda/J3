@@ -26,7 +26,7 @@ object ji{
         return  this
     }
 
-    inline fun <T>get(type: Class<T>): T{
+    fun <T>get(type: Class<T>): T{
         try {
             if(_resolved.containsKey(type)){
                 return _resolved[type] as T
