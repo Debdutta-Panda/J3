@@ -9,6 +9,7 @@ import com.debduttapanda.j3lib.Route
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.arguments
 import com.debduttapanda.j3lib.df.Df
+import com.debduttapanda.j3lib.getBack
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -26,18 +27,24 @@ class SplashViewModel: WirelessViewModel(){
     }
 
     override fun onStartUp(route: Route?, arguments: Bundle?) {
-
+        navigation {
+            val he = getBack<String>("hello")
+            Log.d("fldjkfld","value = $he")
+        }
     }
 
     init {
         viewModelScope.launch {
             delay(2000)
             navigation {
-                navigate(Routes.home.navigation {
-                    set("userId","123")
-                    set("dob","29051987")
-                })
+                navigate(
+                    Routes.home.navigation {
+                        set("userId","123")
+                        set("dob","29051987")
+                    }
+                )
             }
         }
+
     }
 }

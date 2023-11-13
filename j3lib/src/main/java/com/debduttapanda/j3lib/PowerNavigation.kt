@@ -100,7 +100,7 @@ suspend fun MutableState<UINavigationScope?>.forward(
 
 fun Navigation() = mutableStateOf<UINavigationScope?>(null)
 
-fun NavHostController.set(
+fun NavHostController.setBack(
     route: String,
     key: String,
     value: Any?,
@@ -121,7 +121,7 @@ fun NavHostController.set(
 
 fun NavHostController?.arguments() = this?.currentBackStackEntry?.arguments
 
-operator fun <T> NavHostController.get(key: String): T? {
+fun <T> NavHostController.getBack(key: String): T? {
     return currentBackStackEntry
         ?.savedStateHandle
         ?.get<T>(key)

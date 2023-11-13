@@ -75,7 +75,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.debduttapanda"
             artifactId = "j3"
-            version = "1.1.23"
+            version = "1.1.24"
 
             afterEvaluate {
                 from(components["release"])

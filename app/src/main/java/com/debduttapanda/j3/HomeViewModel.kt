@@ -13,6 +13,7 @@ import com.debduttapanda.j3lib._NotificationService
 import com.debduttapanda.j3lib._Resolver
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.arguments
+import com.debduttapanda.j3lib.setBack
 import kotlinx.coroutines.launch
 
 class HomeViewModel: WirelessViewModel(){
@@ -77,6 +78,7 @@ class HomeViewModel: WirelessViewModel(){
     override fun onNotification(id: Any?, arg: Any?) {
         when(id){
             MyDataIds.goBack->navigation {
+                setBack(Routes.splash.name,"hello","hi")
                 popBackStack()
             }
             MyDataIds.inputValue->{
@@ -137,6 +139,9 @@ class HomeViewModel: WirelessViewModel(){
     }
 
     override fun onStartUp(route: Route?, arguments: Bundle?) {
-        Log.d("flkdjfdfd","${route?.name}, ${arguments?.toMap(route!!)}")
+        val userId = arguments?.getString("userId")
+        val map = route?.run{arguments?.toMap(route)}?:return
+        val dob = map["dob"]
+        Log.d("flkdjfdfd","$userId, $dob")
     }
 }
