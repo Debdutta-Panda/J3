@@ -52,9 +52,6 @@ fun localeSelection(context: Context, localeTag: String) {
 
 @AndroidEntryPoint
 class MainActivity : FragmentActivity() {
-    fun runnn(a: Function<*>){
-        a
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

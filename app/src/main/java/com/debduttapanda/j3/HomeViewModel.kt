@@ -1,5 +1,6 @@
 package com.debduttapanda.j3
 
+import android.os.Bundle
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
@@ -7,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.debduttapanda.j3lib.AsSync
 import com.debduttapanda.j3lib.Controller
 import com.debduttapanda.j3lib.EventBusDescription
+import com.debduttapanda.j3lib.Route
 import com.debduttapanda.j3lib._NotificationService
 import com.debduttapanda.j3lib._Resolver
 import com.debduttapanda.j3lib.WirelessViewModel
@@ -72,13 +74,6 @@ class HomeViewModel: WirelessViewModel(){
 
     }
 
-    override fun onStart() {
-        setStatusBarColor(Color.Red,false)
-        navigation {
-            Log.d("fkldlfjd",arguments()?.getString("userId")?:"none")
-        }
-    }
-
     override fun onNotification(id: Any?, arg: Any?) {
         when(id){
             MyDataIds.goBack->navigation {
@@ -114,6 +109,12 @@ class HomeViewModel: WirelessViewModel(){
     }
 
     init {
+        navigation {
+            val args = arguments()
+            val uid = args?.getString("userId")
+            val dob = args?.getString("dob")
+            Log.d("fjldjfd","agrs are uid = $uid, dob = $dob end")
+        }
         childController.resolver.addAll(
             MyDataIds.inputValue to childInputValue,
             MyDataIds.labelValue to childLabelValue,
@@ -132,7 +133,10 @@ class HomeViewModel: WirelessViewModel(){
     }
 
     override fun onCleared() {
-        Log.d("flkdjfdfd","cleared")
         super.onCleared()
+    }
+
+    override fun onStartUp(route: Route?, arguments: Bundle?) {
+        Log.d("flkdjfdfd","${route?.name}, ${arguments?.toMap(route!!)}")
     }
 }

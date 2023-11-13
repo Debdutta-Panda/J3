@@ -40,7 +40,7 @@ inline fun NavGraphBuilder.MyScreen(
     ){
         MyNavigationPage(
             navController,
-            suffix = route.name,
+            route = route,
             wvm = wirelessViewModel()
         ) {
             content()

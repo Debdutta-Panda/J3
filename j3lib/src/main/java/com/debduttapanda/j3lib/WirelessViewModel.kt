@@ -2,6 +2,7 @@ package com.debduttapanda.j3lib
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
@@ -11,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import com.debduttapanda.j3lib.df.Df
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +25,28 @@ data class EventBusDescription(
     val eventBusTopics: (MutableList<String>.()->Unit)? = null,
     val eventBusAction: ((pattern: String, topic: String, value: Any?) -> Unit)? = null
 )
-
 abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
+
+    fun Bundle.toMap(route: Route): Map<String, Any?> {
+        val map = mutableMapOf<String, Any?>()
+        route.arguments.forEach {
+            val name = it.name
+            when(it.argument.type){
+                NavType.StringType->{map[name] = getString(name)}
+                NavType.IntType->{map[name] = getInt(name)}
+                NavType.IntArrayType->{map[name] = getIntArray(name)}
+                NavType.LongType->{map[name] = getLong(name)}
+                NavType.LongArrayType->{map[name] = getLongArray(name)}
+                NavType.BoolType->{map[name] = getBoolean(name)}
+                NavType.BoolArrayType->{map[name] = getBooleanArray(name)}
+                NavType.StringArrayType->{map[name] = getStringArray(name)}
+                NavType.FloatType->{map[name] = getFloat(name)}
+                NavType.FloatArrayType->{map[name] = getFloatArray(name)}
+            }
+        }
+        return map
+    }
+
     override val controller by lazy { createController() }
 
     open fun createController() = Controller(_Resolver(), _NotificationService(::onNotification))
@@ -37,7 +59,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         __softInputMode.value = mode
     }
 
-    abstract fun onStart()
+
     abstract fun onNotification(id: Any?, arg: Any?)
     override val __navigation = Navigation()
     override val __permissionHandler = PermissionHandler()
@@ -46,6 +68,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     private var eventBusRegistered = false
     private var eventBusDescription: EventBusDescription? = null
     init {
+        storeArgs()
         val ed = eventBusDescription()
         if(
             ed?.eventBusId != null
@@ -58,7 +81,15 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         }
 
         controller.resolver.addAll(DataIds.statusBarColor to __statusBarColor)
-        onStart()
+    }
+
+    private fun storeArgs() {
+        navigation {
+            var args = arguments()
+            args?.apply {
+
+            }
+        }
     }
 
 

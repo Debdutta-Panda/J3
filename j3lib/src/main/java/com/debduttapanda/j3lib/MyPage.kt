@@ -1,7 +1,7 @@
 package com.debduttapanda.j3lib
 
 import android.app.Activity
-import android.util.Log
+import android.os.Bundle
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -21,11 +21,10 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
 @Composable
 fun MyNavigationPage(
     navController: NavHostController,
-    suffix: String,
+    route: Route,
     wvm: WirelessViewModelInterface?,
     content: @Composable () -> Unit
 ) {
@@ -33,7 +32,10 @@ fun MyNavigationPage(
     wvm?.__permissionHandler?.handlePermission()
     wvm?.__resultingActivityHandler?.handle()
     LaunchedEffect(key1 = Unit){
-        wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.startupNotification, null)
+        withContext(Dispatchers.Main){
+            val arguments = navController.currentBackStackEntry?.arguments
+            wvm?.onStartUp(route,arguments)
+        }
     }
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current
@@ -95,7 +97,7 @@ fun MyPage(
     wvm?.__permissionHandler?.handlePermission()
     wvm?.__resultingActivityHandler?.handle()
     LaunchedEffect(key1 = Unit){
-        wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.startupNotification, null)
+        wvm?.onStartUp()
     }
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current

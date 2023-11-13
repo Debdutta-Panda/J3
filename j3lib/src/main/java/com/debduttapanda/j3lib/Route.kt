@@ -10,6 +10,8 @@ data class Route(
     val deepLinks: List<NavDeepLink> = emptyList(),
 ) {
 
+    val argKeys: List<String>
+        get() = arguments.map { it.name }
     fun navigation(values: MutableMap<String,Any>.()->Unit): String{
         val map = mutableMapOf<String,Any>()
         values(map)
@@ -36,7 +38,7 @@ data class Route(
         }
         var optional = optionalList.joinToString("&")
         if (optional.isNotEmpty()) {
-            optional = "?$required"
+            optional = "?$optional"
         }
         return "$required$optional"
     }
@@ -62,7 +64,7 @@ data class Route(
         }
         var optional = optionalList.joinToString("&")
         if (optional.isNotEmpty()) {
-            optional = "?$required"
+            optional = "?$optional"
         }
         return "$required$optional"
     }
