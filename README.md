@@ -4,4 +4,4 @@
 
 Jetpack Joyride Junction
 
-https://j3.debduttapanda.com/docs/startup-code
+https://j3.debduttapanda.com
