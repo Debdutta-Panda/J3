@@ -26,23 +26,20 @@ class SplashViewModel: WirelessViewModel(){
         return null
     }
 
+    override fun interCom(message: InterCom) {
+        Log.d("fldkfdfdfd","${message.sender},${message.data}")
+        interCom<HomeViewModel>("Hi")
+    }
+
     override fun onStartUp(route: Route?, arguments: Bundle?) {
-        navigation {
-            val he = getBack<String>("hello")
-            Log.d("fldjkfld","value = $he")
-        }
+
     }
 
     init {
         viewModelScope.launch {
             delay(2000)
             navigation {
-                navigate(
-                    Routes.home.navigation {
-                        set("userId","123")
-                        set("dob","29051987")
-                    }
-                )
+                navigate(Routes.home.full)
             }
         }
 

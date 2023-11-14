@@ -14,6 +14,7 @@ import com.debduttapanda.j3lib._Resolver
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.arguments
 import com.debduttapanda.j3lib.setBack
+import com.debduttapanda.j3lib.simpleName
 import kotlinx.coroutines.launch
 
 class HomeViewModel: WirelessViewModel(){
@@ -78,8 +79,8 @@ class HomeViewModel: WirelessViewModel(){
     override fun onNotification(id: Any?, arg: Any?) {
         when(id){
             MyDataIds.goBack->navigation {
-                setBack(Routes.splash.name,"hello","hi")
-                popBackStack()
+                interCom<SplashViewModel>("Hello")
+                //popBackStack()
             }
             MyDataIds.inputValue->{
                 inputValue.value = arg as String
@@ -110,13 +111,11 @@ class HomeViewModel: WirelessViewModel(){
         return null
     }
 
+    override fun interCom(message: InterCom) {
+        Log.d("fldkfdfdfd","${message.sender},${message.data}")
+    }
+
     init {
-        navigation {
-            val args = arguments()
-            val uid = args?.getString("userId")
-            val dob = args?.getString("dob")
-            Log.d("fjldjfd","agrs are uid = $uid, dob = $dob end")
-        }
         childController.resolver.addAll(
             MyDataIds.inputValue to childInputValue,
             MyDataIds.labelValue to childLabelValue,

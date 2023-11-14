@@ -106,16 +106,30 @@ fun NavHostController.setBack(
     value: Any?,
     last: Boolean = false
 ){
-    if (last){
+    (if (last){
         currentBackStack.value
             .lastOrNull{ it.destination.route == route }
-            ?.savedStateHandle
-            ?.set(key, value)
     } else {
         currentBackStack.value
             .firstOrNull{ it.destination.route == route }
-            ?.savedStateHandle
-            ?.set(key, value)
+    })?.savedStateHandle?.set(key, value)
+}
+
+fun NavHostController.setBack(
+    route: String,
+    map: Map<String,Any?>,
+    last: Boolean = false
+){
+    (if (last){
+        currentBackStack.value
+            .lastOrNull{ it.destination.route == route }
+    } else {
+        currentBackStack.value
+            .firstOrNull{ it.destination.route == route }
+    })?.savedStateHandle?.apply {
+        map.forEach{
+            set(it.key,it.value)
+        }
     }
 }
 
@@ -126,8 +140,3 @@ fun <T> NavHostController.getBack(key: String): T? {
         ?.savedStateHandle
         ?.get<T>(key)
 }
-
-data class NavArgumentRequired(
-    val navArgument: NamedNavArgument,
-    val required: Boolean
-)

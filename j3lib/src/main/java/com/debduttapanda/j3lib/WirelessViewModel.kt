@@ -22,7 +22,7 @@ import kotlin.coroutines.resume
 
 data class EventBusDescription(
     val eventBusId: String,
-    val eventBusTopics: (MutableList<String>.()->Unit)? = null,
+    val eventBusTopics: (EventBus.TopicsBuilder.()->Unit)? = null,
     val eventBusAction: ((pattern: String, topic: String, value: Any?) -> Unit)? = null
 )
 abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
@@ -67,7 +67,27 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     abstract fun eventBusDescription(): EventBusDescription?
     private var eventBusRegistered = false
     private var eventBusDescription: EventBusDescription? = null
+
+    data class InterCom(
+        val sender: String,
+        val data: Any?
+    )
+    abstract fun interCom(message: InterCom)
+    inline fun <reified T:WirelessViewModel>interCom(data: Any?){
+        EventBus.instance.notify("${T::class.java.simpleName}_internal_j3_not_for_external",InterCom(this.simpleName(),data))
+    }
+    private val inter_com_suffix = "_internal_j3_not_for_external"
+    private fun interComIdentity() = this.simpleName()+inter_com_suffix
     init {
+        val id = interComIdentity()
+        EventBus.instance.register(
+            id,
+            {p,t,v->
+                interCom(v as InterCom)
+            }
+        ){
+            add(id)
+        }
         storeArgs()
         val ed = eventBusDescription()
         if(
@@ -168,6 +188,7 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     }
 
     private fun clearEventBusRegistration() {
+        EventBus.instance.unregister(interComIdentity())
         if(eventBusRegistered && eventBusDescription?.eventBusId != null){
             EventBus.instance.unregister(eventBusDescription?.eventBusId)
         }
