@@ -1,7 +1,6 @@
 package com.debduttapanda.j3lib
 
 import android.app.Activity
-import android.os.Bundle
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -19,70 +18,72 @@ import androidx.navigation.NavHostController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.debduttapanda.j3lib.models.ActivityService
+import com.debduttapanda.j3lib.models.Route
+import com.debduttapanda.j3lib.models._NotificationService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+
 @Composable
 fun MyNavigationPage(
     navController: NavHostController,
     route: Route,
-    wvm: WirelessViewModelInterface?,
+    wvm: WirelessViewModel?,
     content: @Composable () -> Unit
 ) {
     InitializeMetrics()
-    wvm?.__permissionHandler?.handlePermission()
-    wvm?.__resultingActivityHandler?.handle()
-    LaunchedEffect(key1 = Unit){
-        withContext(Dispatchers.Main){
+    wvm?.permissionHandler?.handlePermission()
+    wvm?.resultingActivityHandler?.handle()
+    LaunchedEffect(key1 = Unit) {
+        withContext(Dispatchers.Main) {
             val arguments = navController.currentBackStackEntry?.arguments
-            wvm?.onStartUp(route,arguments)
+            wvm?.onStartUp(route, arguments)
         }
     }
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current
-    LaunchedEffect(key1 = wvm?.__navigation?.value){
-        withContext(Dispatchers.Main){
-            wvm?.__navigation?.forward(navController, owner, ActivityService(context))
+    LaunchedEffect(key1 = wvm?.navigation?.value) {
+        withContext(Dispatchers.Main) {
+            wvm?.navigation?.forward(navController, owner, ActivityService(context))
             wvm?.onForwarded()
         }
     }
     // /////////
     val activity = LocalContext.current as Activity
-    LaunchedEffect(key1 = wvm?.__softInputMode?.value) {
-        activity.window.setSoftInputMode(wvm?.__softInputMode?.value?:return@LaunchedEffect)
+    LaunchedEffect(key1 = wvm?.softInputMode?.value) {
+        activity.window.setSoftInputMode(wvm?.softInputMode?.value ?: return@LaunchedEffect)
     }
     // /////////
     CompositionLocalProvider(
-        LocalResolver provides (wvm?.controller?.resolver?:_Resolver()),
-        LocalNotificationService provides (wvm?.controller?.notificationService?:_NotificationService{ _, _->}),
+        LocalResolver provides (wvm?.controller?.resolver ?: _Resolver()),
+        LocalNotificationService provides (wvm?.controller?.notificationService
+            ?: _NotificationService { _, _ -> }),
         LocalController provides (
                 wvm
-                ?.controller?.restricted()
-                ?:
-                Controller(
-                    wvm
-                        ?.controller
-                        ?.resolver
-                        ?:
-                        _Resolver(),
-                    wvm
-                        ?.controller
-                        ?.notificationService
-                        ?:
-                        _NotificationService{ _, _->}
-                ).restricted()
-        ),
+                    ?.controller?.restricted()
+                    ?: Controller(
+                        wvm
+                            ?.controller
+                            ?.resolver
+                            ?: _Resolver(),
+                        wvm
+                            ?.controller
+                            ?.notificationService
+                            ?: _NotificationService { _, _ -> }
+                    ).restricted()
+                ),
     ) {
-        OnLifecycleEvent{owner, event ->
-            wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.lifecycleEvent, event)
+        OnLifecycleEvent { owner, event ->
+            wvm?.controller?.notificationService?.notify(WirelessViewModel.lifecycleEvent, event)
         }
         HandleKeyboardVisibility(wvm)
         StatusBarColorControl()
         Box(
             modifier = Modifier.fillMaxSize()
-        ){
+        ) {
             content()
             LoaderUI(
-                WirelessViewModelInterface.loaderState.value
+                WirelessViewModel.loaderState.value
             )
         }
         BackHandle(wvm)
@@ -92,57 +93,55 @@ fun MyNavigationPage(
 @Composable
 fun MyPage(
     modifier: Modifier = Modifier,
-    wvm: WirelessViewModelInterface?,
+    wvm: WirelessViewModel?,
     content: @Composable () -> Unit
 ) {
-    wvm?.__permissionHandler?.handlePermission()
-    wvm?.__resultingActivityHandler?.handle()
-    LaunchedEffect(key1 = Unit){
+    wvm?.permissionHandler?.handlePermission()
+    wvm?.resultingActivityHandler?.handle()
+    LaunchedEffect(key1 = Unit) {
         wvm?.onStartUp()
     }
     val owner = LocalLifecycleOwner.current
     val context = LocalContext.current
-    LaunchedEffect(key1 = wvm?.__navigation?.value){
-        wvm?.__navigation?.forward( owner, ActivityService(context))
+    LaunchedEffect(key1 = wvm?.navigation?.value) {
+        wvm?.navigation?.forward(owner, ActivityService(context))
     }
     // /////////
     val activity = LocalContext.current as Activity
-    LaunchedEffect(key1 = wvm?.__softInputMode?.value) {
-        activity.window.setSoftInputMode(wvm?.__softInputMode?.value?:return@LaunchedEffect)
+    LaunchedEffect(key1 = wvm?.softInputMode?.value) {
+        activity.window.setSoftInputMode(wvm?.softInputMode?.value ?: return@LaunchedEffect)
     }
     // /////////
     CompositionLocalProvider(
-        LocalResolver provides (wvm?.controller?.resolver?:_Resolver()),
-        LocalNotificationService provides (wvm?.controller?.notificationService?:_NotificationService{ _, _->}),
+        LocalResolver provides (wvm?.controller?.resolver ?: _Resolver()),
+        LocalNotificationService provides (wvm?.controller?.notificationService
+            ?: _NotificationService { _, _ -> }),
         LocalController provides (
                 wvm
                     ?.controller?.restricted()
-                    ?:
-                    Controller(
+                    ?: Controller(
                         wvm
                             ?.controller
                             ?.resolver
-                            ?:
-                            _Resolver(),
+                            ?: _Resolver(),
                         wvm
                             ?.controller
                             ?.notificationService
-                            ?:
-                            _NotificationService{ _, _->}
+                            ?: _NotificationService { _, _ -> }
                     ).restricted()
                 ),
     ) {
-        OnLifecycleEvent{owner, event ->
-            wvm?.controller?.notificationService?.notify(WirelessViewModelInterface.lifecycleEvent, event)
+        OnLifecycleEvent { owner, event ->
+            wvm?.controller?.notificationService?.notify(WirelessViewModel.lifecycleEvent, event)
         }
         HandleKeyboardVisibility(wvm)
         StatusBarColorControl()
         Box(
             modifier = modifier
-        ){
+        ) {
             content()
             LoaderUI(
-                WirelessViewModelInterface.loaderState.value
+                WirelessViewModel.loaderState.value
             )
         }
     }
@@ -150,16 +149,16 @@ fun MyPage(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun HandleKeyboardVisibility(wvm: WirelessViewModelInterface?) {
+internal fun HandleKeyboardVisibility(wvm: WirelessViewModel?) {
     val keyboardController = LocalSoftwareKeyboardController.current
-    LaunchedEffect(key1 = wvm?.__keyboarder?.value){
+    LaunchedEffect(key1 = wvm?.keyboarder?.value) {
         keyboardController?.let {
-            wvm?.__keyboarder?.forward(it)
+            wvm?.keyboarder?.forward(it)
         }
     }
 }
 
-enum class LoaderState{
+internal enum class LoaderState {
     None,
     Loading,
     Success,
@@ -167,7 +166,7 @@ enum class LoaderState{
 }
 
 @Composable
-fun BoxScope.Indeterminate(){
+internal fun BoxScope.Indeterminate() {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(R.raw.loader),
     )
@@ -180,8 +179,9 @@ fun BoxScope.Indeterminate(){
             .size(200.dep)
     )
 }
+
 @Composable
-fun BoxScope.Success(){
+internal fun BoxScope.Success() {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(R.raw.success),
     )
@@ -194,8 +194,9 @@ fun BoxScope.Success(){
             .padding(30.dep)
     )
 }
+
 @Composable
-fun BoxScope.Fail(){
+internal fun BoxScope.Fail() {
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(R.raw.failed),
     )
@@ -211,35 +212,35 @@ fun BoxScope.Fail(){
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun LoaderUI(
+internal fun LoaderUI(
     state: LoaderState
-){
-    if(state!= LoaderState.None){
+) {
+    if (state != LoaderState.None) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .clickable {  },
+                .clickable { },
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.White.copy(alpha = 0.7f))
-            ){
+            ) {
 
             }
             AnimatedContent(
                 targetState = state,
                 transitionSpec = {
-                    fadeIn(animationSpec = tween(500))  with
+                    fadeIn(animationSpec = tween(500)) with
                             fadeOut(animationSpec = tween(500))
                 }, label = ""
             ) {
-                when(it){
+                when (it) {
                     LoaderState.Loading -> Indeterminate()
                     LoaderState.Success -> Success()
                     LoaderState.Fail -> Fail()
-                    else->{}
+                    else -> {}
                 }
             }
         }

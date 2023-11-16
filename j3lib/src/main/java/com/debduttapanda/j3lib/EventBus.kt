@@ -1,5 +1,6 @@
 package com.debduttapanda.j3lib
 
+import com.debduttapanda.j3lib.models.EventBusCallback
 import org.intellij.lang.annotations.Language
 
 class EventBus {
@@ -7,12 +8,8 @@ class EventBus {
         val instance by lazy { EventBus() }
     }
 
-    val callbacks = mutableMapOf<String, Callback>()
+    private val callbacks = mutableMapOf<String, EventBusCallback>()
 
-    data class Callback(
-        val topics: MutableList<String>,
-        val action: (String, String, Any?) -> Unit
-    )
 
     fun notify(
         topic: String,
@@ -38,8 +35,8 @@ class EventBus {
         add(pattern)
     }
 
-    class TopicsBuilder(private val list: MutableList<String>){
-        fun add(@Language("regexp") pattern: String): TopicsBuilder{
+    class TopicsBuilder(private val list: MutableList<String>) {
+        fun add(@Language("regexp") pattern: String): TopicsBuilder {
             list.add(pattern)
             return this
         }
@@ -53,7 +50,7 @@ class EventBus {
         val list = mutableListOf<String>()
         val builder = TopicsBuilder(list)
         topics?.invoke(builder)
-        callbacks[id] = Callback(list, action)
+        callbacks[id] = EventBusCallback(list, action)
     }
 
     fun topics(id: String, list: MutableList<String>.() -> Unit) {

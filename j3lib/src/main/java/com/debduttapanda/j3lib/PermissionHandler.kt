@@ -4,23 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.core.content.ContextCompat
+import com.debduttapanda.j3lib.models.J3PermissionStatus
+import com.debduttapanda.j3lib.models.PermissionRequestResult
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.MultiplePermissionsState
-import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.accompanist.permissions.shouldShowRationale
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
-
-
-public sealed interface J3PermissionStatus {
-    data object Granted : J3PermissionStatus
-    data class Denied(
-        val shouldShowRationale: Boolean
-    ) : J3PermissionStatus
-}
 
 
 public val J3PermissionStatus.isGranted: Boolean
@@ -48,13 +40,13 @@ class J3MultiPermissionState(
 
 
 @OptIn(ExperimentalPermissionsApi::class)
-class PermissionHandler{
+internal class PermissionHandler {
     private val _permissions = mutableStateListOf<String>()
     private val _request = mutableStateOf(false)
 
     suspend fun check(vararg permissions: String): J3MultiPermissionState? =
-        suspendCancellableCoroutine {coroutine ->
-            if (permissions.isEmpty()){
+        suspendCancellableCoroutine { coroutine ->
+            if (permissions.isEmpty()) {
                 coroutine.resume(null)
                 coroutine.cancel()
                 return@suspendCancellableCoroutine
@@ -67,7 +59,7 @@ class PermissionHandler{
                     it.permissions.map {
                         J3PermissionState(
                             it.permission,
-                            if(it.status==PermissionStatus.Granted)
+                            if (it.status == PermissionStatus.Granted)
                                 J3PermissionStatus.Granted
                             else J3PermissionStatus.Denied(it.status.shouldShowRationale)
                         )
@@ -75,7 +67,7 @@ class PermissionHandler{
                     it.revokedPermissions.map {
                         J3PermissionState(
                             it.permission,
-                            if(it.status==PermissionStatus.Granted)
+                            if (it.status == PermissionStatus.Granted)
                                 J3PermissionStatus.Granted
                             else J3PermissionStatus.Denied(it.status.shouldShowRationale)
                         )
@@ -90,20 +82,16 @@ class PermissionHandler{
             _permissions.addAll(permissions)
         }
 
-    data class PermissionRequestResult(
-        val multiPermissionState: J3MultiPermissionState?,
-        val permittedMap: Map<String, Boolean>?
-    )
 
     suspend fun request(vararg permissions: String): PermissionRequestResult =
-        suspendCancellableCoroutine {coroutine ->
-            if (permissions.isEmpty()){
-                coroutine.resume(PermissionRequestResult(null,null))
+        suspendCancellableCoroutine { coroutine ->
+            if (permissions.isEmpty()) {
+                coroutine.resume(PermissionRequestResult(null, null))
                 coroutine.cancel()
                 return@suspendCancellableCoroutine
             }
-            onDisposition = {mps,states->
-                onDisposition = {mps,states->}
+            onDisposition = { mps, states ->
+                onDisposition = { mps, states -> }
                 _permissions.clear()
                 _request.value = false
 
@@ -111,7 +99,7 @@ class PermissionHandler{
                     mps.permissions.map {
                         J3PermissionState(
                             it.permission,
-                            if(it.status==PermissionStatus.Granted)
+                            if (it.status == PermissionStatus.Granted)
                                 J3PermissionStatus.Granted
                             else J3PermissionStatus.Denied(it.status.shouldShowRationale)
                         )
@@ -119,7 +107,7 @@ class PermissionHandler{
                     mps.revokedPermissions.map {
                         J3PermissionState(
                             it.permission,
-                            if(it.status==PermissionStatus.Granted)
+                            if (it.status == PermissionStatus.Granted)
                                 J3PermissionStatus.Granted
                             else J3PermissionStatus.Denied(it.status.shouldShowRationale)
                         )
@@ -128,31 +116,32 @@ class PermissionHandler{
                     mps.shouldShowRationale
                 )
 
-                coroutine.resume(PermissionRequestResult(j3mps,states))
+                coroutine.resume(PermissionRequestResult(j3mps, states))
                 coroutine.cancel()
             }
             _permissions.addAll(permissions)
             _request.value = true
         }
 
-    private var onDisposition: (multiplePermissionsState: MultiplePermissionsState,states: Map<String, Boolean>) -> Unit = {mps,states->}
+    private var onDisposition: (multiplePermissionsState: MultiplePermissionsState, states: Map<String, Boolean>) -> Unit =
+        { mps, states -> }
     private var onResult: (multiplePermissionsState: MultiplePermissionsState) -> Unit = {}
 
     @OptIn(ExperimentalPermissionsApi::class)
     @Composable
     fun handlePermission() {
-        if (_permissions.isNotEmpty()){
+        if (_permissions.isNotEmpty()) {
             lateinit var permissionState: MultiplePermissionsState
             permissionState = rememberMultiplePermissionsState(
                 _permissions
-            ){
-                onDisposition(permissionState,it)
+            ) {
+                onDisposition(permissionState, it)
             }
-            LaunchedEffect(key1 = permissionState){
+            LaunchedEffect(key1 = permissionState) {
                 onResult(permissionState)
             }
-            LaunchedEffect(key1 = _request){
-                if (_request.value){
+            LaunchedEffect(key1 = _request) {
+                if (_request.value) {
                     permissionState.launchMultiplePermissionRequest()
                 }
             }

@@ -1,7 +1,6 @@
 package com.debduttapanda.j3
 
 import android.app.Application
-import com.debduttapanda.j3lib.EventBus
 import dagger.hilt.android.HiltAndroidApp
 
 object AppContext {

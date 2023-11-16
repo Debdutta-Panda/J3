@@ -3,15 +3,15 @@ package com.debduttapanda.j3lib
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class AsSync<T : Any> private constructor(){
+class AsSync<T : Any> private constructor() {
 
     private var callback: (
         d: AsSync<T>,
         id: Any, arg: Any?
-    )->Unit = {_,_,_->}
+    ) -> Unit = { _, _, _ -> }
 
-    companion object{
-        fun <T : Any>create(): AsSync<T>{
+    companion object {
+        fun <T : Any> create(): AsSync<T> {
             return AsSync()
         }
     }
@@ -21,27 +21,27 @@ class AsSync<T : Any> private constructor(){
         callback: (
             d: AsSync<T>,
             id: Any, arg: Any?
-        )->Unit
-    ): T = suspendCancellableCoroutine {coroutine ->
+        ) -> Unit
+    ): T = suspendCancellableCoroutine { coroutine ->
         this.callback = callback
-        controller.notificationService.callback = {id,arg->
-            this.callback(this,id,arg)
+        controller.notificationService.callback = { id, arg ->
+            this.callback(this, id, arg)
         }
         onStopCallback = {
             onStopCallback = {}
             coroutine.resume(it)
             coroutine.cancel()
         }
-        this.callback(this,Event.START,null)
+        this.callback(this, Event.START, null)
     }
 
-    private var onStopCallback: (value: T)->Unit = {}
+    private var onStopCallback: (value: T) -> Unit = {}
 
-    fun stop(value: T){
+    fun stop(value: T) {
         onStopCallback(value)
     }
 
-    enum class Event{
+    enum class Event {
         START
     }
 }

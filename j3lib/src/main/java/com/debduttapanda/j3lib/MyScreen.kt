@@ -8,12 +8,13 @@ import androidx.compose.runtime.NonRestartableComposable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import com.debduttapanda.j3lib.models.Route
 
 @NonRestartableComposable
 inline fun NavGraphBuilder.MyScreen(
     navController: NavHostController,
     route: Route,
-    crossinline wirelessViewModel: ( @Composable ()->WirelessViewModel? ) = {null},
+    crossinline wirelessViewModel: (@Composable () -> WirelessViewModel?) = { null },
     enableDefaultTransition: Boolean = true,
     noinline enterTransition: (@JvmSuppressWildcards
     AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?)? = null,
@@ -27,7 +28,7 @@ inline fun NavGraphBuilder.MyScreen(
         exitTransition,
 
     crossinline content: @Composable () -> Unit
-){
+) {
     myComposable(
         route.full,
         arguments = route.arguments,
@@ -37,7 +38,7 @@ inline fun NavGraphBuilder.MyScreen(
         exitTransition = exitTransition,
         popEnterTransition = popEnterTransition,
         popExitTransition = popExitTransition
-    ){
+    ) {
         MyNavigationPage(
             navController,
             route = route,

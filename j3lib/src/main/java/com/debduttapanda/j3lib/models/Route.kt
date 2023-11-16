@@ -1,7 +1,6 @@
-package com.debduttapanda.j3lib
+package com.debduttapanda.j3lib.models
 
 import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavArgument
 import androidx.navigation.NavDeepLink
 
 data class Route(
@@ -12,10 +11,11 @@ data class Route(
 
     val argKeys: List<String>
         get() = arguments.map { it.name }
-    fun navigation(values: MutableMap<String,Any>.()->Unit): String{
-        val map = mutableMapOf<String,Any>()
+
+    fun navigation(values: MutableMap<String, Any>.() -> Unit): String {
+        val map = mutableMapOf<String, Any>()
         values(map)
-        return name+arguments.stringWithValue(map)
+        return name + arguments.stringWithValue(map)
     }
 
     val full by lazy { "$name${arguments.string()}" }
@@ -43,12 +43,12 @@ data class Route(
         return "$required$optional"
     }
 
-    private fun List<NamedNavArgument>.stringWithValue(map: MutableMap<String,Any>): String {
+    private fun List<NamedNavArgument>.stringWithValue(map: MutableMap<String, Any>): String {
         val requiredList = mutableListOf<String>()
         val optionalList = mutableListOf<String>()
         forEach {
             val name = it.name
-            if(map.containsKey(name)){
+            if (map.containsKey(name)) {
                 val value = map[name]
                 val required = !it.argument.run { defaultValue != null || isNullable }
                 if (required) {

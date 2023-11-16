@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-var screenWidthDp = 0
+internal var screenWidthDp = 0
     private set(value) {
         field = value
     }
-var screenHeightDp = 0
+internal var screenHeightDp = 0
     private set(value) {
         field = value
     }
@@ -24,37 +24,41 @@ private var savedDensity = 1f
 private var savedFontScale = 1f
 private var inverseSavedFontScale = 1f
 
-fun ep(
+internal fun ep(
     dimension: Float,
-): Float{
+): Float {
     return dimension * localDimensionFactor
 }
 
 fun Dp.toSp(): TextUnit = (value * inverseSavedFontScale).sp
 
-val Number.dep: Dp get(){
-    return ep(dimension = toFloat()).dp
-}
+val Number.dep: Dp
+    get() {
+        return ep(dimension = toFloat()).dp
+    }
 
-val Number.depx: Float get() {
-    return this.dep.value * savedDensity
-}
+val Number.depx: Float
+    get() {
+        return this.dep.value * savedDensity
+    }
 
-val Any?.depx: Float get() {
-    return if(this is Number) this.dep.value * savedDensity else 0f
-}
+val Any?.depx: Float
+    get() {
+        return if (this is Number) this.dep.value * savedDensity else 0f
+    }
 
-val Any?.adep: Dp get() {
-    return if(this is Number) this.dep else 0.dep
-}
+val Any?.adep: Dp
+    get() {
+        return if (this is Number) this.dep else 0.dep
+    }
 
 val Number.sep get() = ep(dimension = toFloat()).dep.toSp()
 
 private var metricsInitialized = false
 
 @Composable
-fun InitializeMetrics() {
-    if(metricsInitialized){
+internal fun InitializeMetrics() {
+    if (metricsInitialized) {
         return
     }
     screenWidthDp = LocalConfiguration.current.screenWidthDp
@@ -64,7 +68,7 @@ fun InitializeMetrics() {
 
     savedDensity = density.density
     savedFontScale = density.fontScale
-    inverseSavedFontScale = 1f/ savedFontScale
+    inverseSavedFontScale = 1f / savedFontScale
     localDimensionFactor = screenWidthDp / designWidth
     metricsInitialized = true
 }
@@ -72,6 +76,7 @@ fun InitializeMetrics() {
 operator fun Dp.times(number: Number): Dp {
     return (this.value * number.toFloat()).dep
 }
+
 operator fun Number.times(dp: Dp): Dp {
     return (this.toFloat() * dp.value).dep
 }
@@ -79,6 +84,7 @@ operator fun Number.times(dp: Dp): Dp {
 operator fun TextUnit.times(number: Number): TextUnit {
     return (this.value * number.toFloat()).sep
 }
+
 operator fun Number.times(sp: TextUnit): TextUnit {
     return (this.toFloat() * sp.value).sep
 }

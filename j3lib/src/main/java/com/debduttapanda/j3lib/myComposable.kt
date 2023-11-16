@@ -17,7 +17,7 @@ import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
-object DefaultNavigationAnimation{
+object DefaultNavigationAnimation {
     private const val animationTime = 300
     val enterTransition: (@JvmSuppressWildcards
     AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition) = {
@@ -81,15 +81,19 @@ fun NavGraphBuilder.myComposable(
     AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?)? =
         exitTransition,
     content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
-){
+) {
     composable(
         route,
         arguments,
         deepLinks,
         content = content,
-        enterTransition = enterTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.enterTransition else null,
-        exitTransition = exitTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.exitTransition else null,
-        popEnterTransition = popEnterTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.popEnterTransition else null,
-        popExitTransition = popExitTransition?: if(enableDefaultTransition) DefaultNavigationAnimation.popExitTransition else null
+        enterTransition = enterTransition
+            ?: if (enableDefaultTransition) DefaultNavigationAnimation.enterTransition else null,
+        exitTransition = exitTransition
+            ?: if (enableDefaultTransition) DefaultNavigationAnimation.exitTransition else null,
+        popEnterTransition = popEnterTransition
+            ?: if (enableDefaultTransition) DefaultNavigationAnimation.popEnterTransition else null,
+        popExitTransition = popExitTransition
+            ?: if (enableDefaultTransition) DefaultNavigationAnimation.popExitTransition else null
     )
 }

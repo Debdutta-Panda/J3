@@ -3,11 +3,12 @@ package com.debduttapanda.j3lib
 import androidx.compose.runtime.State
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.snapshots.SnapshotStateMap
+import com.debduttapanda.j3lib.models.StringResource
 
 class RestrictedController(
     private val _resolver: Resolver,
     private val _notifier: NotificationService
-){
+) {
     fun resolver() = _resolver
     fun notifier() = _notifier
     fun floatState(key: Any): State<Float> {
@@ -38,31 +39,31 @@ class RestrictedController(
         return _resolver.get(key)
     }
 
-    fun <T>listState(key: Any): SnapshotStateList<T> {
+    fun <T> listState(key: Any): SnapshotStateList<T> {
         return _resolver.get(key)
     }
 
-    fun <T>safeListState(key: Any): SnapshotStateList<T>? {
+    fun <T> safeListState(key: Any): SnapshotStateList<T>? {
         return _resolver.get(key)
     }
 
-    fun <T, E>mapState(key: Any): SnapshotStateMap<T, E> {
+    fun <T, E> mapState(key: Any): SnapshotStateMap<T, E> {
         return _resolver.get(key)
     }
 
-    fun <T, E>safeMapState(key: Any): SnapshotStateMap<T, E>? {
+    fun <T, E> safeMapState(key: Any): SnapshotStateMap<T, E>? {
         return _resolver.get(key)
     }
 
-    fun <T>t(key: Any): T {
+    fun <T> t(key: Any): T {
         return _resolver.get(key)
     }
 
-    fun <T>tState(key: Any): State<T> {
+    fun <T> tState(key: Any): State<T> {
         return _resolver.get(key)
     }
 
-    fun <T>safeTState(key: Any): State<T>? {
+    fun <T> safeTState(key: Any): State<T>? {
         return _resolver.get(key)
     }
 }

@@ -3,17 +3,14 @@ package com.debduttapanda.j3
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.navArgument
-import com.debduttapanda.j3lib.EventBusDescription
-import com.debduttapanda.j3lib.Route
+import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
-import com.debduttapanda.j3lib.arguments
-import com.debduttapanda.j3lib.df.Df
-import com.debduttapanda.j3lib.getBack
+import com.debduttapanda.j3lib.models.EventBusDescription
+import com.debduttapanda.j3lib.models.Route
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SplashViewModel: WirelessViewModel(){
+class SplashViewModel : WirelessViewModel() {
     override fun onBack() {
 
     }
@@ -27,7 +24,7 @@ class SplashViewModel: WirelessViewModel(){
     }
 
     override fun interCom(message: InterCom) {
-        Log.d("fldkfdfdfd","${message.sender},${message.data}")
+        Log.d("fldkfdfdfd", "${message.sender},${message.data}")
         interCom<HomeViewModel>("Hi")
     }
 
@@ -38,9 +35,10 @@ class SplashViewModel: WirelessViewModel(){
     init {
         viewModelScope.launch {
             delay(2000)
-            navigation {
-                navigate(Routes.home.full)
-            }
+            /*navigation {
+                navigate(Routes.home.full
+                )
+            }*/
         }
 
     }

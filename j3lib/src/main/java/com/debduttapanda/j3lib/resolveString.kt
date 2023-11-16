@@ -1,13 +1,9 @@
 package com.debduttapanda.j3lib
 
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import com.debduttapanda.j3lib.models.StringResource
 
-data class StringResource(
-    @StringRes val id: Int,
-    var formatArgs: List<Any> = emptyList(),
-)
 
 @Composable
 fun Any.resolveString(): String {
@@ -16,6 +12,7 @@ fun Any.resolveString(): String {
         is StringResource -> {
             stringResource(id = this.id, *(this.formatArgs.toTypedArray()))
         }
+
         else -> "$this"
     }
 }

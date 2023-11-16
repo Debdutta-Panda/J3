@@ -5,6 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.snapshots.SnapshotStateMap
+import com.debduttapanda.j3lib.models.StringResource
 
 @Composable
 fun rememberFloatState(id: Any): State<Float> {

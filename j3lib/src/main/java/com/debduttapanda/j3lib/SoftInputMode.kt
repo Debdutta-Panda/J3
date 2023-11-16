@@ -2,7 +2,7 @@ package com.debduttapanda.j3lib
 
 import android.view.WindowManager
 
-object SoftInputMode{
+object SoftInputMode {
     const val adjustPan = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
     const val adjustNothing = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING
     const val adjustUnspecified = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED
