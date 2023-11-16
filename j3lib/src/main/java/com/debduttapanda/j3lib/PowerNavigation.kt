@@ -1,5 +1,6 @@
 package com.debduttapanda.j3lib
 
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -24,7 +25,9 @@ data class ActivityService(
     private val context: Context
 ){
     fun toast(message: String, duration: Int = Toast.LENGTH_SHORT){
-        Toast.makeText(context, message, duration).show()
+        (context as Activity).runOnUiThread {
+            Toast.makeText(context, message, duration).show()
+        }
     }
 
     fun stringResource(@StringRes id: Int, vararg formatArgs: Any): String{
@@ -61,14 +64,12 @@ typealias UINavigationScope = suspend Bundle.(NavHostController?, LifecycleOwner
 
 fun MutableState<UINavigationScope?>.scope(block: UINavigationScope?){
     this.value = {navHostController, lifecycleOwner, toaster ->
-        withContext(Dispatchers.Main){
-            block?.invoke(
-                navHostController?.currentBackStackEntry?.arguments ?: Bundle(),
-                navHostController,
-                lifecycleOwner,
-                toaster
-            )
-        }
+        block?.invoke(
+            navHostController?.currentBackStackEntry?.arguments ?: Bundle(),
+            navHostController,
+            lifecycleOwner,
+            toaster
+        )
         this@scope.value = null
     }
 }

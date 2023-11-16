@@ -42,6 +42,7 @@ fun MyNavigationPage(
     LaunchedEffect(key1 = wvm?.__navigation?.value){
         withContext(Dispatchers.Main){
             wvm?.__navigation?.forward(navController, owner, ActivityService(context))
+            wvm?.onForwarded()
         }
     }
     // /////////

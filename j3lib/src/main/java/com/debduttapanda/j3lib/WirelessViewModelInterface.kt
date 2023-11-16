@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 interface WirelessViewModelInterface{
     val controller: Controller
@@ -16,10 +19,15 @@ interface WirelessViewModelInterface{
     fun onStartUp(route: Route? = null, arguments: Bundle? = null)
     fun _toast(message: Any,duration: Int = Toast.LENGTH_SHORT){
         __navigation.scope { navHostController, lifecycleOwner, activityService ->
-            activityService?.toast(str(activityService,message),duration)
+            CoroutineScope(Dispatchers.Main).launch {
+                activityService?.toast(str(activityService,message),duration)
+            }
         }
     }
     fun onBack()
+    fun onForwarded()
+    fun onForwardStarted()
+
     val __keyboarder: MutableState<KeyboardScope?> get() = Keyboarder()
     interface LoaderInterface{
         fun clear()

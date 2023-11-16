@@ -16,6 +16,7 @@ import androidx.navigation.NavType
 import com.debduttapanda.j3lib.df.Df
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
@@ -26,7 +27,7 @@ data class EventBusDescription(
     val eventBusAction: ((pattern: String, topic: String, value: Any?) -> Unit)? = null
 )
 abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
-
+    private val uiScopes = mutableListOf<UINavigationScope>()
     fun Bundle.toMap(route: Route): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
         route.arguments.forEach {
@@ -128,8 +129,34 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
         )
     }
 
+    private var lastBusyTime = 0L
+    private var uiScopeBusy = false
+
+    override fun onForwardStarted() {
+        uiScopeBusy = true
+        lastBusyTime = System.currentTimeMillis()
+    }
+
+    override fun onForwarded() {
+        uiScopeBusy = false
+        lastBusyTime = 0
+        if(uiScopes.isNotEmpty()){
+            try {
+                __navigation.scope(uiScopes.removeFirst())
+            } catch (e: Exception) {
+
+            }
+        }
+    }
     fun navigation(block: NavHostController.()->Unit){
-        viewModelScope.launch(Dispatchers.Main) {
+        val now = System.currentTimeMillis()
+        if(uiScopeBusy && lastBusyTime != 0L && (now-lastBusyTime)<4000){
+            uiScopes.add { controller, _, _ ->
+                controller?.let { block(controller) }
+            }
+        }
+        else{
+            onForwardStarted()
             __navigation.scope { navHostController, lifecycleOwner, activityService ->
                 block(navHostController?:return@scope)
             }
@@ -199,8 +226,17 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     }
 
     fun toast(message: Any,duration: Int = Toast.LENGTH_SHORT){
-        viewModelScope.launch(Dispatchers.Main) {
-            _toast(message,duration)
+        val now = System.currentTimeMillis()
+        if(uiScopeBusy && lastBusyTime != 0L && (now-lastBusyTime)<4000){
+            uiScopes.add { navHostController, lifecycleOwner, activityService ->
+                activityService?.toast(str(activityService,message),duration)
+            }
+        }
+        else{
+            onForwardStarted()
+            __navigation.scope { navHostController, lifecycleOwner, activityService ->
+                activityService?.toast(str(activityService,message),duration)
+            }
         }
     }
 
@@ -230,6 +266,19 @@ abstract class WirelessViewModel: WirelessViewModelInterface, ViewModel(){
     fun showKeyboard(){
         __keyboarder{
             show()
+        }
+    }
+
+
+    fun ViewModel.ioScope(block: suspend CoroutineScope.() -> Unit): Job {
+        return viewModelScope.launch(Dispatchers.IO) {
+            block(this)
+        }
+    }
+
+    fun ViewModel.mainScope(block: suspend CoroutineScope.() -> Unit) {
+        viewModelScope.launch(Dispatchers.Main) {
+            block(this)
         }
     }
 
