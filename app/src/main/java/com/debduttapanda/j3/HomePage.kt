@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import com.debduttapanda.j3lib.ControlledById
 import com.debduttapanda.j3lib.NotificationService
 import com.debduttapanda.j3lib.SafeControlledById
+import com.debduttapanda.j3lib.UINotification
 import com.debduttapanda.j3lib.rememberBoolState
 import com.debduttapanda.j3lib.rememberNotifier
 import com.debduttapanda.j3lib.rememberStringState
@@ -30,6 +31,9 @@ fun HomePage(
         modifier = Modifier
             .fillMaxSize()
     ) {
+        UINotification{id,event->
+
+        }
         TextField(
             value = inputValue.value,
             onValueChange = {
