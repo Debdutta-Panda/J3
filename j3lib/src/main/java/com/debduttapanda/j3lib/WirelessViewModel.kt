@@ -51,6 +51,7 @@ abstract class WirelessViewModel : ViewModel() {
         }
 
     // private properties
+    private val uiMessage = mutableStateOf<Event<Any?>?>(null)
     private val uiScopes = mutableListOf<UINavigationScope>()
     private val statusBarColor = mutableStateOf<StatusBarColor?>(null)
     private var eventBusRegistered = false
@@ -254,6 +255,9 @@ abstract class WirelessViewModel : ViewModel() {
     fun setSoftInputMode(mode: Int) {
         softInputMode.value = mode
     }
+    fun uiNotify(data: Any?, id: Any? = null){
+        uiMessage.value = Event(data, id)
+    }
 
     suspend fun <I, O> requestForResult(
         contract: ActivityResultContract<I, O>,
@@ -344,6 +348,9 @@ abstract class WirelessViewModel : ViewModel() {
 
 
     init {
+        controller.resolver.addAll(
+            DataIds.UiMessage to uiMessage
+        )
         val id = interComIdentity()
         EventBus.instance.register(id, { p, t, v ->
             interCom(v as InterCom)

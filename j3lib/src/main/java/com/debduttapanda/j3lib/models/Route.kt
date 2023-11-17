@@ -12,7 +12,7 @@ data class Route(
     val argKeys: List<String>
         get() = arguments.map { it.name }
 
-    fun navigation(values: MutableMap<String, Any>.() -> Unit): String {
+    fun arguments(values: MutableMap<String, Any>.() -> Unit): String {
         val map = mutableMapOf<String, Any>()
         values(map)
         return name + arguments.stringWithValue(map)

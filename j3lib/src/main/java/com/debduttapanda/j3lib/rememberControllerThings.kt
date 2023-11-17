@@ -16,6 +16,14 @@ fun rememberFloatState(id: Any): State<Float> {
 }
 
 @Composable
+fun rememberUiMessage(): State<Event<Any?>?> {
+    val controller = LocalController.current
+    return remember(controller) {
+        controller.tState(DataIds.UiMessage)
+    }
+}
+
+@Composable
 fun rememberDoubleState(id: Any): State<Double> {
     val controller = LocalController.current
     return remember(controller) {
