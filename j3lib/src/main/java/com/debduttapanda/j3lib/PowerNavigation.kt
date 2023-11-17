@@ -6,6 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import com.debduttapanda.j3lib.models.ActivityService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class NotFragmentActivityException :
@@ -14,7 +17,7 @@ class NotFragmentActivityException :
 typealias UINavigationScope = suspend Bundle.(NavHostController?, LifecycleOwner, ActivityService?) -> Unit
 
 internal fun MutableState<UINavigationScope?>.scope(block: UINavigationScope?) {
-    this.value = { navHostController, lifecycleOwner, toaster ->
+    this@scope.value = { navHostController, lifecycleOwner, toaster ->
         block?.invoke(
             navHostController?.currentBackStackEntry?.arguments ?: Bundle(),
             navHostController,

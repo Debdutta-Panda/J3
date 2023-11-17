@@ -157,8 +157,10 @@ abstract class WirelessViewModel : ViewModel() {
             }
         } else {
             onForwardStarted()
-            navigation.scope { navHostController, lifecycleOwner, activityService ->
-                block(navHostController ?: return@scope)
+            mainScope {
+                navigation.scope { navHostController, lifecycleOwner, activityService ->
+                    block(navHostController ?: return@scope)
+                }
             }
         }
     }
@@ -177,8 +179,10 @@ abstract class WirelessViewModel : ViewModel() {
             }
         } else {
             onForwardStarted()
-            navigation.scope { navHostController, lifecycleOwner, activityService ->
-                activityService?.toast(str(activityService, message), duration)
+            mainScope {
+                navigation.scope { navHostController, lifecycleOwner, activityService ->
+                    activityService?.toast(str(activityService, message), duration)
+                }
             }
         }
     }
