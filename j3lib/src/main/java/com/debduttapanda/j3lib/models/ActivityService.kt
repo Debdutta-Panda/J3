@@ -16,6 +16,9 @@ import com.debduttapanda.j3lib.df.Df
 data class ActivityService(
     private val context: Context
 ) {
+    fun finish(){
+        (context as Activity).finish()
+    }
     fun toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
         (context as Activity).runOnUiThread {
             Toast.makeText(context, message, duration).show()

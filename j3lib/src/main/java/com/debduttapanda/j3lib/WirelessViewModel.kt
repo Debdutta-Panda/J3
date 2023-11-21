@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
@@ -13,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import com.debduttapanda.j3lib.df.Df
@@ -147,6 +149,23 @@ abstract class WirelessViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.Main) {
             block(this)
         }
+    }
+
+    fun finish(){
+        val now = System.currentTimeMillis()
+        if (uiScopeBusy && lastBusyUiScopeBusyTime != 0L && (now - lastBusyUiScopeBusyTime) < 4000) {
+            uiScopes.add { navHostController, lifecycleOwner, activityService ->
+                activityService?.finish()
+            }
+        } else {
+            onForwardStarted()
+            mainScope {
+                navigation.scope { navHostController, lifecycleOwner, activityService ->
+                    activityService?.finish()
+                }
+            }
+        }
+
     }
 
     fun navigation(block: NavHostController.() -> Unit) {
@@ -352,6 +371,7 @@ abstract class WirelessViewModel : ViewModel() {
 
 
     init {
+        Log.d("lfdjfldfd",this.simpleName())
         controller.resolver.addAll(
             DataIds.UiMessage to uiMessage
         )
@@ -389,5 +409,22 @@ abstract class WirelessViewModel : ViewModel() {
         clearEventBusRegistration()
         super.onCleared()
     }
+
+    fun popOrFinish(){
+        navigation {
+            if(finishable()){
+                finish()
+            }
+            else{
+                popBackStack()
+            }
+        }
+    }
+
 }
 
+fun NavHostController.finishable(): Boolean{
+    val stack = currentBackStack.value
+    return stack.isEmpty()
+            || (stack.size < 3 && stack.first().destination.route == null)
+}
