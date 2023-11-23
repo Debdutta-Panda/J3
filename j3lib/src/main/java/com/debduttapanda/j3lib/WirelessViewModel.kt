@@ -368,7 +368,9 @@ abstract class WirelessViewModel : ViewModel() {
 
     // extensible methods
     open fun createController() = Controller(_Resolver(), _NotificationService(::onNotification))
-
+    fun mapData(vararg pairs: Pair<Any, Any?>) {
+        controller.resolver.addAll(*pairs)
+    }
 
     init {
         Log.d("lfdjfldfd",this.simpleName())

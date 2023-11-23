@@ -6,7 +6,10 @@ import com.debduttapanda.j3lib.models.StringResource
 
 
 @Composable
-fun Any.resolveString(): String {
+fun Any?.resolveString(): String {
+    if(this==null){
+        return "null"
+    }
     return when (this) {
         is String -> this
         is StringResource -> {
