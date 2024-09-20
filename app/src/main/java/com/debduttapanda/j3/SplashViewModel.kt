@@ -7,10 +7,13 @@ import com.debduttapanda.j3lib.InterCom
 import com.debduttapanda.j3lib.WirelessViewModel
 import com.debduttapanda.j3lib.models.EventBusDescription
 import com.debduttapanda.j3lib.models.Route
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SplashViewModel : WirelessViewModel() {
+@HiltViewModel
+class SplashViewModel @Inject constructor() : WirelessViewModel() {
     override fun onBack() {
 
     }

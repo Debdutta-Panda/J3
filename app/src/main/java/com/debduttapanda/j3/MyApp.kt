@@ -17,7 +17,7 @@ fun MyApp() {
         MyScreen(
             navController = navController,
             route = Routes.splash,
-            { viewModel<SplashViewModel>() }
+            { hiltViewModel<SplashViewModel>() }
         ) {
             SplashPage()
         }

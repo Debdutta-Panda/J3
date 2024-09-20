@@ -55,8 +55,8 @@ dependencies {
     implementation(project(mapOf("path" to ":j3lib")))
 
     // others
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    kapt("com.google.dagger:hilt-compiler:2.48.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.4")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.7.2")
 }

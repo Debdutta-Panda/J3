@@ -42,53 +42,52 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.1")
-    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+    implementation("androidx.activity:activity-compose:1.9.2")
+    implementation(platform("androidx.compose:compose-bom:2024.09.02"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.fragment:fragment-ktx:1.8.3")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    val nav_version = "2.7.5"
-    implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("androidx.navigation:navigation-compose:2.8.1")
     implementation("com.airbnb.android:lottie-compose:6.1.0")
     implementation("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.22")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.09.02"))
 
 
 
     ///////
-    api("androidx.appcompat:appcompat:1.6.1")
-    api("androidx.core:core-ktx:1.12.0")
-    api("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    api("androidx.activity:activity-compose:1.8.1")
-    api(platform("androidx.compose:compose-bom:2023.10.01"))
+    api("androidx.appcompat:appcompat:1.7.0")
+    api("androidx.core:core-ktx:1.13.1")
+    api("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+    api("androidx.activity:activity-compose:1.9.2")
+    api(platform("androidx.compose:compose-bom:2024.09.02"))
     api("androidx.compose.ui:ui")
     api("androidx.compose.ui:ui-graphics")
     api("androidx.compose.ui:ui-tooling-preview")
     api("androidx.compose.material3:material3")
-    api("androidx.fragment:fragment-ktx:1.6.2")
+    api("androidx.fragment:fragment-ktx:1.8.3")
     testApi("junit:junit:4.13.2")
-    androidTestApi("androidx.test.ext:junit:1.1.5")
-    androidTestApi("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestApi("androidx.test.ext:junit:1.2.1")
+    androidTestApi("androidx.test.espresso:espresso-core:3.6.1")
     androidTestApi("androidx.compose.ui:ui-test-junit4")
     debugApi("androidx.compose.ui:ui-tooling")
     debugApi("androidx.compose.ui:ui-test-manifest")
-    api("androidx.navigation:navigation-compose:$nav_version")
+    api("androidx.navigation:navigation-compose:2.8.1")
     api("com.airbnb.android:lottie-compose:6.1.0")
     api("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
     api("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
-    androidTestApi(platform("androidx.compose:compose-bom:2023.10.01"))
+    androidTestApi(platform("androidx.compose:compose-bom:2024.09.02"))
 }
 
 publishing {
@@ -96,7 +95,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.debduttapanda"
             artifactId = "j3"
-            version = "1.1.32"
+            version = "1.1.34"
 
             afterEvaluate {
                 from(components["release"])
