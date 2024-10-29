@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("kotlin-kapt")
     id("maven-publish")
 }
@@ -29,7 +30,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -95,7 +96,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.debduttapanda"
             artifactId = "j3"
-            version = "1.1.34"
+            version = "1.1.35"
 
             afterEvaluate {
                 from(components["release"])
