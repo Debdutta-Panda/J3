@@ -45,25 +45,25 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
-    implementation("androidx.activity:activity-compose:1.9.2")
-    implementation(platform("androidx.compose:compose-bom:2024.09.02"))
+    implementation("androidx.activity:activity-compose:1.9.3")
+    implementation(platform("androidx.compose:compose-bom:2024.10.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.fragment:fragment-ktx:1.8.3")
+    implementation("androidx.fragment:fragment-ktx:1.8.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("androidx.navigation:navigation-compose:2.8.1")
+    implementation("androidx.navigation:navigation-compose:2.8.3")
     implementation("com.airbnb.android:lottie-compose:6.1.0")
     implementation("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.22")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.09.02"))
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.23")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.10.00"))
 
 
 
@@ -71,24 +71,24 @@ dependencies {
     api("androidx.appcompat:appcompat:1.7.0")
     api("androidx.core:core-ktx:1.13.1")
     api("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
-    api("androidx.activity:activity-compose:1.9.2")
-    api(platform("androidx.compose:compose-bom:2024.09.02"))
+    api("androidx.activity:activity-compose:1.9.3")
+    api(platform("androidx.compose:compose-bom:2024.10.00"))
     api("androidx.compose.ui:ui")
     api("androidx.compose.ui:ui-graphics")
     api("androidx.compose.ui:ui-tooling-preview")
     api("androidx.compose.material3:material3")
-    api("androidx.fragment:fragment-ktx:1.8.3")
+    api("androidx.fragment:fragment-ktx:1.8.4")
     testApi("junit:junit:4.13.2")
     androidTestApi("androidx.test.ext:junit:1.2.1")
     androidTestApi("androidx.test.espresso:espresso-core:3.6.1")
     androidTestApi("androidx.compose.ui:ui-test-junit4")
     debugApi("androidx.compose.ui:ui-tooling")
     debugApi("androidx.compose.ui:ui-test-manifest")
-    api("androidx.navigation:navigation-compose:2.8.1")
+    api("androidx.navigation:navigation-compose:2.8.3")
     api("com.airbnb.android:lottie-compose:6.1.0")
     api("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
     api("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
-    androidTestApi(platform("androidx.compose:compose-bom:2024.09.02"))
+    androidTestApi(platform("androidx.compose:compose-bom:2024.10.00"))
 }
 
 publishing {
@@ -96,7 +96,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.debduttapanda"
             artifactId = "j3"
-            version = "1.1.35"
+            version = "1.1.36"
 
             afterEvaluate {
                 from(components["release"])
